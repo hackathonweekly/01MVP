@@ -1,0 +1,136 @@
+---
+title: 安装nodejs npm
+---
+
+
+**下载地址**
+
+https://nodejs.org/zh-cn/download
+
+这里我们使用 nodejs 20 版本 + pnpm
+
+![](/images/installing-nodejs-npm.001.png)
+
+
+**Windows**
+
+务必要使用 管理员权限 打开 powershell 
+
+打开 powershell ，输入下面的命令
+
+
+```bash
+# Download and install fnm
+winget install Schniz.fnm
+```
+
+安装成功后， 关闭 powershell ，再输入如下命令
+
+```Bash
+
+# Download and install Node.js:
+fnm install 20
+
+# Verify the Node.js version:
+node -v # Should print "v20.18.1".
+
+# Download and install pnpm:
+corepack enable pnpm
+
+# Verify pnpm version:
+pnpm -v
+```
+
+**Mac**
+
+打开终端，输入下面的命令
+
+
+```JSON
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+# Download and install Node.js:
+nvm install 20
+
+# Verify the Node.js version:
+node -v # Should print "v20.18.1".
+nvm current # Should print "v20.18.1".
+
+# Download and install pnpm:
+corepack enable pnpm
+
+# Verify pnpm version:
+pnpm -v
+```
+
+
+**常用命令介绍**
+
+**Node.js 命令**
+
+- node -v：查看 Node.js 版本
+- node xxx.js：运行 JavaScript 文件
+
+**NPM 包管理器命令**
+
+NPM 是 Node.js 的包管理器，主要用于：
+
+- npm install xxx：安装某个包
+- npm run dev：启动开发环境
+- npm run build：打包项目
+- npm run start：启动项目
+
+**终端常用命令**
+
+终端是我们和电脑对话的工具，这些是最常用的命令：
+
+- ls：查看当前文件夹内容（Windows 用 dir）
+- cd 文件夹名：进入某个文件夹
+- cd ..：返回上一级文件夹
+- open .：打开当前文件夹（Mac）
+- explorer.exe .：打开当前文件夹（Windows）
+
+**使用建议**
+
+1. 版本选择
+- 建议使用 LTS（长期支持）版本
+- 目前推荐使用 18.x 版本
+2. 包管理器选择
+- 推荐使用 pnpm 替代 npm
+- pnpm 更节省空间，速度更快
+- 安装命令：npm install -g pnpm
+- 除了 npm / pnpm，你可能还会看到 yarn / bun / deno 之类的东西，他们跟 npm 类似但有区别。小白用 pnpm 就够了，不用太纠结。
+3. 常见问题解决
+- 如果安装失败，可以尝试以管理员身份运行
+- 如果下载很慢，可以使用国内镜像源
+- npm config set registry https://registry.npmmirror.com
+
+**学习建议**
+
+1. 循序渐进
+- 先掌握基础命令的使用
+- 不需要一次学会所有内容
+- 遇到问题可以随时查询或请教
+2. 实践为主
+- 多动手练习
+- 从简单的项目开始
+- 遇到错误不要害怕，这是学习的一部分
+3. 获取帮助
+- 遇到问题可以：
+- 查看官方文档
+- 使用搜索引擎
+- 询问 AI 助手（如 ChatGPT）
+- 在开发社区提问
+
+**下一步**
+
+环境搭建完成后，你就可以：
+
+1. 开始学习 JavaScript 基础
+2. 尝试创建简单的网页
+3. 跟随教程开发实际项目
+
+记住：编程学习是一个渐进的过程，不要着急，遇到问题时多查资料，多实践，慢慢就会越来越熟练了。
+
+

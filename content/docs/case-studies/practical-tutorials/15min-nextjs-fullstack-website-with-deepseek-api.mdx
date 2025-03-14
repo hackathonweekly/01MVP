@@ -1,0 +1,133 @@
+---
+title: OPENAI\_API\_BASE\_URL=https://api.deepseek.com/v1
+---
+
+
+**15分钟上线 Nextjs 全栈网站，接入 DeepSeek API!**
+
+视频教程
+
+**[该类型的内容暂不支持下载]**
+
+**课程目标**
+
+https://pmai.jackiexiao.com/
+
+![](/images/15min-nextjs-deepseek-api.001.png)
+
+![](/images/15min-nextjs-deepseek-api.002.png)
+
+**下载代码模板**
+
+```下面任意选择其中一种方法下载代码模板即可
+```
+**[Next Shadcn Template.zip]**
+
+https://github.com/jackiexiao/next-shadcn-template
+
+https://gitee.com/jackiegeek/next-shadcn-template
+./
+![](/images/15min-nextjs-deepseek-api.003.png)
+./
+![](/images/15min-nextjs-deepseek-api.004.png)
+
+**注册 [Sealos](https://cloud.sealos.run/?uid=N0lFN0Q8_U) 以获取 大模型  Api Key**
+
+[Sealos](https://cloud.sealos.run/?uid=N0lFN0Q8_U) 的便利性，一次注册
+
+- 可以使用多个国内大模型 API： 阿里 / 智谱 / 豆包 / DeepSeek
+- 可以使用 对象存储、数据库等服务（当然你也可以买腾讯云、Vercel 的）
+- 注册地址：https://cloud.sealos.run/?uid=N0lFN0Q8\_U
+
+如果你只打算使用 deepseek.com 官方的 api，也可以不使用 Sealos，直接在它的官网注册充值即可
+
+**Apikey 放到 .env 环境变量中**
+
+```JSON
+# OPENAI\_API\_BASE\_URL=https://api.deepseek.com/v1
+
+OPENAI\_API\_BASE\_URL=https://aiproxy.hzh.sealos.run/v1
+OPENAI\_API\_KEY=sk-3ccdff8877284a2abcbe3a8e28f3f1ea
+OPENAI\_MODEL\_NAME=deepseek-chat
+```
+
+写入到 .env 文件中，确保它在 .gitignore 里头（保证密钥不泄露）
+
+同时写一个 .env.example ，告诉其他访问这个代码的人，.env 应该怎么写
+
+
+```JSON
+OPENAI\_API\_BASE\_URL=https://aiproxy.hzh.sealos.run/v1
+OPENAI\_API\_KEY=sk-xxx
+OPENAI\_MODEL\_NAME=deepseek-chat
+```
+**开发环境**
+
+Nodejs 安装，请访问 nodejs.com 
+
+**Prompt 提示词**
+
+
+```JSON
+
+这是一个使用了 Next.js 15 (App Router)、Shadcn UI、Radix UI 和 Tailwind CSS 的代码仓库，请你阅读这个仓库的代码。
+
+我想实现的需求：实现一个 AI 商业画布生成器，具体流程如下
+
+1. 用户可以首页的输入框中输入他们的 idea
+2. 调用后端 api，后端 api 应该调用 chatgpt api 获取 json 结果
+
+注意使用如下环境变量
+
+OPENAI\_API\_BASE\_URL=https://aiproxy.hzh.sealos.run/v1
+OPENAI\_API\_KEY=sk-xxx
+OPENAI\_MODEL\_NAME=deepseek-chat
+
+使用的 prompt 如下
+
+
+基于用户输入的产品"${idea}"生成商业模式画布的九大要点，内容精炼，词汇精准直接。请按以下格式生成JSON响应：
+
+{
+  "客户细分": [
+    { "point": "point1" },
+    { "point": "point2" }
+  ],
+  "价值主张": [
+    { "point": "point1" },
+    { "point": "point2" }
+  ],
+  ...
+  // 包含其他模块：渠道通路、客户关系、收入来源、核心资源、关键业务、重要合作、成本结构
+}
+
+3. 前端拿到后端返回的包含商业画布信息的 json ，应该写一个页面来呈现这个商业画布
+
+我希望总体风格足够现代简洁风。
+```
+
+**Vercel 部署**
+
+1. 首先注册一个 vercel.com 的账号
+2. 终端中运行 npm run build ，如果有报错，让 AI 修复
+3. 终端中运行 npm run deploy， 这一步会将你的代码部署到服务器上
+4. 到 vercel 设置你的 apikey （环境变量）
+
+**大功告成！**
+
+[pmai-example.vercel.app](https://pmai-example.vercel.app/)
+
+最终的代码我上传到这里（虽然你大概率用不到它）： https://github.com/Jackiexiao/pmai-tutorial
+
+**FAQ**
+
+**为什么使用 sealos 这类中转 API？**
+
+1. 因为未来你大概率需要使用不同的模型
+1. 不同的模型适用场景不同，比如有些响应速度快，有些写代码强，有些写作强
+2. 使用中转 API，你就不需要一个一个大模型去自己接入了，省心省事，但缺点就是你可能需要稍微多付一点钱给中转 API。如果你业务规模大了，再切换也不迟。
+
+**这个 xxx.vercel.app 国内无法访问？**
+
+需要绑定自定义域名之后才可以访问，可以在 B 站上搜索 “Vercel 绑定自定义域名”
+

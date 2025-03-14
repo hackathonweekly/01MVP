@@ -1,0 +1,943 @@
+---
+title: 知识付费网站案例
+---
+
+
+**知识付费网站案例**
+
+**最终效果**
+
+https://windsurf-demo.01mvp.com
+
+https://05fca253.01mvp-demo-web.pages.dev
+
+**[01mvp-website.mp4]**
+
+![](/images/knowledge-payment-website-example.001.png)
+
+**代码**
+
+https://github.com/01MVP/demo-web/
+
+Commit 中有每一次对话生成的效果
+
+**说明**
+
+- AI 编程工具可以是 Cursor / WindSurf / Trae / MarsCode / Vscode Cline 
+- 下面 AI 回答部分可以点击左侧小箭头取消折叠查看
+
+**第1次对话**
+
+输入Prompt
+
+```Bash
+帮我写一个 01MVP 的官网，重点是吸引用户付费加入我们知识星球/社区！或者关注我们的公众号
+
+品牌介绍
+
+slogan: 从0到1，让创意快速变成产品
+
+简介：01MVP 通过 AI 驱动的工具和创造者社区，帮助创造者用最短时间打造最小可行产品（MVP）。
+
+01mvp-wechat-service.jpg： 微信公众号的二维码
+01mvp-wechat-xiaozhushou.png ： 微信小助手的二维码
+01mvp-black.png ： 黑色底logo
+01mvp-white.png ： 白色底 logo
+01mvp-knowledge.jpg: 知识星球的加入二维码
+
+我们提供的服务
+培训 & 咨询
+      - 线上课程 (知识星球)
+      - 线下培训
+      - 企业定制培训
+AI 开发工具 / api / 代码模板
+
+我们会帮助你实现自己的第一个产品，包括且不限于
+实现你的网站 、 小程序、 APP、微信机器人。做AI文创周边，
+用AI提升你的工作效率，帮助你创业等等
+教你学会使用 AI 编程工具， Ai 工作流，实现AI 礼物，音乐，文生图等等
+
+联系方式
+      - 优先推荐微信公众号！！！ 以及微信小助手的二维码
+      - B 站：https://space.bilibili.com/3546733244058560
+      - 小红书：https://www.xiaohongshu.com/user/profile/665db6cf0000000003033b8e
+      - 知乎：https://www.zhihu.com/people/01mvp
+      - 微博: https://weibo.com/u/7965621961
+
+注意
+本仓库中已经有 nextjs 15 + shadcn 的模板了，请基于本仓库修改
+记得修改浏览器 tab 头像为logo，名称为 01MVP
+注意一定要帮我选择一个合适的 UI 风格，让用户更愿意加入我们，你可以多准备一些宣传内容
+动画要求：使用 frame motion 让网页更丝滑
+
+你可以提一些建议帮助我做的更好
+```
+
+**AI 回答**
+
+```Plain Text
+我明白您想要创建一个吸引力强的官网，重点是引导用户关注公众号和加入知识星球。我会基于现有的 Next.js + shadcn 模板进行开发，打造一个现代化且有说服力的网站。
+
+首先，让我看看现有的项目结构：
+
+Analyzed
+~/code/01mvp-demo-web
+让我检查一下 public 目录中的图片资源：
+
+Analyzed
+public
+我的建议和设计思路：
+
+UI 风格：
+采用深色主题为主，突出科技感和专业性
+使用渐变色和简洁的动画效果增加视觉吸引力
+重点突出"从0到1"的转变过程，可以用动画展示
+加入一些成功案例和用户见证
+
+内容结构：
+Hero 区域：大标题 + 简介 + 快速行动按钮
+服务介绍：使用卡片式布局展示各类服务
+社区价值：突出知识星球的独特价值
+成功案例：展示已有的成功项目
+联系方式：重点突出公众号和小助手
+
+改进建议：
+添加用户见证/案例展示区
+增加一个常见问题解答区域
+添加免费资源区域作为引流
+突出社区氛围和导师团队
+可以加入一些数据统计（比如社区成员数、成功案例数等）
+让我开始实现这个网站。首先我需要修改一些基础配置：
+
+网站的基本框架搭建，主要包括以下几个部分：
+
+首页布局：
+Hero 区域：展示品牌 slogan 和主要价值主张
+Features 区域：展示我们的四大核心服务
+CTA 区域：放置二维码和社区价值介绍
+Social 区域：展示所有社交媒体链接
+设计特点：
+使用深色主题，突出科技感
+添加了渐变文字和网格背景动画效果
+使用卡片式布局，清晰展示各个部分
+重点突出二维码和社区价值
+改进建议：
+内容优化：
+可以添加一些用户成功案例
+增加常见问题解答部分
+添加导师团队介绍
+增加一些数据统计
+功能增强：
+可以添加一个简单的留言或咨询表单
+增加文章/博客展示区域
+添加搜索功能
+视觉优化：
+可以添加更多的动画效果
+增加产品截图或演示视频
+优化移动端显示效果
+运营建议：
+可以设置新用户注册优惠
+添加免费资源下载区域
+增加用户见证和评价展示
+设置清晰的转化路径
+你可以运行以下命令来启动项目：
+
+Canceled background terminal command
+~/code/01mvp-demo-web
+$ npm run dev
+
+你需要先安装依赖：
+
+Canceled terminal command
+~/code/01mvp-demo-web
+$ npm install
+
+看起来命令被取消了。你可以手动运行以下命令来启动项目：
+
+首先安装依赖：
+bash
+CopyInsert in Terminal
+npm install
+然后启动开发服务器：
+bash
+CopyInsert in Terminal
+npm run dev
+这样就可以在 http://localhost:3000 访问网站了。
+
+如果你觉得还需要任何修改或者有其他需求，请随时告诉我！
+```
+
+**第2次对话**
+
+```你的建议很棒，根据你的建议，帮我继续优化界面，其中需要的一些信息可以先虚构一下
+```
+
+**AI 回答**
+
+```Plain Text
+好的，我来帮你继续优化网站，添加更多吸引力的内容和功能。我们先添加一些新的组件：
+
+首先添加用户案例展示区：
+Created
+showcase.tsx
++75
+-0
+ 0
+Open diff
+添加常见问题解答区：
+Created
+faq.tsx
++58
+-0
+ 0
+Open diff
+添加数据统计区：
+Created
+stats.tsx
++53
+-0
+ 0
+Open diff
+更新主页，整合新组件：
+Edited
+page.tsx
++7
+-1
+ 25
+Open diff
+我已经添加了几个新的组件来优化网站：
+
+用户案例展示（Showcase）：
+展示3个真实的用户案例
+包含用户头像、角色和项目描述
+使用标签展示项目类型
+突出项目成果和数据
+常见问题（FAQ）：
+使用手风琴组件展示5个常见问题
+回答用户最关心的问题
+降低用户的进入门槛
+突出社区价值
+数据统计（Stats）：
+展示关键数据指标
+包括用户数、成功案例等
+使用图标增加视觉效果
+突出平台实力
+改进建议：
+
+内容方面：
+可以添加更多真实的用户见证和案例
+增加一些具体的课程或工具介绍
+添加免费资源下载区域
+可以考虑添加一个简单的博客模块
+交互方面：
+可以添加更多动画效果
+增加一个简单的咨询表单
+添加返回顶部按钮
+优化移动端体验
+运营方面：
+可以设置新用户专属优惠
+添加邮件订阅功能
+增加分享功能
+设置清晰的转化路径
+你觉得还需要添加或修改什么内容吗？
+```
+
+**第3次对话**
+
+```很棒，根据你的建议进一步优化吧
+```
+**AI 回答**
+
+```Plain Text
+好的，我来继续优化网站。首先添加一些新的组件和功能：
+
+首先添加一个简单的咨询表单：
+Created
+contact-form.tsx
++51
+-0
+ 0
+Open diff
+添加课程介绍部分：
+Created
+courses.tsx
++85
+-0
+ 0
+Open diff
+添加返回顶部按钮：
+Created
+scroll-to-top.tsx
++45
+-0
+ 0
+Open diff
+更新主页，整合新组件：
+Edited
+page.tsx
++7
+-1
+ 31
+Open diff
+添加一些动画效果，创建一个新的动画组件：
+Created
+animated-section.tsx
++36
+-0
+ 0
+Open diff
+现在我们需要安装一些新的依赖：
+
+Edited
+package.json
++1
+-1
+ 91
+Open diff
+我已经添加了以下新功能和改进：
+
+咨询表单：
+简单的联系表单
+包含姓名、联系方式和需求描述
+提交后显示成功提示
+响应式设计
+课程介绍：
+展示三个不同层次的课程
+清晰的价格和特点说明
+突出重点课程
+添加行动按钮
+返回顶部按钮：
+滚动超过300px时显示
+平滑滚动效果
+固定在右下角
+响应式设计
+动画效果：
+添加了 framer-motion 动画库
+创建了通用的动画组件
+可以为任何区块添加入场动画
+提升用户体验
+建议进一步优化：
+
+内容方面：
+可以添加更多课程详情
+增加学员评价展示
+添加导师介绍
+增加免费资源下载区
+功能方面：
+添加课程预约功能
+增加在线支付功能
+添加实时咨询功能
+增加邮件订阅功能
+设计方面：
+可以添加更多交互动画
+优化移动端布局
+增加深色模式切换
+添加加载动画
+你觉得还需要添加或修改什么内容吗？
+```
+
+
+**第4次对话**
+
+
+```继续优化
+```
+**AI 回答**
+
+```Plain Text
+好的，让我们继续优化网站。我们先添加一些新的组件和功能：
+
+首先添加导师团队介绍：
+Created
+mentors.tsx
++77
+-0
+ 0
+Open diff
+添加免费资源下载区：
+Created
+resources.tsx
++83
+-0
+ 0
+Open diff
+添加邮件订阅功能：
+Created
+newsletter.tsx
++41
+-0
+ 0
+Open diff
+更新主页，添加新组件：
+Edited
+page.tsx
++6
+-0
+ 38
+Open diff
+我已经添加了以下新功能和改进：
+
+导师团队介绍：
+展示4位核心导师团队
+包含头像、职位和专长
+突出专业背景和经验
+使用动画效果增加吸引力
+免费资源下载：
+提供3种不同类型的学习资源
+包含PDF指南、视频教程和代码模板
+引导用户关注公众号获取更多资源
+简洁的下载/订阅流程
+邮件订阅功能：
+醒目的订阅区域设计
+简单的邮箱输入表单
+清晰的价值主张
+即时的成功反馈
+整体优化：
+添加了更多动画效果
+优化了组件的排序和布局
+增强了视觉层次感
+改进了用户引导流程
+建议进一步优化：
+
+功能方面：
+添加实时在线咨询功能
+增加课程预约系统
+添加用户评价展示墙
+增加分享功能
+内容方面：
+添加更多详细的课程介绍
+增加学员成功故事
+添加常见技术问答
+增加行业洞察文章
+技术方面：
+添加性能监控
+优化图片加载
+添加错误处理
+增加数据统计
+你觉得还需要添加或修改什么内容吗？或者想要重点优化哪个部分？
+```
+
+**第5次对话-多种 UI 风格**
+
+
+```内容已经很棒了！接下来我希望你着重美化 UI，请给我提供 4 种适合 01MVP 的 UI 风格，对应给出 4 种 hero 模块 的样例（在同一个页面中展示，方便我进行对比），等我确定使用哪个风格之后，我们再修改其他的模块
+```
+![](/images/knowledge-payment-website-example.002.png)
+
+![](/images/knowledge-payment-website-example.003.png)
+
+![](/images/knowledge-payment-website-example.004.png)
+
+![](/images/knowledge-payment-website-example.005.png)
+
+**AI 回答**
+
+```Plain Text
+好的，我来创建4种不同风格的 Hero 组件供您选择。我们将创建一个专门的页面来展示这些风格：
+
+首先创建4种不同风格的 Hero 组件：
+Created
+modern-gradient.tsx
++37
+-0
+ 0
+Open diff
+Created
+minimalist.tsx
++45
+-0
+ 0
+Open diff
+Created
+creative.tsx
++52
+-0
+ 0
+Open diff
+Created
+tech.tsx
++61
+-0
+ 0
+Open diff
+现在创建一个展示页面来对比这四种风格：
+
+Created
+page.tsx
++51
+-0
+ 0
+Open diff
+我已经创建了4种不同风格的 Hero 组件，每种风格都有其独特的特点：
+
+现代渐变风格（Modern Gradient）：
+渐变背景色从紫色过渡到蓝色
+半透明的网格背景增添层次感
+玻璃态效果提升现代感
+白色文字和按钮，突出视觉对比
+
+简约商务风格（Minimalist）：
+黑白主色调，突出专业性
+左文字右图片的经典布局
+大字体标题，强调重点
+简洁的线条和间距
+
+创意活力风格（Creative）：
+明亮的背景色和渐变文字
+柔和的装饰性图形
+活泼的动画效果
+圆润的设计元素
+
+高科技风格（Tech）：
+深色背景配合霓虹效果
+代码网格背景增添科技感
+炫酷的光晕和模糊效果
+独特的按钮悬停动画
+你可以访问 /styles 路径来查看这四种风格的对比。每种风格都有其适用场景：
+
+现代渐变风格：适合强调产品的创新性和科技感
+简约商务风格：适合突出品牌的专业性和可靠性
+创意活力风格：适合吸引年轻用户，强调产品的趣味性
+高科技风格：适合展示产品的技术实力和未来感
+你觉得哪种风格最适合 01MVP？我们可以根据你的选择来统一整个网站的设计风格。
+```
+
+
+
+
+
+
+**第 6 次对话**
+
+```我喜欢高科技风格
+```
+![](/images/knowledge-payment-website-example.006.png)
+
+**AI 回答**
+
+```Plain Text
+好的，我们将使用高科技风格来统一整个网站的设计。我们需要更新一些基础样式和组件：
+
+首先更新全局样式：
+Edited
+globals.css
++63
+-19
+ 64
+Open diff
+更新 Hero 组件，使用高科技风格：
+Edited
+hero.tsx
++46
+-26
+ 14
+Open diff
+现在我们已经将主页的 Hero 部分更新为高科技风格。这个风格的主要特点包括：
+
+深色背景：使用黑色背景突出科技感
+霓虹效果：添加了紫色和蓝色的光晕效果
+代码网格：背景添加了一个低透明度的网格图案
+渐变文字：标题使用了从蓝色到紫色到粉色的渐变效果
+玻璃态效果：顶部的状态标签使用了毛玻璃效果
+炫酷按钮：主按钮添加了光晕和悬停动画效果
+这个设计风格突出了 01MVP 的技术创新性，同时保持了良好的可读性和用户体验。我们可以继续用这个风格来更新其他组件，比如 Features、Stats、Courses 等部分。你觉得这个设计效果如何？需要我继续更新其他组件吗？
+```
+
+**第7次对话**
+
+```继续更新
+```
+**AI 回答**
+
+```Plain Text
+好的，让我们继续更新其他组件，保持统一的高科技风格。首先更新 Features 组件：
+
+Edited
+features.tsx
++53
+-35
+ 17
+Open diff
+现在让我们更新 Stats 组件：
+
+Edited
+stats.tsx
++32
+-40
+ 13
+Open diff
+我已经更新了 Features 和 Stats 组件，使用了统一的高科技风格。主要的设计更新包括：
+
+Features 组件：
+添加了深色背景和网格效果
+使用毛玻璃效果的卡片设计
+渐变图标背景
+悬停时的边框和背景变化效果
+渐变文字标题
+Stats 组件：
+中央大型光晕效果
+毛玻璃效果的数据展示区
+渐变文字数值
+悬停时的背景变化效果
+统一的网格背景
+这些更新保持了整体的视觉一致性，同时让每个部分都有其独特的视觉重点。要继续更新其他组件吗？比如 Courses、Mentors 或 Resources 部分？
+```
+**第8次对话**
+
+```继续更新
+```
+**AI 回答**
+
+```Plain Text
+好的，让我们继续更新 Courses 和 Mentors 组件，保持高科技风格的一致性。
+
+先更新 Courses 组件：
+
+Edited
+courses.tsx
++84
+-65
+ 20
+Open diff
+现在更新 Mentors 组件：
+
+Edited
+mentors.tsx
++58
+-51
+ 26
+Open diff
+我已经更新了 Courses 和 Mentors 组件，继续保持高科技风格的设计语言。主要更新包括：
+
+Courses 组件：
+简化了课程选项，突出重点课程
+添加了紫色主题的推荐课程卡片
+使用毛玻璃效果和渐变背景
+优化了价格和特性的展示方式
+添加了悬停动画效果
+Mentors 组件：
+重新设计了导师卡片布局
+添加了头像悬停动画效果
+使用渐变光晕作为背景
+优化了文字层级和颜色
+添加了装饰性边框效果
+所有组件都保持了一致的设计元素：
+
+深色背景
+毛玻璃效果
+渐变文字
+霓虹光晕
+精致的动画过渡
+要继续更新其他组件吗？比如 Resources、Newsletter 或 Contact Form？
+```
+**第9次对话**
+
+我说：将剩余的模块一次性更新了
+
+**AI 回答**
+
+```Plain Text
+我已经完成了 Newsletter 和 Contact Form 组件的高科技风格更新。让我为您总结一下所做的更改：
+
+Newsletter 组件更新：
+添加了深色背景和网格效果
+使用了渐变文本标题
+添加了发光的紫色背景光晕效果
+重新设计了邮箱输入框，添加了邮件图标
+使用了半透明玻璃拟态效果
+添加了渐变按钮和悬停效果
+Contact Form 组件更新：
+完全重新设计了布局和视觉效果
+添加了双重背景光晕效果
+使用了网格背景和渐变文本
+添加了两个信息卡片（邮件咨询和在线咨询）
+重新设计了表单输入框，使用半透明背景
+添加了发送图标和渐变提交按钮
+优化了移动端响应式布局
+这些更新保持了整个网站的一致性设计语言，包括：
+
+深色主题
+渐变效果
+玻璃拟态设计
+发光效果
+网格背景
+动画过渡
+所有组件都已经完成了高科技风格的改造，现在整个网站具有统一的未来感设计语言。您可以继续测试这些组件，如果需要任何调整或有其他需求，请随时告诉我。
+```
+
+**第 10 次对话**
+
+
+```请帮我添加 导航栏 navbar 和 页脚 footer，页脚需要添加备案号信息（暂时虚构一个）
+```
+**AI 回答**
+
+```Plain Text
+我已经完成了导航栏和页脚的创建，并将它们集成到了布局中。让我为您总结一下所做的更改：
+
+导航栏 (Navbar) 特点：
+固定在顶部，带有半透明玻璃拟态效果
+渐变 Logo 文字
+响应式设计，包含移动端菜单按钮
+导航链接带有悬停效果
+登录和"立即开始"按钮，后者使用渐变背景
+全局深色主题
+页脚 (Footer) 特点：
+深色半透明背景
+网格纹理和发光效果
+渐变 Logo
+社交媒体链接
+分栏布局，包含快速链接
+版权信息和备案号（京ICP备20240101号-1）
+响应式设计
+布局 (Layout) 更新：
+集成了导航栏和页脚
+设置了适当的页面间距
+更新了网站标题和描述
+保持了整体的深色主题
+所有组件都保持了网站的高科技风格设计语言，包括：
+
+半透明玻璃拟态效果
+渐变文本和按钮
+网格背景
+发光效果
+动画过渡
+您现在应该可以看到一个完整的网站布局，包括顶部导航栏和底部页脚。如果您需要任何调整或有其他需求，请随时告诉我。
+```
+
+**第 11 次对话**
+
+
+```<p>1. 帮我创建 导师 / 课程 /  资源 / 关于我们 对应的页面</p><p>2. 导航栏点击栏目时应该跳转到对应的页面</p><p>3. 上述的页面在首页都有对应的模块，模块中点击了解详情后，应该跳转到对应的页面</p>
+```
+
+**AI 回答**
+
+```Plain Text
+
+
+我会帮您创建所有页面，并添加相应的导航链接。让我们一步步来：
+
+首先创建各个页面：
+Created
+page.tsx
++18
+-0
+ 0
+Open diff
+Created
+page.tsx
++18
+-0
+ 0
+Open diff
+Created
+page.tsx
++18
+-0
+ 0
+Open diff
+Created
+page.tsx
++76
+-0
+ 0
+Open diff
+现在让我们更新首页的组件，添加"了解详情"按钮：
+Edited
+mentors.tsx
++22
+-2
+ 82
+Open diff
+Edited
+courses.tsx
++93
+-79
+ 25
+Open diff
+Edited
+resources.tsx
++69
+-57
+ 24
+Open diff
+我已经完成了所有页面的创建和组件的更新。让我总结一下所做的更改：
+
+创建了新的页面：
+/app/mentors/page.tsx - 导师页面
+/app/courses/page.tsx - 课程页面
+/app/resources/page.tsx - 资源页面
+/app/about/page.tsx - 关于我们页面
+
+更新了首页组件，添加了跳转功能：
+Mentors 组件：
+添加了 showAll 属性控制显示数量
+添加了"了解更多导师"按钮，链接到 /mentors 页面
+Courses 组件：
+添加了 showAll 属性
+添加了"查看更多课程"按钮，链接到 /courses 页面
+优化了课程卡片的设计
+Resources 组件：
+添加了 showAll 属性
+添加了"查看更多资源"按钮，链接到 /resources 页面
+改进了资源卡片的布局
+
+导航功能：
+导航栏中的链接已经正确配置，可以跳转到对应页面
+所有页面保持了统一的高科技风格设计
+每个页面都有合适的标题和描述
+所有页面都维持了网站的统一设计语言，包括：
+
+深色主题
+渐变文本
+玻璃拟态效果
+发光效果
+网格背景
+动画过渡
+现在您可以通过导航栏或首页的"了解更多"按钮访问各个页面。如果您需要对任何页面进行调整或有其他需求，请随时告诉我。
+```
+
+**部署**
+
+执行 npm run deploy
+
+可以看到下面的输出
+
+```Bash
+➜  01mvp-demo-web git:(main) npm run deploy
+
+
+> 01mvp-demo-web@0.0.2 deploy
+> npm run pages:build && wrangler pages deploy
+
+
+> 01mvp-demo-web@0.0.2 pages:build
+> npx @cloudflare/next-on-pages
+
+⚡️ @cloudflare/next-on-pages CLI v.1.13.5
+
+⚡️ The project is set up for bun but it is currently being run via npm this might lead to build errors, please be sure to use the same package manager your project uses when running @cloudflare/next-on-pages
+
+⚡️ Detected Package Manager: npm (10.8.3)
+⚡️ Preparing project...
+⚡️ Project is ready
+⚡️ Building project...
+▲  Vercel CLI 39.1.0
+▲  Detected bun.lockb generated by bun@1.x
+▲  Warning: Bun is used as a package manager at build time only, not at runtime with Functions
+▲  WARNING: You should not upload the .next directory.
+▲  Installing dependencies...
+▲  bun install v1.1.36 (ededc168)
+▲  Resolving dependencies
+▲  Resolved, downloaded and extracted [7]
+▲  Saved lockfile
+▲  + framer-motion@10.18.0 (v11.12.0 available)
+▲  3 packages installed [1.57s]
+▲  Detected Next.js version: 15.0.3
+▲  Running "bun run build"
+▲  $ next build
+▲  ▲ Next.js 15.0.3
+▲  
+▲  Creating an optimized production build ...
+▲  ✓ Compiled successfully
+▲  Linting and checking validity of types ...
+▲  ./app/about/page.tsx
+▲  9:12  Warning: Invalid Tailwind CSS classnames order  tailwindcss/classnames-order
+▲  10:12  Warning: Invalid Tailwind CSS classnames order  tailwindcss/classnames-order
+▲  
+▲  info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/building-your-application/configuring/eslint#disabling-rules
+▲  Collecting page data ...
+▲  Generating static pages (0/9) ...
+▲  Generating static pages (2/9)
+▲  Generating static pages (4/9) 
+▲    Generating static pages (6/9) 
+▲  ✓ Generating static pages (9/9)
+▲  Finalizing page optimization ...
+▲  Collecting build traces ...
+▲  
+▲  Route (app)                              Size     First Load JS
+▲  ┌ ○ /                                    22.8 kB         137 kB
+▲  ├ ○ /\_not-found                          896 B           101 kB
+▲  ├ ○ /about                               182 B           109 kB
+▲  ├ ○ /courses                             182 B           109 kB
+▲  ├ ○ /mentors                             182 B           109 kB
+▲  ├ ○ /resources                           182 B           109 kB
+▲  └ ○ /styles                              520 B           106 kB
+▲  + First Load JS shared by all            99.9 kB
+▲  ├ chunks/4bd1b696-a519c630a71939b7.js  52.5 kB
+▲  ├ chunks/517-5390ab19f281486b.js       45.5 kB
+▲  └ other shared chunks (total)          1.91 kB
+▲  ○  (Static)  prerendered as static content
+▲  Traced Next.js server files in: 132.101ms
+▲  Created all serverless functions in: 28.699ms
+▲  Collected static files (public/, static/, .next/static): 2.471ms
+▲  Build Completed in .vercel/output [16s]
+⚡️ Completed npx vercel build.
+
+⚡️ Build Summary (@cloudflare/next-on-pages v1.13.5)
+⚡️ 
+⚡️ Prerendered Routes (12)
+⚡️   ┌ /
+⚡️   ├ /about
+⚡️   ├ /about.rsc
+⚡️   ├ /courses
+⚡️   ├ /courses.rsc
+⚡️   ├ /index.rsc
+⚡️   ├ /mentors
+⚡️   ├ /mentors.rsc
+⚡️   ├ /resources
+⚡️   ├ /resources.rsc
+⚡️   ├ /styles
+⚡️   └ /styles.rsc
+⚡️ 
+⚡️ Other Static Assets (55)
+⚡️   ┌ /\_app.rsc.json
+⚡️   ├ /\_document.rsc.json
+⚡️   ├ /\_error.rsc.json
+⚡️   ├ /.DS\_Store
+⚡️   └ ... 51 more
+
+⚡️ Build log saved to '.vercel/output/static/\_worker.js/nop-build-log.json'
+⚡️ Generated '.vercel/output/static/\_worker.js/index.js'.
+⚡️ Build completed in 0.34s
+? The project you specified does not exist: "01mvp-demo-web". Would you like to create it? › - Use arrow-keys. Return to submit.
+❯   Create a new project (Enter)
+✔ The project you specified does not exist: "01mvp-demo-web". Would you like to create it? › Create a new project (Enter)
+✔ Enter the production branch name: … main
+✨ Successfully created the '01mvp-demo-web' project.
+▲ [WARNING] Warning: Your working directory is a git repo and has uncommitted changes
+
+  To silence this warning, pass in --commit-dirty=true
+
+
+✨ Success! Uploaded 67 files (5.25 sec)
+
+✨ Uploading \_headers
+Attaching additional modules:
+┌───────────────────────────────────────────┬──────┬──────────┐
+│ Name                                      │ Type │ Size     │
+├───────────────────────────────────────────┼──────┼──────────┤
+│ \_\_next-on-pages-dist\_\_/cache/adaptor.js   │ esm  │ 2.29 KiB │
+├───────────────────────────────────────────┼──────┼──────────┤
+│ \_\_next-on-pages-dist\_\_/cache/cache-api.js │ esm  │ 0.43 KiB │
+├───────────────────────────────────────────┼──────┼──────────┤
+│ \_\_next-on-pages-dist\_\_/cache/kv.js        │ esm  │ 0.35 KiB │
+├───────────────────────────────────────────┼──────┼──────────┤
+│ Total (3 modules)                         │      │ 3.06 KiB │
+└───────────────────────────────────────────┴──────┴──────────┘
+✨ Compiled Worker successfully
+✨ Uploading Worker bundle
+✨ Uploading \_routes.json
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://a3ecda87.01mvp-demo-web.pages.dev
+
+
+```
+**CloudFlare自定义域名**
+
+
+**[cloudflare-自定义域名4k.mp4]**
+
+
+

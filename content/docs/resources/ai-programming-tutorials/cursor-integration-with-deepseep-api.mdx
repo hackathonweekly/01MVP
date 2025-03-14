@@ -1,0 +1,140 @@
+---
+title: cursor-integration-with-deepseep-api
+---
+
+
+**cursor-integration-with-deepseep-api**
+
+
+**Cursor 中接入 deepseek-v3 模型（性价比最高的模型）**
+
+```<p>1. deepseek-v3 代码能力强悍</p><p>2. deepseek-v3 价格便宜，让你可以省去一笔 Cursor 订阅费用（不过要注意的是你无法使用 cursor 的补全功能）</p>
+```
+
+
+```换成 Deepseek api 的局限性！ 只能使用 Chat 模式，无法使用 Compose / Agent 模式！
+```
+
+**第一步：获取 Apikey**
+
+方法 1：访问 DeepSeek 官网获取 API 密钥
+./
+```https://platform.deepseek.com/usage
+```
+![](/images/cursor-integration-with-deepseep-api.001.png)
+
+方法 2：访问 sealos 的 AI Proxy （推荐）
+
+```https://sealos.run
+```././
+使用 sealos 的好处在于，你可以使用同一个 apikey 访问所有国内的大模型（不同模型的适用场景不同），而且价格跟官网相同，这样你就不需要一个个注册国内的大模型了
+
+
+|![](/images/cursor-integration-with-deepseep-api.002.png)|![](/images/cursor-integration-with-deepseep-api.003.png)|
+| :-: | :-: |
+点击 api keys 生成key,记住复制并保存好
+
+从现在你可以享受DeepSeek V3（代码能力跟 claude-sonnect 相当！）和他的超值优惠价格！
+
+- 输入成本：每百万 tokens 仅需 0.1-1 元
+- 输出成本：每百万 tokens 仅需 2 元（不过3 个月后会涨价到 8 元）
+
+**第二步：在./
+
+- 打开 Cursor 设置面板
+
+![](/images/cursor-integration-with-deepseep-api.004.png)
+
+- 暂时关闭其他已激活的模型
+- 将 API 地址设为：
+- https://api.deepseek.com （如果你在 deepseek 官网中获取）
+- https://aiproxy.gzg.sealos.run  （如果你使用 sealos.run）
+./
+- 输入你的专属 API 密钥
+- 点 ver./model中加入'deepseek-chat'
+
+![](/images/cursor-integration-with-deepseep-api.005.png)
+
+![](/images/cursor-integration-with-deepseep-api.006.png)
+
+
+```deepseek-chat 模型已全面升级为 DeepSeek-V3，接口不变。 所以只要指定 model='deepseek-chat' 即可调用 DeepSeek-V3。
+```
+
+- 模型选择deepseek-chat 并使用
+
+
+**更详细的教./
+
+```下面的文章来自 Sealos
+```
+DeepSeek-V3 实在是太便宜了，就跟不要钱似的：**每百万输入 tokens 0.1 元 (缓存命中)/ 1 元 (缓存未命中)，每百万输出 tokens 2 元**
+
+![](/images/cursor-integration-with-deepseep-api.007.png)
+
+跟其他模型相比，DeepSeek-V3 的性价比非常高，只能用 “真香” 来形容。
+
+Sealos 推出的 AI 聚合代理服务 Sealos AI Proxy 为用户提供了便捷的 AI 模型访问通道，其中就包含了 DeepSeek-V3 模型。而且通过 Sealos AI Proxy 使用这些模型时，**价格与官方定价完全一致**，真正做到零溢价，让用户能够以最实惠的价格享受优质的 AI 服务。
+
+接下来，我将**手把手教你如何让 Cursor 使用 DeepSeek-V3 模型**。
+
+虽然 Cursor 的价格较高且试用时间有限，但它支持用户接入自定义 API。因此，我们可以通过接入 Sealos AI Proxy 的 API，让 Cursor 使用 DeepSeek-V3 模型以及其他各种模型。
+
+```注意：Cursor 接入自定义 API 只能使用 Chat 模式，不能使用 Composer 模式。不过已经很香了。
+```
+如果你只想接入 DeepSeek-V3 模型，也可以选择使用 DeepSeek 官方的 API。而 **Sealos AI Proxy 的优势在于它可以同时接入多个模型，而不仅仅局限于 DeepSeek**。
+./
+下面开始正式操作。
+
+首先登录/注册[ Sealos Cloud](https://cloud.sealos.run/?uid=N0lFN0Q8_U)
+./
+打开桌面上的【AI Proxy】：
+
+![](/images/cursor-integration-with-deepseep-api.008.png)
+
+新建一个 Key：
+./
+![](/images/cursor-integration-with-deepseep-api.008.png)
+
+创建完成后，你就得到了一个 API Key。
+
+现在回到 Cursor，点击顶部菜单栏的 Cursor --> Settings --> Cursor Settings：
+./
+![](/images/cursor-integration-with-deepseep-api.009.png)
+
+下面的步骤比较重要，**请仔细阅读，并严格按照步骤操作**。
+./
+1. 首先来到 Models 界面，**取消勾选其他所有模型**。
+
+![](/images/cursor-integration-with-deepseep-api.010.png)
+./
+1. 点击 “Add Model” 添加一个自定义模型。
+
+![](/images/cursor-integration-with-deepseep-api.011.png)
+
+1. 输入模型名称为 deepseek-chat，然后回车。
+./
+![](/images/cursor-integration-with-deepseep-api.012.png)
+
+1. 因为 DeepSeek 的模型 deepseek-chat 和 deepseek-coder 已经合并，所以这里输入 deepseek-chat 即可自动使用最新的 DeepSeek-V3 模型。
+2. 在 “O./Base URL” 下方输入框中输入 Sealos AI Proxy 的 API 地址：https://aiproxy.hzh.sealos.run/v1，然后点击 “Save” 按钮。
+
+```1. 注意：API 地址末尾的 /v1 不能省略。
+```
+![](/images/cursor-integration-with-deepseep-api.013.png)
+
+1. 输入之前在 Sealos AI Proxy 中创建的 API Key，然后点击 “Verify” 按钮。
+
+![](/images/cursor-integration-with-deepseep-api.014.png)
+
+1. 在弹出来./ OpenAI API Key” 按钮。
+
+![](/images/cursor-integration-with-deepseep-api.015.png)
+
+1. 验证完成后，就会变成这个样子：
+
+接下来就可以在 Cursor 中使用 DeepSeek-V3 模型了。直接按下快捷键 CMD + L 打开 Cursor 的 Chat 界面，然后开始对话。
+
+![](/images/cursor-integration-with-deepseep-api.016.png)
+
+

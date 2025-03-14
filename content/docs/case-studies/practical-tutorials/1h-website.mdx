@@ -1,0 +1,274 @@
+---
+title: h website
+---
+
+
+**1 小时用 AI 开发一个丝滑优雅的个性化网站！**
+
+
+视频版本：[15 分钟上线 Nextjs 全栈网站，接入 DeepSeek API 的教程](https://www.bilibili.com/video/BV1C56JYiEXz/)
+
+**目标：你将在 1 小时内学会用 AI 快速开发一个丝滑优雅的个性化网站！**
+
+感受 AI 编程进步带来的魅力！
+
+你可以做：个性化网站、有趣的小游戏、公司官网等等！
+
+无需编程，熟悉电脑操作即可
+
+如果你进展顺利，有空余时间，甚至还可以将它部署到公网上给朋友
+
+
+|![](/images/1h-ai-elegant-website.001.jpeg)|![](/images/1h-ai-elegant-website.002.jpeg)|
+| :-: | :-: |
+
+**更多案例（点击展开）**
+
+**现代简洁风格**
+
+网站：https://7a553bf7.hackweek.pages.dev/ 或者 hackweek.cn 
+
+|![](/images/1h-ai-elegant-website.003.png)|![](/images/1h-ai-elegant-website.004.png)|
+| :-: | :-: |
+**[hackweek-demo.mp4]**
+
+**工程师风格**
+
+网站：https://terminal-style.hackweek.pages.dev/
+
+|![](/images/1h-ai-elegant-website.005.png)|![](/images/1h-ai-elegant-website.006.png)|
+| :-: | :-: |
+
+**[terminal.mp4]**
+
+我仅跟 AI 对话了两次就基本切换到了第二种风格（ps: 1。 前提是前文中给过风格样例，2。 后续我还微调了细节）
+
+``` terminal-hero 的风格我很喜欢，请参考这个风格将剩下的所有模块重写一遍吧！里头的文本内容先不要修改，你只需要专注修改样式就好
+```
+
+
+```很棒！继续帮我修改剩下的部分，比如 activites / footer / header / timeline / team 的 section
+```
+
+接下来，让我们开始吧！
+
+**安装环境** 
+
+**方案 1：使用本地电脑安装 nodejs**
+
+https://nodejs.org/zh-cn/download/prebuilt-installer
+
+如图，
+
+![](/images/1h-ai-elegant-website.007.png)
+
+
+**下载 AI 代码编辑器 Cursor 或者 Windsurf 或者 Trae**
+
+**下载代码模板，然后使用 Cursor / Windsurf / Trae  中打开**
+
+方法 1：
+
+**[Next Shadcn Template.zip]**
+
+方法 2：直接从 Github 下载（有可能需要魔法才能访问）
+
+源码地址： 
+
+https://github.com/Jackiexiao/next-shadcn-template
+
+![](/images/1h-ai-elegant-website.008.png)
+
+下载解压，可以看一下里头的 README，有详细的解释
+
+```<p>为什么要使用这个代码模板？</p><p>1. 它包含了很多基础功能，让你能够专注开发核心功能，而不是浪费时间在基础框架上</p><p>2. 它是精心设计过的，符合业内最佳实践，能让 AI 生成效果更加稳定</p><p>3. 它内置了常用的操作，比如一键部署到 Cloudflare</p><p>4. 使用了当前主流的网页开发技术栈：Nextjs 15  + Shadcn-UI + Tailwindcss （新手不懂的话可以忽略这个些术语）</p><p>Ps：不同场景你需要使用不同的代码模板，这个模板专门用于搭建简单的网站</p>
+```
+**Cursor / Windsurf 中打开终端并安装依赖**
+
+点击右上角：
+
+![](/images/1h-ai-elegant-website.009.jpeg)
+
+或者
+
+快捷键： Ctrl + `/  command + J打开终端，输入 
+
+```Bash
+npm config set registry https://registry.npmmirror.com/
+npm install
+```
+
+**准备 需求文档 和素材**
+
+1. 参考下面的 prompt 改成你的需求
+2. 注意准备好你的图片素材放在 public 文件夹下（建议做图片压缩，不然加载比较久） 
+3. 把 prompt 给 windsurf （在右侧聊天框中输入）
+4. Windsurf 会开始执行代码，如果遇到执行命令的提示，你就点 Accept，然后正常会让你打开 http://localhost:3000/ 让你预览页面的效果
+
+```Bash
+请帮我生成[项目名称 周周黑客松] 的Landing Page
+
+社区的介绍和信息
+
+（可以写详细点，比如我放了社区简介，口号，活动内容，发展时间线）
+这里略去
+
+需要包含以下内容
+1. 导航栏
+2. 简介
+3. 特色
+4. 时间线
+5. 主理人信息
+6. 合作伙伴
+7. 页脚（放公众号信息，邮箱等）
+
+我提供的图片有（在 public 文件夹下）
+1. 活动照片 events/1.jpg, 2.jpg... 8.jpg
+2. 活动海报 posters/1.jpg ... 8.jpg
+3. 合作伙伴 logo  partners/1.png ... 8.png
+4. 公众号微信二维码 wechat\_official\_qr.png
+
+主理人信息如下
+1. 姓名 + 简介
+2. 姓名 + 简介
+
+要求
+1. 本仓库中已经有 nextjs 15 + shadcn 的模板了，请基于本仓库修改
+2. 记得修改浏览器 Tab 的 icon 为logo，名称为 XX
+3. 动画要求：使用 frame motion 让网页更丝滑
+
+你可以提一些建议帮助我做的更好
+```
+**第一版本-专注于内容优化**
+
+通常 AI 第一版本会比较简洁，界面 一般
+
+|![](/images/1h-ai-elegant-website.010.png)|![](/images/1h-ai-elegant-website.011.png)|![](/images/1h-ai-elegant-website.012.png)|
+| :-: | :-: | :-: |
+
+
+|![](/images/1h-ai-elegant-website.013.png)|![](/images/1h-ai-elegant-website.014.png)|![](/images/1h-ai-elegant-website.015.png)|
+| :-: | :-: | :-: |
+
+接下来你可以跟 AI 说，继续优化等等
+
+**第二版本-让它提供几种风格的 UI**
+
+我让它生成几种风格的介绍页面，供我筛选，AI 给了我 4 种选择，描述了对应的风格有什么特点，并生成了 4 个页面 Demo，我最终选择了现代简约风（尽管工程师风格也很不错）
+
+比如
+
+```内容已经很棒了！接下来我希望你着重美化 UI，请给我提供 4 种适合 01MVP 的 UI 风格，对应给出 4 种 hero 模块 的样例（在同一个页面中展示，方便我进行对比），等我确定使用哪个风格之后，我们再修改其他的模块
+```
+
+
+```AI 提供的风格选项
+```
+*极简科技风*
+
+- *特点：大量留白，简洁的线条，少量但精准的动效*
+- *配色：以黑白为主，辅以单一突出的主题色*
+- *布局：网格化布局，清晰的视觉层次*
+- *适合：强调专业性和效率的产品*
+
+*赛博朋克风*
+
+- *特点：霓虹效果，故障艺术，不规则几何*
+- *配色：深色背景，霓虹色彩（紫色、青色、粉色）*
+- *布局：非对称，带有科幻感的 UI 元素*
+- *适合：强调创新和前卫的产品*
+
+*现代简约风*
+
+- *特点：圆润的设计元素，柔和的渐变，平滑的动画*
+- *配色：浅色或深色背景，渐变色彩*
+- *布局：模块化，有机的形状*
+- *适合：强调用户友好和现代感的产品*
+
+*工程师风格*
+
+- *特点：终端界面元素，代码片段，技术图表*
+- *配色：深色背景，绿色/蓝色等经典编程色彩*
+- *布局：类似 IDE 或终端的布局*
+- *适合：强调技术和极客文化的产品*
+
+
+```AI 生成的样例
+```
+
+
+|![](/images/1h-ai-elegant-website.016.png)|![](/images/1h-ai-elegant-website.017.png)|
+| :-: | :-: |
+
+
+|![](/images/1h-ai-elegant-website.016.png)|![](/images/1h-ai-elegant-website.017.png)|
+| :-: | :-: |
+
+**第三版本-选择 UI 风格，完善剩余的模块**
+
+告诉 AI 使用你选择的风格，完善剩余的所有模块，一般它会分几步完成，你也可以跟他说：一次性完善所有模块
+
+**第四版本-完善细节，大功告成！**
+
+你可以继续优化细节，跟 AI
+
+**技巧**
+
+1. **优化与细节调整：** 我告诉 AI 多次“继续优化界面”，结果令人惊喜！从视觉效果到动画流畅度，它真的像一个资深设计师一样，一句简单的“继续优化”或者“你觉得有哪些可以优化的点”常常比你自己不懂瞎提需求要好的多，比如它给我加了很多优秀的过渡动画，一些鼠标悬浮的小变化，更好的 UI 设计等等。
+2. **一次性提多个需求**：你可以把自己当产品经理，大白话直接跟它说你的具体需求，一二三四点列出来就好，它同样也可以完成的很好（但不要提太大、复杂的需求）。
+3. 你可以画好 UI，然后发给 Windsurf！
+
+**更多案例**
+
+[**知识付费网站案例**](https://hackathonweekly.feishu.cn/wiki/NVeOwZCSGiNqzpkHoRGcLEOVnve)
+
+[**案例二、定制个人的生日礼物网**](../特殊公开内容/手把手教你在2小时内用AI做一个丝滑优雅的网站-游戏-Landing Page/案例二、定制个人的生日礼物网.md)
+
+[**案例三、制作有趣的小游戏**](../特殊公开内容/手把手教你在2小时内用AI做一个丝滑优雅的网站-游戏-Landing Page/案例三、制作有趣的小游戏.md)
+
+**Bolt.new  生成网站**
+
+- 优点：它能够一个网站就可以搞定代码生成和部署（不需要你搭建本地开发环境），非常适合用来生成基础的项目结构
+- 缺点：它免费额度有限，聊三四次免费额度就用完了，容易产生 bug，经常白屏
+- 折中方案：下载之后用 Cursor / WindSurf 继续修改就行
+
+**示例**
+
+- https://startup-simulator-delta.vercel.app/ 创业模拟器游戏
+- https://cyber-nexus-eight.vercel.app/ Cursor 十分钟写的文字冒险游戏
+- https://eth-territory-conquest.vercel.app/  web 3 方块占领小游戏
+
+
+**常见错误以及解决方案**
+
+**手动修改项目名称**
+
+Ctrl + shift + F 全仓库搜索，查找替换 next-shadcn-template 为你的项目名称
+
+![](/images/1h-ai-elegant-website.018.png)
+
+**可能出现的报错以及解决方案**
+
+**Import Error: `@/components/ui/use-toast`**
+
+解决方案：将  @/components/ui/use-toast 替换为 @/hooks/use-toast 即可
+
+原因：这个代码库使用到的 shadcn 最新版本的代码路径发生了变动，但是 AI 还没有更新知识库
+
+**" can be escaped with &quot;**
+
+，常见的另一个错误，另外 还是一堆 warning 怎么回事： 79:17  Error: " can be escaped with &quot;, &ldquo;, &#34;, &rdquo;.  react/no-unescaped-entities  79:39  Error: " can be escaped with &quot;, &ldquo;, &#34;, &rdquo;.
+
+**Use client**
+
+```Error:   × You're importing a component that needs useState. This React hook only works in a client component. To fix, mark the file (or its parent) with the "use client" directive.
+```
+在报错对应的页面上加一行下面的文本即可
+
+```Bash
+"use client"
+```
+
+
+
+

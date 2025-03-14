@@ -1,4 +1,7 @@
 # deps
+.vscode/
+.env
+temp/
 /node_modules
 
 # generated content
