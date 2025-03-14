@@ -1,4 +1,8 @@
+'use client';
 import { Target, HelpCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Container } from '@/components/ui/container';
+import { Card } from '@/components/ui/card';
 
 export function TargetAudienceAndFAQ() {
   const audiences = [
@@ -38,60 +42,112 @@ export function TargetAudienceAndFAQ() {
       answer: "当然！01MVP是一个开源知识库，我们欢迎创业者、开发者和产品爱好者分享自己的经验和案例。详情请查看'贡献指南'。"
     }
   ];
+  
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
 
   return (
-    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-5xl mx-auto">
+    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-950 relative">
+      {/* Background design elements */}
+      <div className="absolute top-0 left-1/3 right-1/3 h-px bg-gray-300 dark:bg-gray-700" />
+      <div className="absolute bottom-0 left-1/3 right-1/3 h-px bg-gray-300 dark:bg-gray-700" />
+      <div className="absolute left-0 top-1/3 bottom-1/3 w-px bg-gray-300 dark:bg-gray-700" />
+      <div className="absolute right-0 top-1/3 bottom-1/3 w-px bg-gray-300 dark:bg-gray-700" />
+      <div className="absolute top-12 right-12 w-24 h-24 border-2 border-gray-200 dark:border-gray-800 rounded-full opacity-20" />
+      <div className="absolute bottom-12 left-12 w-16 h-16 border-2 border-gray-200 dark:border-gray-800 rounded-full opacity-20" />
+      
+      <Container className="relative z-10">
         {/* Target Audience */}
-        <div className="mb-24">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30 p-2 mb-4">
-              <Target className="h-6 w-6 text-purple-600" />
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-24"
+        >
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 p-2 mb-4">
+              <Target className="h-6 w-6 text-gray-800 dark:text-gray-200" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">适合人群</h2>
-            <p className="text-lg text-fd-muted-foreground max-w-2xl mx-auto">
-              01MVP手册专为以下人群设计，帮助各种背景的创造者快速实现产品创意
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">适合谁使用？</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              我们的手册为各类创造者提供工具与指南，帮助他们将想法变为现实
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {audiences.map(audience => (
-              <div 
-                key={audience.title}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700"
-              >
-                <h3 className="text-xl font-bold mb-2">{audience.title}</h3>
-                <p className="text-fd-muted-foreground">{audience.description}</p>
-              </div>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {audiences.map((audience, index) => (
+              <motion.div key={audience.title} variants={itemVariants}>
+                <Card className="h-full border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+                  <div className="p-6">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mb-4 mx-auto">
+                      <span className="text-lg font-bold text-gray-800 dark:text-gray-200">{index + 1}</span>
+                    </div>
+                    <h3 className="font-semibold text-lg text-center text-gray-900 dark:text-white mb-2">{audience.title}</h3>
+                    <p className="text-sm text-center text-gray-600 dark:text-gray-400">{audience.description}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* FAQ */}
-        <div>
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30 p-2 mb-4">
-              <HelpCircle className="h-6 w-6 text-purple-600" />
+        {/* FAQs */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 p-2 mb-4">
+              <HelpCircle className="h-6 w-6 text-gray-800 dark:text-gray-200" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">常见问题</h2>
-            <p className="text-lg text-fd-muted-foreground max-w-2xl mx-auto">
-              关于01MVP手册和MVP开发过程的一些常见问题解答
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">常见问题</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              关于创建MVP及获取用户的常见疑问解答
             </p>
           </div>
 
-          <div className="space-y-6">
-            {faqs.map(faq => (
-              <div 
-                key={faq.question}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700"
-              >
-                <h3 className="text-xl font-bold mb-2">{faq.question}</h3>
-                <p className="text-fd-muted-foreground">{faq.answer}</p>
-              </div>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {faqs.map((faq) => (
+              <motion.div key={faq.question} variants={itemVariants}>
+                <Card className="h-full border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+                  <div className="p-6">
+                    <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-3">{faq.question}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{faq.answer}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </Container>
     </section>
   );
 } 

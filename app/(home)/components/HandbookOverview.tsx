@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { BookOpen, CheckCircle } from 'lucide-react';
+import { BookOpen, CheckCircle, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/container';
 import { Card, CardContent } from '@/components/ui/card';
@@ -54,7 +54,13 @@ export function HandbookOverview() {
   };
 
   return (
-    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-950">
+    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-950 relative">
+      {/* Background design elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-[1px] bg-gray-200 dark:bg-gray-800" />
+      <div className="absolute bottom-0 left-0 w-1/4 h-[1px] bg-gray-200 dark:bg-gray-800" />
+      <div className="absolute top-20 left-10 w-5 h-5 border border-gray-300 dark:border-gray-700 transform rotate-45" />
+      <div className="absolute bottom-20 right-10 w-5 h-5 border border-gray-300 dark:border-gray-700 transform rotate-45" />
+      
       <Container>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -68,7 +74,7 @@ export function HandbookOverview() {
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">01MVP 手册介绍</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            帮助创造者从0到1实现<strong>最小可行产品</strong>（MVP），并快速找到他们的<strong>前100个</strong>用户
+            帮助创造者从0到1实现<strong>最小可行产品</strong>，并快速找到他们的<strong>前100个</strong>用户
           </p>
         </motion.div>
 
@@ -79,13 +85,13 @@ export function HandbookOverview() {
             whileInView="show"
             viewport={{ once: true }}
           >
-            <Card className="h-full">
+            <Card className="h-full border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">我们的不同</h3>
                 <ul className="space-y-6">
                   {features.map((feature) => (
                     <motion.li key={feature.id} variants={item} className="flex items-start">
-                      <CheckCircle className="h-6 w-6 text-black dark:text-white mr-3 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="h-6 w-6 text-gray-800 dark:text-gray-200 mr-3 flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white">{feature.title}</p>
                         <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
@@ -103,9 +109,12 @@ export function HandbookOverview() {
             whileInView="show"
             viewport={{ once: true }}
           >
-            <Card className="h-full">
+            <Card className="h-full border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">最好的时代</h3>
+                <div className="flex items-start mb-6">
+                  <Sparkles className="h-6 w-6 text-gray-800 dark:text-gray-200 mr-3 flex-shrink-0 mt-1" />
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">最好的时代</h3>
+                </div>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   这是一个最好的时代，你能做的事情远远超出了你的想象。利用现代工具和AI技术，一个人就能完成产品开发，这在以前是无法想象的。
                 </p>
@@ -114,7 +123,7 @@ export function HandbookOverview() {
                 <ul className="space-y-6">
                   {aiFeatures.map((feature) => (
                     <motion.li key={feature.id} variants={item} className="flex items-start">
-                      <CheckCircle className="h-6 w-6 text-black dark:text-white mr-3 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="h-6 w-6 text-gray-800 dark:text-gray-200 mr-3 flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white">{feature.title}</p>
                         <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>

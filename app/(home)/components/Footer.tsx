@@ -38,18 +38,16 @@ export function Footer() {
   ];
 
   return (
-    <footer className="w-full py-16 px-4 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800">
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 mb-12">
+    <footer className="w-full py-16 px-4 bg-gray-50 dark:bg-gray-950 relative">
+      {/* Background design elements */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gray-200 dark:bg-gray-800" />
+      <div className="absolute left-1/4 top-0 w-px h-12 bg-gray-200 dark:bg-gray-800" />
+      <div className="absolute right-1/4 top-0 w-px h-12 bg-gray-200 dark:bg-gray-800" />
+      
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 mb-16">
           <div>
             <Link href="/" className="flex items-center mb-6">
-              <Image 
-                src="/icon.svg" 
-                alt="01MVP Logo" 
-                width={36} 
-                height={36}
-                className="mr-2 dark:invert"
-              />
               <Image 
                 src="/logo.svg" 
                 alt="01MVP Logo" 
@@ -59,7 +57,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              帮助创造者从0到1，快速实现最小可行产品，并找到前100个用户
+              帮助创造者从0到1，实现最小可行产品，并找到前100个用户
             </p>
             <a 
               href="https://github.com/HackathonWeekly" 
