@@ -1,3 +1,11 @@
 {
-  "pages": ["deployment-and-filing", "domain-setup", "publishing", "user-acquisition", "legal-compliance", "international-publishing", "domestic-publishing", "..."]
+  "pages": [
+    "deployment-and-filing", 
+    "domain-setup", 
+    "user-acquisition", 
+    "international-publishing",
+    "domestic-publishing", 
+    "analytics-metrics", 
+    "legal-compliance"
+  ]
 } 
