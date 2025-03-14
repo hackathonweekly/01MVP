@@ -1,25 +1,27 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
+import { HeroSection } from './components/HeroSection';
+import { HandbookOverview } from './components/HandbookOverview';
+import { ContentStructure } from './components/ContentStructure';
+import { CommunityIntro } from './components/CommunityIntro';
+import { TargetAudienceAndFAQ } from './components/TargetAudienceAndFAQ';
+import { CommunityJoin } from './components/CommunityJoin';
+import { Footer } from './components/Footer';
 
 export const metadata: Metadata = {
-  title: '01MVP - Build your first MVP fast',
-  description: '01MVP 帮助你快速构建和验证最小可行产品',
+  title: '01MVP - 从0到1，让创意快速变成产品',
+  description: '通过 AI 驱动的工具和创造者社区，帮助你用最短时间打造最小可行产品，并快速找到前100个用户',
 };
 
 export default function HomePage() {
   return (
-    <main className="flex flex-1 flex-col justify-center text-center">
-      <h1 className="mb-4 text-2xl font-bold">欢迎使用 01MVP</h1>
-      <p className="text-fd-muted-foreground">
-        请访问{' '}
-        <Link
-          href="/docs"
-          className="text-fd-foreground font-semibold underline"
-        >
-          文档页面
-        </Link>{' '}
-        了解如何使用 01MVP 构建您的第一个最小可行产品。
-      </p>
-    </main>
+    <div className="flex flex-col min-h-screen bg-white dark:bg-black">
+      <HeroSection />
+      <HandbookOverview />
+      <ContentStructure />
+      <CommunityIntro />
+      <TargetAudienceAndFAQ />
+      <CommunityJoin />
+      <Footer />
+    </div>
   );
 }
