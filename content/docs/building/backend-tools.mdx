@@ -1,0 +1,173 @@
+---
+title: 后端与数据库
+description: 独立开发者的后端技术与数据库选择指南
+---
+
+# 后端与数据库
+
+独立开发者的后端技术选择需要平衡开发效率、维护成本和可扩展性。本页面介绍适合独立开发者和小团队的后端框架、数据库和相关服务。
+
+## 后端框架选择
+
+### Node.js生态
+
+[**Nest.js**](https://docs.nestjs.com/) 🌟
+- **特点**：基于Node.js的渐进式框架
+- **优势**：模块化架构，完善的依赖注入系统
+- **适用场景**：企业级应用，复杂业务逻辑
+
+[**Midway.js**](https://midwayjs.org/)
+- **特点**：阿里开源的Node.js框架
+- **优势**：支持多种编程范式，企业级支持
+- **适用场景**：面向中国开发者的企业级应用
+
+### Serverless解决方案
+
+[**Cloudflare Workers**](https://workers.cloudflare.com/) 🌟
+- **特点**：基于V8引擎的边缘计算平台
+- **优势**：
+  - 全球分布式部署
+  - 按使用量计费，控制成本
+  - 免费额度(100,000次/天)充足
+- **缺点**：免费版CPU执行时间限制为10ms，付费版为30s
+- **推荐框架**：[Hono](https://hono.dev/) - 轻量级Web框架，适合边缘计算
+- **额外阅读**：[我把网站迁移到CF，省了几万块](https://mp.weixin.qq.com/s/ZuWCpIEV3m14nGXjuxXLJw)
+
+## 数据库选择
+
+### 关系型数据库
+
+[**PostgreSQL (Supabase)**](https://supabase.com/) 🌟
+- **特点**：开源关系型数据库，功能丰富
+- **优势**：
+  - 强大的SQL功能和扩展系统
+  - Supabase提供500MB免费存储空间
+  - 支持实时订阅、文件存储、向量搜索
+- **适用场景**：需要关系型数据库的全栈应用
+
+[**SQLite (Cloudflare D1)**](https://www.cloudflare.com/zh-cn/products/distributed-sql-database/) 🌟
+- **特点**：边缘部署的SQLite数据库
+- **优势**：
+  - 与Cloudflare Worker无缝集成
+  - 低延迟，全球分布
+  - 免费额度5GB，后续费用仅$0.75/月
+  - 支持与Prisma ORM集成
+- **适用场景**：全球用户分布的轻量级应用
+
+[**Neon**](https://neon.tech/)
+- **特点**：Serverless PostgreSQL服务
+- **优势**：按需扩展，分支功能支持开发和测试
+- **适用场景**：需要PostgreSQL但希望降低管理复杂度的项目
+
+[**TiDB Cloud**](https://tidbcloud.com/)
+- **特点**：兼容MySQL的分布式数据库
+- **优势**：高可用，5GB以内免费
+- **适用场景**：需要MySQL兼容性的应用
+
+### NoSQL数据库
+
+[**MongoDB Atlas**](https://www.mongodb.com/cloud/atlas)
+- **特点**：文档型数据库云服务
+- **优势**：免费层提供共享集群，适合开发和小型应用
+- **适用场景**：需要灵活Schema的应用
+
+[**Upstash**](https://upstash.com/) 🌟
+- **特点**：Serverless Redis和Kafka服务
+- **优势**：按使用量计费，Redis和Kafka易于使用
+- **适用场景**：缓存、实时消息、排行榜等Redis常见用例
+
+[**DynamoDB**](https://aws.amazon.com/dynamodb/)
+- **特点**：AWS提供的NoSQL数据库
+- **优势**：高扩展性，按需付费
+- **适用场景**：AWS生态系统内的应用
+
+### 国内可用数据库服务
+
+[**MemfireDB**](https://memfiredb.com/)
+- **特点**：Supabase的国内替代品
+- **优势**：支持PostgreSQL，适合中国开发者
+- **适用场景**：面向中国用户的应用
+
+**腾讯云开发/微信云开发**
+- **特点**：提供一站式后端云服务
+- **优势**：与微信生态深度整合
+- **适用场景**：微信小程序和公众号应用
+
+## ORM工具
+
+[**Prisma**](https://prisma.io/) 🌟
+- **特点**：现代TypeScript ORM
+- **优势**：
+  - 类型安全，自动生成TypeScript类型
+  - 支持PostgreSQL、MySQL、SQLite等
+  - 强大的关系查询和事务支持
+  - 对不熟悉SQL的用户友好
+- **适用场景**：TypeScript/JavaScript后端项目
+
+[**TypeORM**](https://github.com/typeorm/typeorm)
+- **特点**：基于TypeScript的ORM
+- **优势**：灵活的实体定义，支持多种数据库
+- **适用场景**：TypeScript项目，需要更多灵活性
+
+[**Drizzle**](https://orm.drizzle.team/)
+- **特点**：轻量级TypeScript ORM
+- **优势**：专为Serverless优化，打包后仅31KB
+- **适用场景**：Serverless环境，如Cloudflare Workers
+
+## API与集成服务
+
+[**rapidapi.com**](https://rapidapi.com/)
+- **功能**：API市场，可以找到各种现成的API服务
+- **用途**：快速集成第三方功能，而不是自己构建
+
+## 大模型API集成
+
+- **[硅基流动](https://suijicloud.com/)**：国内AI模型聚合服务
+- **[Groq](https://groq.com/)**：高性能LLM推理服务
+- **[Cloudflare AI Worker](https://developers.cloudflare.com/workers-ai/)**：边缘AI计算
+- **[OpenRouter](https://openrouter.ai/)**：统一多个大语言模型的API
+
+## AI与GPU资源
+
+- **[Replicate](https://replicate.com/)**：AI模型API，按需使用
+- **[Hugging Face](https://huggingface.co/)**：AI模型和数据集社区
+- **[RunPod](https://runpod.io/)**：按需GPU租用
+- **[Vast.ai](https://vast.ai/)**：廉价GPU租用平台
+
+## 搜索API服务
+
+- **Bing API**：提供网页搜索功能
+- **Brave Search API**：隐私友好的搜索API
+- **DuckDuckGo API**：不限次数，免费使用
+
+## 文本内容抽取API
+
+- **[Jina.ai/reader](https://jina.ai/reader/)**：开源且无限制的阅读器API
+- **[Apify](https://apify.com/)**：网页数据抽取服务，每月5美元起
+- **[Firecrawl](https://firecrawl.dev/)**：前500次免费的网页抽取工具，开源
+
+## 后端开发最佳实践
+
+### 架构选择建议
+
+1. **先考虑Serverless**：对于大多数独立项目，Serverless架构可以显著降低成本和维护负担
+2. **微服务vs单体**：小项目从单体开始，随需求增长再考虑拆分
+3. **数据库选择**：考虑数据模型、查询复杂度和预期规模
+
+### 成本控制策略
+
+1. **免费额度优先**：充分利用云服务提供商的免费层
+2. **按需扩展**：选择能够根据使用量自动扩展的服务
+3. **避免过度工程**：不要为未来可能不会出现的需求过度设计
+
+### 安全性考虑
+
+1. **身份验证与授权**：使用成熟的解决方案，避免自行实现
+2. **数据加密**：敏感数据必须加密存储
+3. **定期更新依赖**：保持依赖包的最新安全补丁
+
+## 学习资源
+
+- [Serverless架构实践指南](https://sst.dev/chapters/what-is-serverless.html)
+- [数据库设计基础](https://www.postgresql.org/docs/current/tutorial.html)
+- [API设计最佳实践](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design) 
