@@ -60,14 +60,28 @@ export function TargetAudienceAndFAQ() {
   };
 
   return (
-    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-950 relative">
-      {/* Background design elements */}
-      <div className="absolute top-0 left-1/3 right-1/3 h-px bg-gray-300 dark:bg-gray-700" />
-      <div className="absolute bottom-0 left-1/3 right-1/3 h-px bg-gray-300 dark:bg-gray-700" />
-      <div className="absolute left-0 top-1/3 bottom-1/3 w-px bg-gray-300 dark:bg-gray-700" />
-      <div className="absolute right-0 top-1/3 bottom-1/3 w-px bg-gray-300 dark:bg-gray-700" />
-      <div className="absolute top-12 right-12 w-24 h-24 border-2 border-gray-200 dark:border-gray-800 rounded-full opacity-20" />
-      <div className="absolute bottom-12 left-12 w-16 h-16 border-2 border-gray-200 dark:border-gray-800 rounded-full opacity-20" />
+    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-950 relative overflow-hidden">
+      {/* Background design elements - simplified */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Main large blurred circle */}
+        <div className="absolute -left-40 top-1/4 w-[450px] h-[450px] bg-gradient-to-br from-purple-50 via-indigo-100 to-transparent dark:from-purple-950 dark:via-indigo-900 dark:to-transparent rounded-full opacity-40 transform blur-xl" />
+        
+        {/* Core cross lines */}
+        <div className="absolute top-0 left-1/3 right-1/3 h-[2px] bg-gradient-to-r from-transparent via-blue-300 dark:via-blue-700 to-transparent opacity-60" />
+        <div className="absolute bottom-0 left-1/3 right-1/3 h-[2px] bg-gradient-to-r from-transparent via-blue-300 dark:via-blue-700 to-transparent opacity-60" />
+        
+        {/* Primary diagonal line */}
+        <div className="absolute top-0 right-0 w-[300px] h-[3px] bg-gradient-to-l from-transparent to-amber-300 dark:to-amber-700 opacity-50 transform -rotate-45 origin-top-right" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[3px] bg-gradient-to-r from-transparent to-amber-300 dark:to-amber-700 opacity-50 transform -rotate-45 origin-bottom-left" />
+        
+        {/* Minimal geometric shapes */}
+        <div className="absolute top-20 right-20 w-32 h-32 border-4 border-indigo-200 dark:border-indigo-700 rounded-full opacity-40" />
+        <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900 dark:to-amber-800 opacity-30 transform rotate-12" />
+        
+        {/* Small circle accents */}
+        <div className="absolute top-1/4 left-1/4 w-6 h-6 bg-gradient-to-br from-teal-200 to-teal-300 dark:from-teal-700 dark:to-teal-600 rounded-full opacity-60 shadow-md" />
+        <div className="absolute bottom-1/3 right-1/3 w-8 h-8 bg-gradient-to-br from-rose-200 to-rose-300 dark:from-rose-700 dark:to-rose-600 rounded-full opacity-60 shadow-md" />
+      </div>
       
       <Container className="relative z-10">
         {/* Target Audience */}

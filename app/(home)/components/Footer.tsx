@@ -38,11 +38,22 @@ export function Footer() {
   ];
 
   return (
-    <footer className="w-full py-16 px-4 bg-gray-50 dark:bg-gray-950 relative">
-      {/* Background design elements */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gray-200 dark:bg-gray-800" />
-      <div className="absolute left-1/4 top-0 w-px h-12 bg-gray-200 dark:bg-gray-800" />
-      <div className="absolute right-1/4 top-0 w-px h-12 bg-gray-200 dark:bg-gray-800" />
+    <footer className="w-full py-16 px-4 bg-gray-50 dark:bg-gray-950 relative overflow-hidden">
+      {/* Background design elements - simplified */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Main horizontal line */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-300 dark:via-indigo-700 to-transparent opacity-50" />
+        
+        {/* Minimal vertical lines */}
+        <div className="absolute left-1/4 top-0 w-[2px] h-20 bg-gradient-to-b from-transparent via-blue-300 dark:via-blue-700 to-transparent opacity-50" />
+        <div className="absolute right-1/4 top-0 w-[2px] h-20 bg-gradient-to-b from-transparent via-blue-300 dark:via-blue-700 to-transparent opacity-50" />
+        
+        {/* Single diagonal line */}
+        <div className="absolute top-0 left-0 w-[250px] h-[3px] bg-gradient-to-r from-transparent to-amber-300 dark:to-amber-700 opacity-40 transform rotate-45 origin-top-left" />
+        
+        {/* One geometric shape for balance */}
+        <div className="absolute bottom-20 right-20 w-24 h-24 border-4 border-indigo-200 dark:border-indigo-700 opacity-30 transform -rotate-12" />
+      </div>
       
       <Container className="relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 mb-16">

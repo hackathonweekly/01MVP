@@ -20,7 +20,7 @@ export function HandbookOverview() {
     {
       id: "practical",
       title: "注重实操经验",
-      description: "创业理论很多书籍已经讲得很好了，我们更侧重于分享实践中的具体经验"
+      description: "我们更侧重于分享实践中的具体经验，而不是理论"
     }
   ];
 
@@ -28,12 +28,12 @@ export function HandbookOverview() {
     {
       id: "learning",
       title: "学习的门槛",
-      description: "ChatGPT等AI助手大大降低了技术学习的难度"
+      description: "不再畏惧不熟悉的领域，通过 AI 你也可以快速上手"
     },
     {
       id: "development",
       title: "开发的门槛",
-      description: "你可以利用AI技术，一人之力，完成一个产品的开发"
+      description: "你变成产品经理、架构师，AI 生成代码"
     }
   ];
 
@@ -54,14 +54,39 @@ export function HandbookOverview() {
   };
 
   return (
-    <section className="w-full py-20 px-4 bg-gray-50 dark:bg-gray-950 relative">
-      {/* Background design elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-[1px] bg-gray-200 dark:bg-gray-800" />
-      <div className="absolute bottom-0 left-0 w-1/4 h-[1px] bg-gray-200 dark:bg-gray-800" />
-      <div className="absolute top-20 left-10 w-5 h-5 border border-gray-300 dark:border-gray-700 transform rotate-45" />
-      <div className="absolute bottom-20 right-10 w-5 h-5 border border-gray-300 dark:border-gray-700 transform rotate-45" />
+    <section className="w-full py-20 pt-8 px-4 bg-white dark:bg-black relative overflow-hidden">
+      {/* Background design elements - simplified */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large blurred gradient circles - positioned to match with HeroSection */}
+        <div className="absolute -top-60 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-purple-100 to-indigo-200 dark:from-purple-900 dark:to-indigo-800 rounded-full opacity-50 transform translate-x-1/2 blur-xl" />
+        <div className="absolute top-1/3 left-0 w-80 h-80 bg-gradient-to-br from-indigo-100 via-blue-50 to-transparent dark:from-indigo-950 dark:via-blue-900 dark:to-transparent rounded-full opacity-50 transform -translate-x-1/2 blur-xl" />
+        
+        {/* Key horizontal and vertical lines */}
+        <div className="absolute top-0 right-0 w-1/3 h-[2px] bg-gradient-to-l from-transparent via-indigo-300 dark:via-indigo-600 to-transparent opacity-70" />
+        <div className="absolute bottom-0 left-0 w-1/4 h-[2px] bg-gradient-to-r from-transparent via-blue-300 dark:via-blue-600 to-transparent opacity-70" />
+        
+        {/* Strategic larger shapes */}
+        <div className="absolute top-20 left-10 w-16 h-16 border-4 border-indigo-200 dark:border-indigo-700 transform rotate-45 opacity-60" />
+        <div className="absolute bottom-1/4 right-1/3 w-32 h-32 border-8 border-amber-200 dark:border-amber-700 rounded-full opacity-30" />
+        
+        {/* Key accent circles - positioned to match with HeroSection */}
+        <div className="absolute top-10 right-12 w-16 h-16 bg-gradient-to-br from-amber-200 to-orange-300 dark:from-amber-700 dark:to-orange-600 rounded-full opacity-60 shadow-lg" />
+        
+        {/* Limited colorful dots - just one group */}
+        <div className="absolute top-40 right-12 grid grid-cols-3 gap-4 opacity-60">
+          <div className="w-4 h-4 rounded-full bg-indigo-300 dark:bg-indigo-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-blue-300 dark:bg-blue-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-cyan-300 dark:bg-cyan-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-teal-300 dark:bg-teal-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-green-300 dark:bg-green-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-emerald-300 dark:bg-emerald-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-purple-300 dark:bg-purple-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-violet-300 dark:bg-violet-600 shadow-md" />
+          <div className="w-4 h-4 rounded-full bg-fuchsia-300 dark:bg-fuchsia-600 shadow-md" />
+        </div>
+      </div>
       
-      <Container>
+      <Container className="relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -116,10 +141,10 @@ export function HandbookOverview() {
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">最好的时代</h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  这是一个最好的时代，你能做的事情远远超出了你的想象。利用现代工具和AI技术，一个人就能完成产品开发，这在以前是无法想象的。
+                  利用AI技术，一个人就能快速完成产品开发，这在以前是难以想象的。
                 </p>
                 
-                <p className="font-medium mb-4 text-gray-900 dark:text-white">AI技术至少降低了:</p>
+                <p className="font-medium mb-4 text-gray-900 dark:text-white">AI技术降低了:</p>
                 <ul className="space-y-6">
                   {aiFeatures.map((feature) => (
                     <motion.li key={feature.id} variants={item} className="flex items-start">

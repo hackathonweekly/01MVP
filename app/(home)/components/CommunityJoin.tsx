@@ -9,14 +9,24 @@ import { Container } from '@/components/ui/container';
 export function CommunityJoin() {
   return (
     <section className="w-full py-20 px-4 bg-white dark:bg-black relative overflow-hidden">
-      {/* Background design elements */}
+      {/* Background design elements - simplified */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gray-200 dark:bg-gray-800" />
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-200 dark:bg-gray-800" />
-        <div className="absolute top-1/2 left-0 w-1/4 h-[1px] bg-gray-200 dark:bg-gray-800 transform -rotate-45" />
-        <div className="absolute top-1/2 right-0 w-1/4 h-[1px] bg-gray-200 dark:bg-gray-800 transform rotate-45" />
-        <div className="absolute top-16 right-16 w-24 h-24 border border-gray-200 dark:border-gray-800 rounded-full opacity-20" />
-        <div className="absolute bottom-16 left-16 w-32 h-32 border border-gray-200 dark:border-gray-800 opacity-20 transform rotate-12" />
+        {/* Main large blurred circle */}
+        <div className="absolute -right-40 bottom-0 w-[500px] h-[500px] bg-gradient-to-tl from-blue-50 via-indigo-100 to-transparent dark:from-blue-950 dark:via-indigo-900 dark:to-transparent rounded-full opacity-40 transform blur-xl" />
+        
+        {/* Horizontal lines */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-300 dark:via-indigo-700 to-transparent opacity-60" />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-300 dark:via-indigo-700 to-transparent opacity-60" />
+        
+        {/* Primary diagonal line */}
+        <div className="absolute top-1/2 left-0 w-[300px] h-[3px] bg-gradient-to-r from-transparent to-amber-300 dark:to-amber-700 opacity-60 transform -rotate-45" />
+        
+        {/* Minimal shapes */}
+        <div className="absolute top-20 right-20 w-32 h-32 border-4 border-blue-200 dark:border-blue-800 rounded-full opacity-40" />
+        <div className="absolute bottom-20 left-20 w-20 h-20 bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900 dark:to-emerald-800 opacity-30 transform rotate-45" />
+        
+        {/* Small color accent */}
+        <div className="absolute top-1/3 left-1/3 w-10 h-10 bg-gradient-to-br from-rose-200 to-rose-300 dark:from-rose-700 dark:to-rose-600 rounded-full opacity-50 shadow-md" />
       </div>
       
       <Container className="relative z-10">
