@@ -1,245 +1,157 @@
 ---
-title: 代码模板
+title: 代码模板：加速MVP开发的最佳选择
 ---
 
+# 代码模板：从0到1的捷径
 
-**3.5 代码模板**
+> 💡 **快速启动秘诀**: 选择合适的代码模板可以将MVP开发时间从数周缩短至数天，让你专注于核心功能开发和寻找前100个用户。
 
+## 为什么使用代码模板对MVP至关重要？
 
-nextjs saas模板只推荐2个，也就是上面这2个，技术栈都很扎实，代码和文档都很好
+创建MVP时，使用现成的代码模板可以：
 
-https://boilerplatehunt.com/item/supastarter
+1. **节省80%的基础开发时间**：避免重复构建认证、支付、基础UI等标准组件
+2. **降低技术债务**：使用经过社区验证的架构和最佳实践
+3. **快速获得专业外观**：即使没有设计师，也能拥有现代美观的UI
+4. **更快进入用户获取阶段**：将精力集中在核心功能和找到前100个用户上
 
-https://boilerplatehunt.com/item/achromatic
-
-**开源模板**
+## Web应用模板（最适合大多数MVP）
 
-**Landing Page 模板**
+### 推荐的Next.js SaaS模板
+> *最易于用来构建、部署和获取用户的MVP形式*
 
-- [tailsc](https://tailsc.com/) : 提供了很多组件，有多种风格可选，推荐！开发者：[推特@zissy_w](https://twitter.com/zissy_w)、[Github@ZissyW](https://github.com/ZissyW) 
-- [ui.convertfa.st](https://ui.convertfa.st/): 一个快速生成落地页的工具，可以选择落地页的常见模块
-- [landing-page-boilerplate](https://github.com/weijunext/landing-page-boilerplate) : 开源、免费、0 设计资源的模板
-- [landing-page-sawana](https://github.com/waitlistSawana/landing-page-sawana)：一个简洁的 Landing Page
-- [shadcn-landing-page](https://github.com/nobruf/shadcn-landing-page)：基于 Nextjs 14, shadcn 的优雅落地页
+根据易用性、维护情况和内置用户获取功能排序：
 
-**Web 开发模板**
+#### 免费精选
 
-- Next
-- 免费
-- [Saasfly](https://show.saasfly.io/zh)（免费）：Nextjs SaaS 模板，良心开源模板，[使用文档](https://document.saasfly.io/zh-cn/)
-- [FFlow Next](https://www.fflowlink.com/zh)（免费）：一个支持 Cloudflare 快速部署的 Nextjs + Drizzle ORM SaaS 模板
-- [SaaS-Boilerplate](https://github.com/ixartz/SaaS-Boilerplate)（免费）：Nextjs + Shadcn UI Saas 模板，免费而且积极维护
-- [Next-js-Boilerplate](https://github.com/ixartz/Next-js-Boilerplate)（免费）：Next.js + Drizzle ORM + Husky + Lint-Staged + Vitest + Testing Library + Playwright + Storybook + Commitlint + Tailwind CSS ✨
-- [Opensaas（免费）](https://github.com/wasp-lang/open-saas/) : Astro + React + Node.js。集成了登录、支付（stripe）、邮件、AI 功能 
-- [smart-excel-ai（免费）](https://github.com/weijunext/smart-excel-ai) : Next.js。集成了登录、支付（lemon squeezy）、AI 功能
-- 付费
-- [SupaStarter（付费）](https://supastarter.dev/) : Next.js/Nuxt.js。集成了登录、支付、邮件、后台 
-- [Shipfast（付费）](https://shipfa.st/) : Next.js。集成了登录、支付（stripe）、邮件、AI 功能（不再推荐，原因：shipfast 作者大多精力在营销上，代码质量和更新频率都较差）
-- [Full-stack-kit.dev](https://www.full-stack-kit.dev/en)（付费）： Nextjs
-- https://makerkit.dev/ （付费）
-- https://www.newcult.co/
-- Nuxt
-- [sidebase.io](https://sidebase.io/)（免费） : Nuxt 模板
-- 国内
-- https://nuxtbase.site/ （付费）nuxt 
-- https://www.mvpfast.top/ （付费） 接入了微信登录和微信支付的国内 nextjs 模板
+1. **[SaaS-Boilerplate](https://github.com/ixartz/SaaS-Boilerplate)** ⭐️⭐️⭐️⭐️⭐️
+   - **核心优势**: Next.js + Shadcn UI，积极维护，完善的认证和付费订阅系统
+   - **用户获取**: 内置SEO优化、社交分享、电子邮件收集功能
+   - **上手难度**: ★★☆☆☆ (中低)
 
-**生产级别的最佳 Nextjs 应用（开源）**
+2. **[Saasfly](https://show.saasfly.io/zh)** ⭐️⭐️⭐️⭐️
+   - **核心优势**: 国内开发者友好，完整中文[使用文档](https://document.saasfly.io/zh-cn/)
+   - **用户获取**: 支持博客、SEO优化、内置用户反馈系统
+   - **上手难度**: ★★☆☆☆ (中低)
 
-参考： https://www.reddit.com/r/nextjs/comments/1brg5z7/world\_class\_next\_14\_app\_router\_open\_source\_full/
+3. **[FFlow Next](https://www.fflowlink.com/zh)** ⭐️⭐️⭐️⭐️
+   - **核心优势**: 支持Cloudflare快速部署，包含Drizzle ORM
+   - **用户获取**: 轻量级，适合快速迭代测试不同用户获取策略
+   - **上手难度**: ★★☆☆☆ (中低)
 
-- Nextjs App Router
-- [Midday](https://github.com/midday-ai/midday): Monorepo / Bun / Nextjs / Supabase / Shadcn，对应[文档](https://docs.midday.ai/local-development)
-- [lobe-chat](https://github.com/lobehub/lobe-chat)：Lobe Chat - an open-source, modern-design AI chat framework.
-- [Melodisco](https://github.com/all-in-aigc/melodisco)： nextjs + typescript + tailwindcss + shadcn + supabase + stripe
-- [Nodejs](https://github.com/nodejs/nodejs.org)官网: Nextjs / Monorepo / MDX 
-- [SkateShop](https://github.com/sadmann7/skateshop)：Nextjs 电商网站
-- [Cal-com](https://github.com/calcom/cal.com/)：日程安排网站
-- [PaperMark](https://github.com/mfts/papermark): 开源的安全的文档分享网站，黑白风格，非常简洁的设计
-- [Taxonomy](https://github.com/shadcn-ui/taxonomy): （有些过时了）简洁风格，包括文档 i18n
-- [typebot.io](https://github.com/baptistearno/typebot.io)：一个有趣的产品：通过聊天的方式来获取用户信息，而不是通过表单
-- [openstatus](https://github.com/openstatushq/openstatus)：nextjs + drrizle
-- [documenso](https://github.com/documenso/documenso)
-- https://github.com/formbricks/formbricks: 开源调查问卷
-- https://github.com/sadmann7/skateshop 开源商城，nextjs drrizle orm clerk
+4. **[Opensaas](https://github.com/wasp-lang/open-saas/)** ⭐️⭐️⭐️
+   - **核心优势**: Astro + React + Node.js，集成登录、Stripe支付、邮件、AI功能
+   - **用户获取**: 内置博客系统、SEO友好、内置用户分析
+   - **上手难度**: ★★★☆☆ (中等)
 
-**Chrome 插件**
+#### 值得付费的模板
 
-- 模板 : 特性 
-- [Plasmo](https://www.plasmo.com/) : 支持 React、Vue 等多种前端框架 
-- [wxt.dev](https://wxt.dev/) : 支持 Vue、Svelte 等多种前端框架
+1. **[SupaStarter](https://supastarter.dev/)** ⭐️⭐️⭐️⭐️⭐️
+   - **核心优势**: 技术栈扎实，支持Next.js/Nuxt.js，代码质量高，完善的认证和支付系统
+   - **用户获取**: 包含用户引导、邮件营销集成、用户行为分析
+   - **价格**: $99（单次购买）
+   - **ROI**: 如能帮助找到20个付费用户，投资回报率高
 
-**Electron 模板**
+2. **[Full-stack-kit.dev](https://www.full-stack-kit.dev/en)** ⭐️⭐️⭐️⭐️
+   - **核心优势**: Next.js全栈解决方案，完善的组件库和页面模板
+   - **用户获取**: 内置分析、A/B测试支持
+   - **价格**: $69-$129（根据版本）
 
-- [electron-vite](https://electron-vite.org/) electron + vite 支持 react / vue
-- [nextron](https://github.com/saltyshiomix/nextron) 支持 nextjs (page router) 
-- [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
-- electron-egg: 不支持 typescripts
+### 特定产品类型的模板
 
-- electron 里加一个 node.js 的后端框架 nest.js ，让你有写 spring 的感觉->
-- vue+nestjs: https://github.com/ArcherGu/fast-vite-nestjs-electron
-- vue+个人依赖注入小框架： https://github.com/ArcherGu/fast-vite-electron
-- react+nestjs: https://github.com/ArcherGu/vite-react-nestjs-electron
-- 还有一套自己搞的 monorepo 模板：
-- https://github.com/Doubleshotjs/template-react-nest
-- https://github.com/Doubleshotjs/template-vue-nest
-- 上面的模板主要是将 nestjs 这个后端框架集成到了 electron 的主进程中，然后 ipc 可以通过装饰器的方式进行绑定，让这个主进程看上去像一个后端，顺便再把 nestjs 的丰富生态也接入了，什么 typeorm ，sqlite 这些模块啥的，用起来比较方便，代码组织架构也比较清晰。
+#### 落地页模板（适合验证想法）
 
+验证想法和收集首批用户邮箱的最快方式：
 
-**github 通用**
+1. **[tailsc](https://tailsc.com/)** ⭐️⭐️⭐️⭐️⭐️
+   - **用途**: 快速创建高转化率落地页
+   - **用户获取**: 多种漏斗设计、邮件捕获组件、社交分享优化
+   - **实现时间**: 1-2小时
 
-- [README-generator](https://github.com/kefranabg/readme-md-generator)
-- [gitignore 查询模板](https://www.toptal.com/developers/gitignore)
-- [gitattributes 模板集](https://github.com/alexkaratarakis/gitattributes)
+2. **[ui.convertfa.st](https://ui.convertfa.st/)** ⭐️⭐️⭐️⭐️
+   - **用途**: 模块化落地页生成器
+   - **用户获取**: 专注于转化率优化设计
+   - **实现时间**: 1小时内
 
-**github-readme 模板**
+#### 快速启动整套工具
 
-[LobeChat](https://github.com/lobehub/lobe-chat) 的文档首页很棒 
+1. **[CreateT3](https://create.t3.gg/zh-hans/)** ⭐️⭐️⭐️⭐️⭐️
+   - **核心优势**: 最流行的全栈类型安全Next.js应用启动方式
+   - **技术栈**: Next.js, TypeScript, tRPC, Tailwind, NextAuth, Prisma
+   - **学习曲线**: 包含中文文档，适合中等经验开发者
+   - **实现时间**: 配置2-3小时，基础MVP 1-3天
 
-**Nextjs 脚手架 & 模板**
+2. **[Kirimase](https://kirimase.dev/)** ⭐️⭐️⭐️⭐️
+   - **核心优势**: 命令行工具，按需添加功能
+   - **技术栈**: 灵活选择认证、ORM、UI库等
+   - **实现时间**: 配置1-2小时，基础MVP 1-2天
 
-根据你的需求生成项目的脚手架 
+## 其他产品形态的模板
 
-- [superplate 类似 refine，似乎更好用一点](https://github.com/pankod/superplate) 推荐 可以看到现在很多最佳实践
-- [refine](https://refine.dev/): A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.
-- 非常适合做内部工具 & 管理面板
-- [ts-nextjs-tailwind-starter](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter): 干净简约的 nextjs 14模板（极简），只包含必要功能
+### 浏览器插件（Chrome扩展）
+> *用户获取成本低，Chrome商店自带流量*
 
-- Clerk
-- 4.9k start : prisma / vercel 
-- https://github.com/steven-tey/precedent 
-- [nextjs+electron 2.2k stars](https://github.com/saltyshiomix/nextron)
-- [nextjs 企业级模板 3.4k stars](https://github.com/Blazity/next-enterprise)
-- [完整的 pwa 支持示例 - 包含教程](https://github.com/shadowwalker/next-pwa)
-- **推荐** mui+i18n  [inin-estate](https://github.com/SimonsMeldzers/inin-estate)
+1. **[Plasmo](https://www.plasmo.com/)** ⭐️⭐️⭐️⭐️⭐️
+   - **核心优势**: 支持React、Vue等多种前端框架
+   - **用户获取**: Chrome商店SEO优化、一键分享功能
+   - **实现时间**: 基础MVP 1-2天
 
-**Nextjs 项目启动 Toolkit**
+2. **[wxt.dev](https://wxt.dev/)** ⭐️⭐️⭐️⭐️
+   - **核心优势**: 支持Vue、Svelte等多种前端框架
+   - **实现时间**: 基础MVP 1-2天
 
-[CreateT3](https://create.t3.gg/en/introduction)：The best way to start a full-stack, typesafe Next.js app （t3: next / ts / trpc / tailwind / nextauth / prisma) 包含中文文档，采用的也是最流行的技术栈，推荐
+### 微信小程序
+> *中国市场获取前100用户的有效渠道*
 
-[Kirimase](https://kirimase.dev/)：Kirimase is a command-line tool (CLI) for building full-stack Next.js apps faster
+**优质开源模板**（2022年后仍维护的完整项目）:
 
-[blitz](https://github.com/blitz-js/blitz)： The Missing Fullstack Toolkit for Next.js，这个仓库自己封装了 blitz
+1. **[书友会小程序](https://github.com/3075426724/WeReading)** ⭐️⭐️⭐️
+   - **核心优势**: 社区功能完整，含前后端代码
+   - **用户获取**: 社区生态、内容分享
+   - **适合改造为**: 知识分享、兴趣社区类产品
 
-**微信小程序模板**
+2. **[街道社区活动小程序](https://github.com/Jackiexiao/WeStreetAppt)** ⭐️⭐️⭐️
+   - **核心优势**: 活动报名功能完善
+   - **用户获取**: 活动分享、社交功能
+   - **适合改造为**: 社区活动、课程预约类产品
 
-```我发现优质的开源小程序代码**很少...** 就算开源也富含广告，或者已经不再维护
-```
-收录标准：
+### Taro跨平台模板（小程序+App）
+> *同时覆盖多平台，提高用户获取效率*
 
-- 2022 年之后还有维护的
-- 包含前后端代码
+1. **[taro-template](https://github.com/dshuais/taro-template)** ⭐️⭐️⭐️⭐️
+   - **核心优势**: 使用Tailwind CSS，UI美观现代
+   - **用户获取**: 一套代码多平台部署
+   - **实现时间**: 基础MVP 3-5天
 
+## 如何选择最适合你的模板？
 
-- [UniApp 开源组件库](https://gitee.com/xxf_0921/uni-app-component-library)，但似乎有收费部分
-- [不咕约球](https://github.com/BuguTech/Bugu-Sport/blob/main/README_CHINESE.md)是一个以校园体育为主题的微信小程序，x
-- [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app): 但收录的都是较为基础的脚手架
-- 作者 LeeaYoung，他其他的作品：[1](https://github.com/tanshuimaohenquejiao)/[2](https://github.com/dearancelan)/[3](https://github.com/fenzhiere/) 
-- [街道社区活动小程序](https://github.com/Jackiexiao/WeStreetAppt)
-- [活动报名小程序](https://github.com/dearancelan/TurboActivityFee)
-- [书友会小程序](https://github.com/3075426724/WeReading)
-- [餐饮点餐小程序](https://github.com/cocktail18/bee-api?tab=readme-ov-file) ： go后端 + vue
-- [专注时钟](https://github.com/realyao/WXminiprogram-Focus-clock)
-- [Awesome-wechat 收录](https://github.com/justjavac/awesome-wechat-weapp?tab=readme-ov-file#demo) 的小程序源码，部分可用
-- [Megasu/uniapp-shop-vue3-ts](https://github.com/Megasu/uniapp-shop-vue3-ts)： UniAPP 和 UniCloud 开发的电商小程序
-- [maioria/chatgpt-talkieai](https://github.com/maioria/chatgpt-talkieai/tree/main)：基于chat-gpt的外语学习应用，可通过语音进行聊天，语法分析，翻译，前端使用uniapp开发，基于vue3，可运行到web、小程序、APP
+选择模板时考虑以下关键因素：
 
-- [流浪猫图鉴](https://github.com/sysucats/zhongdamaopu) ： 很优秀的小程序了
-- 更多
-- 在 gitee 中进行搜索：https://so.gitee.com/?q=uniapp 
+1. **目标用户获取渠道**：选择内置了符合你用户获取策略的模板
+   - 需要SEO流量？选择Next.js等支持SSR的模板
+   - 主打社交分享？确保有内置分享组件
+   - 依赖有机发现？选择平台商店有优势的形态（如Chrome插件）
 
-**Taro 模板**
+2. **开发速度与经验**：
+   - **前端经验丰富**: 可选择完整SaaS模板快速开发
+   - **全栈经验有限**: 建议使用无代码/低代码方案或基于API服务的前端模板
 
-https://github.com/dshuais/taro-template 特点是用了 tailwindcss
+3. **定制化需求**:
+   - **标准SaaS**: 现成模板足够
+   - **特殊功能**: 寻找专注该领域的垂直模板
 
-https://github.com/lexmin0412/taro3-react-template 用了 scss & nut UI
+## MVP开发最佳实践
 
-**微信小程序工具**
+1. **从简单开始**: 先使用现成模板创建落地页收集邮箱
+2. **核心功能优先**: 先实现一个用户故事，而非完整功能集
+3. **利用模板生态**: 使用模板社区的插件而非自己开发
+4. **考虑用户获取**: 选择的模板应支持你计划的用户获取渠道
 
-[自动化反编译微信小程序](https://github.com/Ackites/KillWxapkg)
+## 下一步
 
-**Python**
-
-**Python + nextjs**
-
-fastapi nextjs full stack github
-
-这里代码模板很少，前后端分离的代码模板是
-
-- https://github.com/Nneji123/fastapi-nextjs/ 可以作为不错的起点
-- https://github.com/fastapi/full-stack-fastapi-template fastapi 官方的全栈模板
-- https://github.com/cording12/next-fast-turbo 这个看起来还不错（非常详细的文档，也讲了如何配置 vscode workspace 提高开发体验）
-
-` `python 作为 serverless function 是可行的
-
-- Vercel 官方案例，python 作为 serverless function, [demo](https://vercel.com/templates/next.js/nextjs-fastapi-starter), [code](https://github.com/digitros/nextjs-fastapi) 
-- 但是局限性会很大，比如启动时间，运行时间
-
-**Python + 小程序**
-
-https://github.com/vvandk/kinit
-
-FastAPI + vue3 前后端分离后台管理系统，包含PC端，微信小程序端
-
-https://github.com/likeadmin-likeshop/likeadmin\_python?tab=readme-ov-file
-
-likeadmin这套框架专为快速开发业务项目而生，含管理后台、微信小程序、手机 H5、PC 端等
-
-https://github.com/mjhea0/awesome-fastapi
-
-- Python 脚手架
-- [Hatch](https://github.com/pypa/hatch): Python 项目初始化工具，强烈推荐。
-- [Python Project Template](https://github.com/rochacbruno/python-project-template): 一个简单的 Python 项目模板，适合初学者。
-- [Cookiecutter Pypackage](https://github.com/waynerv/cookiecutter-pypackage): 改进版的 Python 包模板，适合创建 Python 包。
-- [PyScaffold](https://github.com/pyscaffold/pyscaffold): 一个功能丰富的 Python 项目模板，Star 最多。
-- [Python Collab Template](https://github.com/eugeneyan/python-collab-template): 适合协作开发的 Python 项目模板。
-- FastAPI
-- [Tifa](https://github.com/twocucao/tifa): 一个 FastAPI 项目模板，适合快速搭建 API。
-- [FastAPI Project Template](https://github.com/rochacbruno/fastapi-project-template): 一个简单的 FastAPI 项目模板。
-- [Full-Stack FastAPI Template](https://github.com/tiangolo/full-stack-fastapi-template): 全栈开发的 FastAPI 模板，适合复杂项目。
-
-**付费模板网站**
-
-**国外**
-
-[www.creative-tim.com](https://www.creative-tim.com/)
-[vercel.com/templates/next.js](https://vercel.com/templates/next.js)
-[tailwindui.com/templates](https://tailwindui.com/templates) ( 99 美元）
-
-[themeforest.net](https://themeforest.net/)
-[templatemonster.com](https://www.templatemonster.com/)
-[saasrock.com](https://saasrock.com/)
-
-**国内**
-
-- [腾讯云](https://cloud.tencent.com/product/cloudpages)上有很多适用于各种行业的网站模板，840 元/年
-
-**UniApp 模板**
-
-https://ext.dcloud.net.cn/
-
-
-**其他**
-
-- Django
-- [Uvicorn Gunicorn FastAPI Docker](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker): 适合使用 Docker 部署 FastAPI 项目的模板。
-- [Django Hello World on Vercel](https://vercel.com/templates/python/django-hello-world): 在 Vercel 上部署的 Django 示例项目。
-- [Django Channels Chat App](https://justdjango.com/blog/chat-app-django-channels): 使用 Django Channels 构建的聊天应用示例。
-- Go Lang
-- [Go 练手开源项目](https://github.com/your-repo/go-practice-projects): 适合 Go 初学者的练手项目。
-- [Go Project Layout](https://github.com/golang-standards/project-layout): 基础的 Go 项目模板。
-- [Go Seed](https://github.com/golang-templates/seed): 一个简单的 Go 项目模板。
-- [Go Podinfo](https://github.com/stefanprodan/podinfo): 一个迷你的 Go 微服务模板，值得借鉴。
-- [Awesome Go 项目布局](https://github.com/yinggaozhen/awesome-go-cn#%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80): 更多 Go 项目模板。
-- [Podinfo](https://github.com/stefanprodan/podinfo): 包含了很多 Golang 最佳实践的微服务模板。
-- C++
-- [Modern C++ Template](https://github.com/filipdutescu/modern-cpp-template): 一个现代 C++ 项目模板，支持 CMake、Clang-Format 等。
-- [ModernCppStarter](https://github.com/TheLartians/ModernCppStarter): 一个现代 C++ 项目模板，推荐从这个看起。
-- [GUI Starter Template](https://github.com/cpp-best-practices/gui_starter_template): 一个适合 GUI 开发的 C++ 项目模板。
-- [Awesome Modern C++](https://github.com/rigtorp/awesome-modern-cpp): 现代 C++ 资源集合。
-- [C++ Initer](https://github.com/xyz1001/cppiniter): 一个简单的 C++ 项目脚手架。
-- [CMake Example with Pybind11](https://github.com/pybind/cmake_example): 使用 CMake 和 Pybind11 构建的 Python 和 C++ 混合项目示例。
-- [Python C++ Skel](https://github.com/mapbox/python-cpp-skel): 使用 Pybind11 绑定 C++ 库的 Python 项目骨架。
+- [AI编程教程](/resources/ai-programming-tutorials): 利用AI加速模板定制
+- [MVP部署指南](/launching/deployment): 将你的MVP部署到线上
+- [发布与推广策略](/launching/international-publishing): 如何将你的MVP推向首批用户
 
 
 

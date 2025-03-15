@@ -1,40 +1,131 @@
 ---
-title: Cursor 安装与使用
+title: Cursor AI编辑器：安装与使用完全指南
 ---
 
+# Cursor AI编辑器：10分钟上手指南
 
-**Cursor 安装与使用**
+> 💡 **MVP加速工具**: Cursor是一款集成AI能力的代码编辑器，可将MVP开发速度提升3-5倍，是快速构建可验证产品的理想工具。
 
-**Cursor 安装教程 & 汉化**
+## 为什么选择Cursor开发MVP？
 
-**[copy\_8C96E666-06D1-4252-89A9-D2A0B130D8A3.MOV]**
+Cursor不仅是一个代码编辑器，更是一个能大幅提升开发效率的AI助手：
 
-**图文教程**
+- **智能代码生成**: 根据简单描述自动生成完整功能代码
+- **上下文理解**: 理解整个项目，提供针对性建议
+- **迭代速度快**: 快速修改和调整代码，缩短开发周期
+- **降低技术门槛**: 即使非专业开发者也能利用AI构建功能完善的MVP
 
-```建议看视频教程哦，更详细和全面
+![Cursor界面概览](/images/cursor-installation-and-usage.001.png)
+
+## 安装与设置流程
+
+### 第一步：下载与安装
+
+1. 访问[Cursor官网](https://cursor.sh/)下载最新版本
+   - Windows/macOS/Linux均有对应版本
+   - 推荐下载稳定版(Stable Release)
+
+2. 运行安装程序并按照向导完成安装
+   - Windows用户：遇到安全提示请选择"仍要运行"
+   - Mac用户：首次打开可能需要在"系统偏好设置>安全性与隐私"中允许运行
+
+### 第二步：账号注册与登录
+
+1. 打开Cursor应用程序
+2. 点击"Sign Up"(注册)或"Log In"(登录)按钮
+3. 使用邮箱注册账号并验证
+   - 建议使用经常使用的邮箱，便于接收验证码
+   - 密码设置建议包含字母、数字和特殊字符
+
+![Cursor登录界面](/images/cursor-installation-and-usage.002.png)
+
+## 基本使用教程
+
+### 打开或创建项目
+
+1. 启动Cursor后，点击"Open Folder"(打开文件夹)
+2. 导航到你的项目文件夹并选择
+3. 首次打开项目时，Cursor会自动索引文件以提供更好的AI建议
+
+![打开项目文件夹](/images/cursor-installation-and-usage.003.png)
+
+### 使用AI助手聊天
+
+1. 点击左侧边栏的聊天图标或使用快捷键`Cmd+K`(Mac)/`Ctrl+K`(Windows)
+2. 在对话框中输入你的需求，例如：
+   - "创建一个用户登录表单"
+   - "解释这段代码的功能"
+   - "优化这个函数的性能"
+
+![AI聊天窗口](/images/cursor-installation-and-usage.004.png)
+
+### 编写高效AI提示
+
+提供清晰、具体的指令可以获得更好的结果：
+
 ```
-**Cursor 环境准备**
+请帮我实现一个React组件，满足以下要求：
+1. 显示产品列表，每个产品包含名称、价格和图片
+2. 支持按价格筛选和排序功能
+3. 点击产品可以查看详情
+4. 使用Tailwind CSS进行样式设计
+```
 
-1. 从cursor官网 https://www.cursor.com/ 下载cursor 桌面软件
-2. 注册账号，准备一个邮箱接收验证码即可
-3. 打开cursor桌面软件，然后登录cursor
-./
-![](/images/cursor-installation-and-usage.001.png)
-./
-![](/images/cursor-installation-and-usage.002.png)
+![有效的提示示例](/images/cursor-installation-and-usage.005.png)
 
-**使用 Cursor**
+## 高级功能与技巧
 
-1. 打开本地的一个文件夹
-./
-![](/images/cursor-installation-and-usage.003.png)
+### 代码解释与优化
 
-2. 打开Chat 窗口
-./
-![](/images/cursor-installation-and-usage.004.png)
+1. 选中一段代码
+2. 右键选择"Explain Code"(解释代码)或"Optimize Code"(优化代码)
+3. Cursor会给出详细解释或优化建议
 
-3. 输入Prompt
-./
-![](/images/cursor-installation-and-usage.005.png)
+### 自动补全与智能建议
 
+1. 开始输入代码时，Cursor会提供上下文相关的补全建议
+2. 使用Tab键接受建议
+3. 使用`Alt+]`查看更多建议
 
+### 自定义快捷键
+
+1. 点击左下角设置图标
+2. 选择"Keyboard Shortcuts"(键盘快捷键)
+3. 根据个人习惯修改快捷键
+
+## 常见问题解决
+
+### Cursor无法连接到AI服务
+
+**解决方案**:
+1. 检查网络连接
+2. 确认账号已正确登录
+3. 尝试重启Cursor应用
+
+### 代码生成质量不高
+
+**解决方案**:
+1. 提供更详细的需求描述
+2. 明确技术栈和框架版本
+3. 给出具体的输入/输出示例
+
+### 性能优化
+
+**适用情况**:
+- 打开大型项目时
+- 系统资源有限
+
+**解决方案**:
+1. 在设置中调低"AI提示频率"
+2. 关闭不必要的标签页
+3. 增加系统内存或使用SSD
+
+## 下一步学习
+
+已经掌握Cursor基础使用后，建议继续了解：
+
+1. [Cursor与DeepSeek API集成](/resources/ai-programming-tutorials/cursor-integration-with-deepseep-api) - 使用更强大的AI模型
+2. [代码版本控制](/resources/ai-programming-tutorials/version-control-tutorial) - 管理AI生成的代码版本
+3. [Next.js国内部署](/resources/ai-programming-tutorials/nextjs-domestic-deployment) - 部署你的MVP
+
+> 📝 **小贴士**: 使用Cursor开发MVP时，先构建核心功能验证想法，再逐步完善细节。这样能够更快获得用户反馈，避免在未经验证的功能上浪费时间。

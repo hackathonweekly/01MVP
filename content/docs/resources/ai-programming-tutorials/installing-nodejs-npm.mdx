@@ -1,126 +1,262 @@
 ---
-title: 安装nodejs npm
+title: Node.js 和 pnpm 环境搭建完全指南
 ---
 
+# Node.js 和 pnpm 环境搭建完全指南
 
-**下载地址**
+> 💡 **MVP开发基础**: 在开始使用 AI 开发 MVP 前，你需要先搭建好基础开发环境。本指南帮助你快速、正确地安装 Node.js 和 pnpm，适用于 Windows、Mac 和 Linux 系统。
 
-https://nodejs.org/zh-cn/download
+## 为什么选择 Node.js 和 pnpm？
 
-这里我们使用 nodejs 20 版本 + pnpm
+- **Node.js**: 现代Web开发的基础，支持JavaScript运行，是大多数前端项目的必备环境
+- **pnpm**: 比npm更高效的包管理器，节省磁盘空间，速度更快，依赖管理更可靠
 
-![](/images/installing-nodejs-npm.001.png)
+![Node.js官网截图](/images/installing-nodejs-npm.001.png)
 
+## 一、选择适合你的安装方式
 
-**Windows**
+根据你的经验和需求，选择以下安装方式之一：
 
-务必要使用 管理员权限 打开 powershell 
+### 🔰 方式1：直接安装（初学者推荐）
 
-打开 powershell ，输入下面的命令
+适合场景：初学者，只需要特定版本，不需要频繁切换版本
 
+| 操作系统 | 安装方式 |
+|---------|---------|
+| Windows | [官网下载安装包](https://nodejs.org/zh-cn/download)，选择 LTS 版本 |
+| macOS | [官网下载安装包](https://nodejs.org/zh-cn/download)，选择 LTS 版本<br/>或使用 Homebrew: `brew install node@20` |
+| Linux (Ubuntu/Debian) | `sudo apt update && sudo apt install nodejs npm` |
+| Linux (CentOS/RHEL) | `sudo yum install nodejs npm` |
+
+### 🚀 方式2：使用版本管理器（专业开发推荐）
+
+适合场景：需要管理多个项目，需要在不同Node版本间切换
+
+| 操作系统 | 推荐工具 | 安装命令 |
+|---------|---------|---------|
+| Windows | nvm-windows | [下载安装程序](https://github.com/coreybutler/nvm-windows/releases) |
+| macOS/Linux | nvm | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh \| bash` |
+| 全平台通用 | fnm | 见下方详细说明 |
+
+## 二、详细安装步骤（按操作系统）
+
+### Windows 系统安装
+
+#### 方法1：官网安装包（简单直接）
+
+1. 访问 [Node.js 官网](https://nodejs.org/zh-cn/download)
+2. 下载 Windows 安装包（选择 LTS 版本，如 20.x）
+3. 运行安装程序，全部使用默认设置即可
+4. 安装完成后，打开命令提示符或 PowerShell，验证安装：
+   ```
+   node -v
+   npm -v
+   ```
+
+#### 方法2：使用 fnm 版本管理器（推荐开发者）
+
+1. 以管理员身份打开 PowerShell
+2. 运行以下命令安装 fnm：
+   ```powershell
+   # 使用 winget 安装（Windows 10 1809+ 推荐）
+   winget install Schniz.fnm
+
+   # 或使用 Chocolatey 安装
+   # choco install fnm
+   ```
+3. 关闭并重新打开 PowerShell，安装 Node.js：
+   ```powershell
+   fnm install 20
+   fnm use 20
+   fnm default 20
+   ```
+4. 安装并启用 pnpm：
+   ```powershell
+   corepack enable
+   corepack prepare pnpm@latest --activate
+   ```
+
+### macOS 系统安装
+
+#### 方法1：使用 Homebrew（推荐）
+
+1. 如果尚未安装 Homebrew，先安装它：
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+2. 安装 Node.js：
+   ```bash
+   brew install node@20
+   ```
+3. 安装并启用 pnpm：
+   ```bash
+   corepack enable
+   corepack prepare pnpm@latest --activate
+   ```
+
+#### 方法2：使用 nvm 版本管理器
+
+1. 安装 nvm：
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   ```
+2. 重新打开终端或运行：
+   ```bash
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+   ```
+3. 安装 Node.js：
+   ```bash
+   nvm install 20
+   nvm use 20
+   nvm alias default 20
+   ```
+4. 安装并启用 pnpm：
+   ```bash
+   corepack enable
+   corepack prepare pnpm@latest --activate
+   ```
+
+### Linux 系统安装
+
+#### Ubuntu/Debian 系统
+
+1. 使用 nvm 安装 Node.js（推荐）：
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   source ~/.bashrc  # 或 source ~/.zshrc（如果使用zsh）
+   nvm install 20
+   nvm use 20
+   nvm alias default 20
+   ```
+2. 安装并启用 pnpm：
+   ```bash
+   corepack enable
+   corepack prepare pnpm@latest --activate
+   ```
+
+#### CentOS/RHEL 系统
+
+1. 使用 nvm 安装 Node.js：
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   source ~/.bashrc
+   nvm install 20
+   nvm use 20
+   nvm alias default 20
+   ```
+2. 安装并启用 pnpm：
+   ```bash
+   corepack enable
+   corepack prepare pnpm@latest --activate
+   ```
+
+## 三、中国区用户加速配置
+
+> 📌 如果你在中国大陆，配置国内镜像源可以显著提升下载速度
+
+### 设置npm国内镜像（适用于所有用户）
 
 ```bash
-winget install Schniz.fnm
+# 使用npmmirror镜像源（淘宝源）
+npm config set registry https://registry.npmmirror.com
 ```
 
-安装成功后， 关闭 powershell ，再输入如下命令
+### 设置pnpm国内镜像（推荐）
 
-```Bash
-
-fnm install 20
-
-node -v # Should print "v20.18.1".
-
-corepack enable pnpm
-
-pnpm -v
+```bash
+# 设置镜像源
+pnpm config set registry https://registry.npmmirror.com
+# 或在项目中临时使用
+pnpm --registry=https://registry.npmmirror.com install
 ```
 
-**Mac**
+### 设置Node.js版本管理器镜像（推荐）
 
-打开终端，输入下面的命令
+#### nvm用户
 
+编辑 `~/.bashrc` 或 `~/.zshrc`（macOS/Linux）或创建 `%USERPROFILE%\.nvmrc`（Windows），添加：
 
-```JSON
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
-nvm install 20
-
-node -v # Should print "v20.18.1".
-nvm current # Should print "v20.18.1".
-
-corepack enable pnpm
-
-pnpm -v
+```bash
+# nvm镜像配置
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
 ```
 
+#### fnm用户
 
-**常用命令介绍**
+```bash
+# Windows (PowerShell)
+$env:FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node"
 
-**Node.js 命令**
+# macOS/Linux
+export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node"
+```
 
-- node -v：查看 Node.js 版本
-- node xxx.js：运行 JavaScript 文件
+## 四、验证安装和常见问题
 
-**NPM 包管理器命令**
+### 验证安装是否成功
 
-NPM 是 Node.js 的包管理器，主要用于：
+安装完成后，运行以下命令确认：
 
-- npm install xxx：安装某个包
-- npm run dev：启动开发环境
-- npm run build：打包项目
-- npm run start：启动项目
+```bash
+# 验证Node.js版本
+node -v  # 应显示20.x.x
 
-**终端常用命令**
+# 验证npm版本
+npm -v  # 应显示9.x.x或更高
 
-终端是我们和电脑对话的工具，这些是最常用的命令：
+# 验证pnpm版本
+pnpm -v  # 应显示8.x.x或更高
+```
 
-- ls：查看当前文件夹内容（Windows 用 dir）
-- cd 文件夹名：进入某个文件夹
-- cd ..：返回上一级文件夹
-- open .：打开当前文件夹（Mac）
-- explorer.exe .：打开当前文件夹（Windows）
+### 常见问题解决方案
 
-**使用建议**
+#### 权限错误
 
-1. 版本选择
-- 建议使用 LTS（长期支持）版本
-- 目前推荐使用 18.x 版本
-2. 包管理器选择
-- 推荐使用 pnpm 替代 npm
-- pnpm 更节省空间，速度更快
-- 安装命令：npm install -g pnpm
-- 除了 npm / pnpm，你可能还会看到 yarn / bun / deno 之类的东西，他们跟 npm 类似但有区别。小白用 pnpm 就够了，不用太纠结。
-3. 常见问题解决
-- 如果安装失败，可以尝试以管理员身份运行
-- 如果下载很慢，可以使用国内镜像源
-- npm config set registry https://registry.npmmirror.com
+**Windows**:
+- 以管理员身份运行PowerShell或命令提示符
+- 运行 `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
-**学习建议**
+**Mac/Linux**:
+- 使用 `sudo` 前缀
+- 或使用 nvm/fnm 避免权限问题（推荐）
 
-1. 循序渐进
-- 先掌握基础命令的使用
-- 不需要一次学会所有内容
-- 遇到问题可以随时查询或请教
-2. 实践为主
-- 多动手练习
-- 从简单的项目开始
-- 遇到错误不要害怕，这是学习的一部分
-3. 获取帮助
-- 遇到问题可以：
-- 查看官方文档
-- 使用搜索引擎
-- 询问 AI 助手（如 ChatGPT）
-- 在开发社区提问
+#### "未找到命令"错误
 
-**下一步**
+- 确保安装路径已添加到系统环境变量
+- 重启终端或命令提示符
+- Windows可能需要重启电脑
 
-环境搭建完成后，你就可以：
+#### 安装过慢或超时
 
-1. 开始学习 JavaScript 基础
-2. 尝试创建简单的网页
-3. 跟随教程开发实际项目
+- 使用上述中国区镜像加速
+- 检查网络连接，尝试使用VPN或更换网络
+- 临时禁用防火墙或杀毒软件
 
-记住：编程学习是一个渐进的过程，不要着急，遇到问题时多查资料，多实践，慢慢就会越来越熟练了。
+## 五、包管理器基础命令
+
+无论你使用哪种包管理器，这些是最常用的命令：
+
+| 操作 | npm | pnpm | yarn |
+|------|-----|------|------|
+| 安装项目依赖 | `npm install` | `pnpm install` | `yarn` |
+| 安装特定包 | `npm install 包名` | `pnpm add 包名` | `yarn add 包名` |
+| 安装开发依赖 | `npm install -D 包名` | `pnpm add -D 包名` | `yarn add -D 包名` |
+| 卸载包 | `npm uninstall 包名` | `pnpm remove 包名` | `yarn remove 包名` |
+| 运行脚本 | `npm run 脚本名` | `pnpm 脚本名` | `yarn 脚本名` |
+| 全局安装 | `npm i -g 包名` | `pnpm add -g 包名` | `yarn global add 包名` |
+
+## 六、下一步学习
+
+环境搭建完成后，你可以：
+
+1. **学习基础** - 熟悉 [JavaScript基础语法](/resources/javascript-basics)
+2. **创建项目** - 使用[代码模板](/building/code-templates)快速启动新项目
+3. **跟随教程** - 尝试完成[15分钟构建AI全栈MVP](/case-studies/practical-tutorials/15min-nextjs-fullstack-website-with-deepseek-api)
+4. **实践开发** - 使用[AI辅助编程技巧](/resources/ai-programming-tutorials/prompt-templates)加快开发速度
+
+---
+
+> 📢 **提示**: 现代Web开发中，pnpm已逐渐成为主流包管理工具，建议优先使用。它不仅速度更快，还能大幅节省磁盘空间，并提供更可靠的依赖管理。
 
 

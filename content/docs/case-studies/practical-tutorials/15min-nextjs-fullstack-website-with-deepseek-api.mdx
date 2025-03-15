@@ -1,132 +1,361 @@
 ---
-title: OPENAI\_API\_BASE\_URL=https://api.deepseek.com/v1
+title: 15分钟构建AI全栈MVP：NextJS + DeepSeek API实战教程
 ---
 
+# 15分钟构建AI全栈MVP：NextJS + DeepSeek API商业画布生成器
 
-**15分钟上线 Nextjs 全栈网站，接入 DeepSeek API!**
+> 💡 **快速MVP秘诀**: 利用现代技术栈+AI API，可以在15分钟内构建出一个可部署的全栈应用，快速验证你的想法并获取首批用户。
 
-视频教程
+![AI商业画布生成器成品展示](/images/15min-nextjs-deepseek-api.001.png)
 
-**[该类型的内容暂不支持下载]**
+## 项目概览
 
-**课程目标**
+**你将构建**: 一个AI驱动的商业画布生成器，帮助创业者和产品经理快速构建商业模型
 
-https://pmai.jackiexiao.com/
+**技术栈**: Next.js 15 (App Router) + Shadcn UI + DeepSeek API
 
-![](/images/15min-nextjs-deepseek-api.001.png)
+**适合人群**: 有基础前端知识的开发者，想要快速构建AI驱动的MVP
 
-![](/images/15min-nextjs-deepseek-api.002.png)
+**最终成果**: [查看演示](https://pmai.jackiexiao.com/) | [GitHub源码](https://github.com/Jackiexiao/pmai-tutorial)
 
-**下载代码模板**
+![最终效果展示](/images/15min-nextjs-deepseek-api.002.png)
 
-```下面任意选择其中一种方法下载代码模板即可
+## 为什么这是一个好的MVP案例？
+
+这个项目展示了现代MVP开发的核心要素：
+
+1. **快速实现**: 15分钟从零到可用产品
+2. **有价值核心**: 解决商业规划这一真实需求
+3. **技术杠杆**: 利用AI API提供核心价值，而非自己构建复杂功能
+4. **高扩展性**: 可轻松迭代添加更多功能
+5. **易于获取用户**: 产品经理和创业者有明确需求，容易找到前100位用户
+
+## 准备工作
+
+### 1. 开发环境准备
+
+- 确保安装了最新版 [Node.js](https://nodejs.org/)（推荐v18+）
+- 安装pnpm: `npm install -g pnpm`
+- 编辑器推荐：VS Code 或 [Cursor](https://cursor.sh/)
+
+### 2. 下载代码模板
+
+选择以下任一方式获取起始模板：
+
+```bash
+# 方式1：直接从GitHub克隆
+pnpm dlx degit jackiexiao/next-shadcn-template my-app
+
+# 方式2：下载ZIP包后解压
+# 下载链接: https://github.com/jackiexiao/next-shadcn-template/archive/refs/heads/main.zip
 ```
-**[Next Shadcn Template.zip]**
 
-https://github.com/jackiexiao/next-shadcn-template
+或访问以下仓库手动下载：
+- GitHub: https://github.com/jackiexiao/next-shadcn-template
+- Gitee(国内): https://gitee.com/jackiegeek/next-shadcn-template
 
-https://gitee.com/jackiegeek/next-shadcn-template
-./
-![](/images/15min-nextjs-deepseek-api.003.png)
-./
-![](/images/15min-nextjs-deepseek-api.004.png)
+![代码模板目录结构](/images/15min-nextjs-deepseek-api.003.png)
 
-**注册 [Sealos](https://cloud.sealos.run/?uid=N0lFN0Q8_U) 以获取 大模型  Api Key**
+### 3. 获取AI API密钥
 
-[Sealos](https://cloud.sealos.run/?uid=N0lFN0Q8_U) 的便利性，一次注册
+有两种方式获取DeepSeek API访问：
 
-- 可以使用多个国内大模型 API： 阿里 / 智谱 / 豆包 / DeepSeek
-- 可以使用 对象存储、数据库等服务（当然你也可以买腾讯云、Vercel 的）
-- 注册地址：https://cloud.sealos.run/?uid=N0lFN0Q8\_U
+**方式1: 使用Sealos统一API服务（推荐，支持国内多种模型）**
+1. 访问[Sealos](https://cloud.sealos.run/?uid=N0lFN0Q8_U)注册账号
+2. 在"AI代理"服务中创建API密钥
+3. 获得的API密钥格式为`sk-xxxxxx`
 
-如果你只打算使用 deepseek.com 官方的 api，也可以不使用 Sealos，直接在它的官网注册充值即可
+**方式2: 直接使用DeepSeek官方API**
+1. 访问[DeepSeek官网](https://deepseek.com)注册账号
+2. 在开发者设置中创建API密钥
 
-**Apikey 放到 .env 环境变量中**
+### 4. 配置环境变量
 
-```JSON
+在项目根目录创建`.env`文件，添加以下内容：
 
-OPENAI\_API\_BASE\_URL=https://aiproxy.hzh.sealos.run/v1
-OPENAI\_API\_KEY=sk-3ccdff8877284a2abcbe3a8e28f3f1ea
-OPENAI\_MODEL\_NAME=deepseek-chat
+```
+OPENAI_API_BASE_URL=https://aiproxy.hzh.sealos.run/v1
+OPENAI_API_KEY=sk-your-api-key-here
+OPENAI_MODEL_NAME=deepseek-chat
 ```
 
-写入到 .env 文件中，确保它在 .gitignore 里头（保证密钥不泄露）
+同时创建`.env.example`文件（不含真实密钥）作为模板示例。
 
-同时写一个 .env.example ，告诉其他访问这个代码的人，.env 应该怎么写
+## 开发步骤
 
+### 步骤1: 启动项目（2分钟）
 
-```JSON
-OPENAI\_API\_BASE\_URL=https://aiproxy.hzh.sealos.run/v1
-OPENAI\_API\_KEY=sk-xxx
-OPENAI\_MODEL\_NAME=deepseek-chat
+```bash
+cd my-app
+pnpm install
+pnpm dev
 ```
-**开发环境**
 
-Nodejs 安装，请访问 nodejs.com 
+访问 http://localhost:3000 确认项目正常运行。
 
-**Prompt 提示词**
+### 步骤2: 创建API端点（5分钟）
 
+在`app/api/generate/route.ts`文件中实现处理AI请求的端点：
 
-```JSON
+```typescript
+import { NextResponse } from 'next/server';
+import { OpenAI } from 'openai';
 
-这是一个使用了 Next.js 15 (App Router)、Shadcn UI、Radix UI 和 Tailwind CSS 的代码仓库，请你阅读这个仓库的代码。
+// 初始化OpenAI客户端
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: process.env.OPENAI_API_BASE_URL,
+});
 
-我想实现的需求：实现一个 AI 商业画布生成器，具体流程如下
+export async function POST(req: Request) {
+  try {
+    const { idea } = await req.json();
+    
+    if (!idea) {
+      return NextResponse.json(
+        { error: "请提供业务创意" },
+        { status: 400 }
+      );
+    }
 
-1. 用户可以首页的输入框中输入他们的 idea
-2. 调用后端 api，后端 api 应该调用 chatgpt api 获取 json 结果
+    // 调用AI API生成商业画布
+    const response = await openai.chat.completions.create({
+      model: process.env.OPENAI_MODEL_NAME || 'deepseek-chat',
+      messages: [
+        {
+          role: "system",
+          content: "你是一位经验丰富的商业分析师，擅长帮助创业者分析商业模式。"
+        },
+        {
+          role: "user",
+          content: `基于用户输入的产品"${idea}"生成商业模式画布的九大要点，内容精炼，词汇精准直接。请按以下格式生成JSON响应：
+          
+          {
+            "客户细分": [
+              { "point": "point1" },
+              { "point": "point2" }
+            ],
+            "价值主张": [
+              { "point": "point1" },
+              { "point": "point2" }
+            ],
+            // 包含其他模块：渠道通路、客户关系、收入来源、核心资源、关键业务、重要合作、成本结构
+          }`
+        }
+      ],
+      temperature: 0.7,
+      response_format: { type: "json_object" }
+    });
 
-注意使用如下环境变量
+    // 解析AI返回的结果
+    const content = response.choices[0].message.content;
+    let canvasData;
+    
+    try {
+      canvasData = JSON.parse(content || '{}');
+    } catch (error) {
+      console.error('解析JSON出错:', error);
+      return NextResponse.json(
+        { error: "AI返回结果解析失败" },
+        { status: 500 }
+      );
+    }
 
-OPENAI\_API\_BASE\_URL=https://aiproxy.hzh.sealos.run/v1
-OPENAI\_API\_KEY=sk-xxx
-OPENAI\_MODEL\_NAME=deepseek-chat
-
-使用的 prompt 如下
-
-
-基于用户输入的产品"${idea}"生成商业模式画布的九大要点，内容精炼，词汇精准直接。请按以下格式生成JSON响应：
-
-{
-  "客户细分": [
-    { "point": "point1" },
-    { "point": "point2" }
-  ],
-  "价值主张": [
-    { "point": "point1" },
-    { "point": "point2" }
-  ],
-  ...
-  // 包含其他模块：渠道通路、客户关系、收入来源、核心资源、关键业务、重要合作、成本结构
+    return NextResponse.json({ canvas: canvasData });
+  } catch (error) {
+    console.error('API调用出错:', error);
+    return NextResponse.json(
+      { error: "处理请求时出错" },
+      { status: 500 }
+    );
+  }
 }
-
-3. 前端拿到后端返回的包含商业画布信息的 json ，应该写一个页面来呈现这个商业画布
-
-我希望总体风格足够现代简洁风。
 ```
 
-**Vercel 部署**
+### 步骤3: 创建用户界面（5分钟）
 
-1. 首先注册一个 vercel.com 的账号
-2. 终端中运行 npm run build ，如果有报错，让 AI 修复
-3. 终端中运行 npm run deploy， 这一步会将你的代码部署到服务器上
-4. 到 vercel 设置你的 apikey （环境变量）
+修改`app/page.tsx`文件，实现输入表单和展示结果的界面：
 
-**大功告成！**
+```tsx
+"use client";
 
-[pmai-example.vercel.app](https://pmai-example.vercel.app/)
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 
-最终的代码我上传到这里（虽然你大概率用不到它）： https://github.com/Jackiexiao/pmai-tutorial
+export default function Home() {
+  const [idea, setIdea] = useState("");
+  const [canvas, setCanvas] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-**FAQ**
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!idea.trim()) return;
+    
+    setLoading(true);
+    setError("");
+    
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idea }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || "生成商业画布时出错");
+      }
+      
+      setCanvas(data.canvas);
+    } catch (err) {
+      setError(err.message || "请求处理失败，请重试");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-**为什么使用 sealos 这类中转 API？**
+  return (
+    <main className="flex min-h-screen flex-col items-center p-4 md:p-24">
+      <div className="max-w-5xl w-full space-y-8">
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold">商业画布生成器</h1>
+          <p className="text-gray-500">
+            输入你的创业想法，AI 将帮你生成完整的商业模式画布
+          </p>
+        </div>
 
-1. 因为未来你大概率需要使用不同的模型
-1. 不同的模型适用场景不同，比如有些响应速度快，有些写代码强，有些写作强
-2. 使用中转 API，你就不需要一个一个大模型去自己接入了，省心省事，但缺点就是你可能需要稍微多付一点钱给中转 API。如果你业务规模大了，再切换也不迟。
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <Input
+            value={idea}
+            onChange={(e) => setIdea(e.target.value)}
+            placeholder="例如：一款基于AI的健身教练App"
+            className="flex-1"
+          />
+          <Button type="submit" disabled={loading || !idea.trim()}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                生成中...
+              </>
+            ) : (
+              "生成画布"
+            )}
+          </Button>
+        </form>
 
-**这个 xxx.vercel.app 国内无法访问？**
+        {error && <p className="text-red-500 text-center">{error}</p>}
 
-需要绑定自定义域名之后才可以访问，可以在 B 站上搜索 “Vercel 绑定自定义域名”
+        {canvas && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {Object.entries(canvas).map(([category, items]) => (
+              <Card key={category} className="overflow-hidden">
+                <CardHeader className="bg-gray-50 p-4">
+                  <CardTitle className="text-lg">{category}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <ul className="list-disc pl-5 space-y-1">
+                    {Array.isArray(items) && 
+                      items.map((item, index) => (
+                        <li key={index}>{item.point}</li>
+                      ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}
+```
+
+### 步骤4: 部署上线（3分钟）
+
+使用Vercel快速部署你的应用：
+
+1. 将代码推送到GitHub仓库
+2. 注册[Vercel](https://vercel.com)并导入你的代码仓库
+3. 在Vercel项目设置中添加环境变量（与`.env`文件相同）
+4. 点击部署即可上线
+
+也可以使用命令行部署（需要先安装Vercel CLI）：
+
+```bash
+# 本地构建验证
+pnpm build
+
+# 部署到Vercel
+pnpm dlx vercel
+```
+
+## 从MVP到获取前100个用户
+
+现在你已经有了一个功能完整的AI商业画布生成器！接下来是寻找前100个用户的策略：
+
+### 目标用户群体
+
+这个产品适合以下人群：
+- 创业初期的创始人/团队
+- 产品经理需要迅速验证产品创意
+- 商科学生学习商业模式构建
+
+### 推广获客策略
+
+1. **内容营销**: 
+   - 在知乎/小红书发布"如何构建有效商业模式"相关内容
+   - 在Medium/公众号发布使用教程，附带产品链接
+
+2. **社区分享**:
+   - 在产品经理/创业者社区发布产品链接
+   - 获取初步用户反馈，迅速迭代产品
+
+3. **增值服务**:
+   - 对活跃用户提供免费的1对1商业模式评估
+   - 收集真实反馈，并作为未来付费功能的基础
+
+## 产品迭代路线
+
+根据用户反馈，计划以下迭代方向：
+
+1. **基础增强** (1-2天):
+   - 保存生成结果历史
+   - 导出为PDF功能
+   - 移动端优化
+
+2. **功能扩展** (1周):
+   - 多种商业画布模板选项
+   - 细化各模块的问答引导
+   - 多语言支持
+
+3. **变现模式** (2周):
+   - 基础功能保持免费
+   - 高级分析和行业洞察为付费功能
+   - 个性化咨询服务对接
+
+## 常见问题解答
+
+**为什么使用Sealos这类中转API服务？**
+- 一次接入，支持多种国内大模型API
+- 不同模型有各自优势：有些响应快，有些写代码强，有些写作强
+- 节省单独接入每个模型的开发时间
+
+**Vercel部署的网站国内无法访问？**
+- 需要绑定自定义域名才能在国内正常访问
+- B站搜索"Vercel绑定自定义域名"获取详细教程
+
+**如何增加商业画布的准确性？**
+- 可以调整API请求中的system prompt，使其更专业
+- 增加用户输入的引导问题，获取更详细信息
+- 尝试不同的AI模型，找到效果最好的一个
+
+## 视频教程
+
+想要观看完整视频教程？[点击这里查看详细教学视频](https://www.bilibili.com/video/BV1C56JYiEXz/)
 
