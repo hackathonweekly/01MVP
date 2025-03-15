@@ -2,8 +2,6 @@
 title: Node.js 和 pnpm 环境搭建完全指南
 ---
 
-# Node.js 和 pnpm 环境搭建完全指南
-
 > 💡 **MVP开发基础**: 在开始使用 AI 开发 MVP 前，你需要先搭建好基础开发环境。本指南帮助你快速、正确地安装 Node.js 和 pnpm，适用于 Windows、Mac 和 Linux 系统。
 
 ## 为什么选择 Node.js 和 pnpm？
@@ -158,16 +156,13 @@ title: Node.js 和 pnpm 环境搭建完全指南
 ### 设置npm国内镜像（适用于所有用户）
 
 ```bash
-# 使用npmmirror镜像源（淘宝源）
 npm config set registry https://registry.npmmirror.com
 ```
 
 ### 设置pnpm国内镜像（推荐）
 
 ```bash
-# 设置镜像源
 pnpm config set registry https://registry.npmmirror.com
-# 或在项目中临时使用
 pnpm --registry=https://registry.npmmirror.com install
 ```
 
@@ -178,17 +173,14 @@ pnpm --registry=https://registry.npmmirror.com install
 编辑 `~/.bashrc` 或 `~/.zshrc`（macOS/Linux）或创建 `%USERPROFILE%\.nvmrc`（Windows），添加：
 
 ```bash
-# nvm镜像配置
 export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
 ```
 
 #### fnm用户
 
 ```bash
-# Windows (PowerShell)
 $env:FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node"
 
-# macOS/Linux
 export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node"
 ```
 
@@ -199,13 +191,10 @@ export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node"
 安装完成后，运行以下命令确认：
 
 ```bash
-# 验证Node.js版本
 node -v  # 应显示20.x.x
 
-# 验证npm版本
 npm -v  # 应显示9.x.x或更高
 
-# 验证pnpm版本
 pnpm -v  # 应显示8.x.x或更高
 ```
 
@@ -258,5 +247,4 @@ pnpm -v  # 应显示8.x.x或更高
 ---
 
 > 📢 **提示**: 现代Web开发中，pnpm已逐渐成为主流包管理工具，建议优先使用。它不仅速度更快，还能大幅节省磁盘空间，并提供更可靠的依赖管理。
-
 

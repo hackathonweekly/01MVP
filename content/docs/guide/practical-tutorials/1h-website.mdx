@@ -2,8 +2,6 @@
 title: 1小时AI速建MVP网站：从0到上线完整流程
 ---
 
-# 1小时AI速建MVP网站：从0到上线完整流程
-
 > 💡 **MVP速成指南**: 本教程将指导你如何在60分钟内利用AI创建一个专业级网站MVP，并部署上线获取首批用户。适合无编程经验的创业者、产品经理或独立开发者。
 
 <div className="flex justify-between my-8">
@@ -49,9 +47,7 @@ title: 1小时AI速建MVP网站：从0到上线完整流程
 在Cursor/Windsurf中打开终端（`Ctrl+J`或点击右上角终端图标）:
 
 ```bash
-# 设置国内镜像（可选，网络不好时使用）
 pnpm config set registry https://registry.npmmirror.com/
-# 安装依赖
 pnpm install
 ```
 
@@ -256,11 +252,9 @@ pnpm run deploy
 **2. 依赖安装失败**
 
 ```bash
-# 尝试清除缓存后重新安装
 pnpm cache clean
 pnpm install
 
-# 如果还有问题，删除node_modules后重装
 rm -rf node_modules
 pnpm install
 ```
