@@ -169,7 +169,7 @@ export function HandbookOverview() {
           className="text-center"
         >
           <Link 
-            href="/docs" 
+            href="/docs/guide" 
             className="text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 font-medium inline-flex items-center border-b-2 border-gray-200 dark:border-gray-700 pb-1 transition-all hover:border-black dark:hover:border-white"
           >
             查看完整手册内容 <span className="ml-1">→</span>

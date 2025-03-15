@@ -1,0 +1,17 @@
+{
+  "title": "MVP指南",
+  "root": true,
+  "pages": [
+    "introduction",
+    "planning",
+    "building",
+    "validation",
+    "launching",
+    "tutorials",
+    "case-studies",
+    "practical-tutorials",
+    "ai-programming-tutorials",
+    "resources",
+    "contribute"
+  ]
+} 

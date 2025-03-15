@@ -1,0 +1,15 @@
+{
+  "name": "入门级教程",
+  "defaultOpen": true,
+  "pages": [
+    "todo-app",
+    "markdown-notes",
+    "calculator",
+    "summary-extension",
+    "focus-timer",
+    "chatbot-ui",
+    "image-generator",
+    "weather-app",
+    "currency-converter"
+  ]
+} 

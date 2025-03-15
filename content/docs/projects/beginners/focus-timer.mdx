@@ -1,0 +1,916 @@
+---
+title: 专注时钟应用
+description: 构建一个帮助你提高工作效率的专注时钟Web应用
+---
+
+# 构建专注时钟应用
+
+在本教程中，我们将创建一个专注时钟（也称为番茄钟）Web应用，它可以帮助你使用时间管理技术来提高工作效率。这个应用将包含计时器功能、工作和休息周期的交替，以及通知提醒。
+
+```
+![专注时钟应用截图](/images/docs/projects/focus-timer-screenshot.png)
+```
+
+## 项目概述
+
+**预计完成时间**: 3小时  
+**难度等级**: ⭐⭐☆☆☆ (入门级+)  
+**前置知识**: 基础HTML、CSS和JavaScript  
+**项目目标**: 创建一个专注时钟Web应用，帮助用户管理工作和休息时间
+
+### 你将学到什么
+
+- JavaScript计时器和时间操作
+- 浏览器通知API的使用
+- 音频元素的控制
+- 使用LocalStorage保存用户设置
+- CSS动画和过渡效果
+- 响应式设计技巧
+
+### 完成项目后的成果
+
+一个功能完整的专注时钟应用，包括：
+- 可调整的工作和休息时间设置
+- 视觉和音频提醒
+- 会话计数和统计
+- 暂停/继续功能
+- 自动在工作和休息模式之间切换
+- 响应式界面，适合所有设备
+
+## 开发环境准备
+
+这个项目需要以下工具：
+
+1. 代码编辑器（推荐Visual Studio Code或Cursor）
+2. 现代浏览器（Chrome、Firefox或Edge）
+3. 几个简单的音频文件（可从免费音效库获取）
+
+## 项目结构
+
+我们将创建以下文件结构：
+
+```
+focus-timer/
+├── index.html      # HTML结构
+├── style.css       # 样式表
+├── script.js       # JavaScript逻辑
+└── assets/
+    ├── bell.mp3    # 计时结束音效
+    ├── tick.mp3    # 滴答声音效（可选）
+    └── favicon.ico # 网站图标
+```
+
+## 步骤1：创建基础HTML结构
+
+首先，创建一个新文件夹`focus-timer`，然后在其中创建`index.html`文件：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>专注时钟</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>专注时钟</h1>
+    
+    <div class="timer-container">
+      <div class="mode-indicator" id="mode-indicator">工作时间</div>
+      
+      <div class="timer" id="timer">
+        <span id="minutes">25</span>:<span id="seconds">00</span>
+      </div>
+      
+      <div class="timer-controls">
+        <button id="start-btn" class="btn primary-btn">
+          <i class="fas fa-play"></i> 开始
+        </button>
+        <button id="pause-btn" class="btn" disabled>
+          <i class="fas fa-pause"></i> 暂停
+        </button>
+        <button id="reset-btn" class="btn">
+          <i class="fas fa-redo-alt"></i> 重置
+        </button>
+      </div>
+    </div>
+    
+    <div class="stats-container">
+      <div class="stat">
+        <span class="stat-label">已完成</span>
+        <span id="sessions-count" class="stat-value">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">目标</span>
+        <span id="sessions-goal" class="stat-value editable" title="点击修改">4</span>
+      </div>
+    </div>
+    
+    <div class="settings-container">
+      <h2>设置</h2>
+      
+      <div class="setting">
+        <label for="work-duration">工作时长 (分钟)</label>
+        <input type="number" id="work-duration" min="1" max="60" value="25">
+      </div>
+      
+      <div class="setting">
+        <label for="short-break-duration">短休息时长 (分钟)</label>
+        <input type="number" id="short-break-duration" min="1" max="30" value="5">
+      </div>
+      
+      <div class="setting">
+        <label for="long-break-duration">长休息时长 (分钟)</label>
+        <input type="number" id="long-break-duration" min="1" max="60" value="15">
+      </div>
+      
+      <div class="setting">
+        <label for="sessions-before-long-break">长休息前工作次数</label>
+        <input type="number" id="sessions-before-long-break" min="1" max="10" value="4">
+      </div>
+      
+      <div class="setting setting-checkbox">
+        <input type="checkbox" id="sound-enabled" checked>
+        <label for="sound-enabled">启用声音提醒</label>
+      </div>
+      
+      <div class="setting setting-checkbox">
+        <input type="checkbox" id="auto-start-breaks" checked>
+        <label for="auto-start-breaks">自动开始休息</label>
+      </div>
+      
+      <div class="setting setting-checkbox">
+        <input type="checkbox" id="auto-start-work">
+        <label for="auto-start-work">自动开始工作</label>
+      </div>
+      
+      <div class="setting setting-checkbox">
+        <input type="checkbox" id="notifications-enabled" checked>
+        <label for="notifications-enabled">启用桌面通知</label>
+      </div>
+      
+      <button id="save-settings" class="btn primary-btn">保存设置</button>
+    </div>
+    
+    <div class="footer">
+      <button id="settings-toggle" class="btn">
+        <i class="fas fa-cog"></i> 设置
+      </button>
+    </div>
+  </div>
+  
+  <!-- 音频元素 -->
+  <audio id="bell-sound" src="assets/bell.mp3" preload="auto"></audio>
+  <audio id="tick-sound" src="assets/tick.mp3" preload="auto"></audio>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+这个HTML文件包含了专注时钟应用的整体结构，包括计时器、控制按钮、统计信息和设置选项。
+
+## 步骤2：添加CSS样式
+
+在同一文件夹中创建`style.css`文件：
+
+```css
+/* 基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #3498db;
+  --primary-dark: #2980b9;
+  --secondary-color: #e74c3c;
+  --text-color: #2c3e50;
+  --background-color: #f5f7fa;
+  --container-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #e0e0e0;
+  --success-color: #2ecc71;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  background-color: var(--container-bg);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  padding: 25px;
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+/* 计时器样式 */
+.timer-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mode-indicator {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.timer {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 20px 0;
+  color: var(--text-color);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+  padding: 15px 20px;
+  display: inline-block;
+}
+
+.timer-running {
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
+  }
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn:hover {
+  background-color: #e0e0e0;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* 统计信息样式 */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.editable {
+  cursor: pointer;
+  border-bottom: 1px dashed var(--primary-color);
+}
+
+/* 设置区域样式 */
+.settings-container {
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.setting {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting label {
+  flex: 1;
+}
+
+.setting input[type="number"] {
+  width: 70px;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.setting-checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.setting-checkbox input {
+  margin-right: 0;
+}
+
+/* 页脚样式 */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 工作和休息模式的颜色 */
+.work-mode .mode-indicator,
+.work-mode .timer {
+  color: var(--primary-color);
+}
+
+.break-mode .mode-indicator,
+.break-mode .timer {
+  color: var(--success-color);
+}
+
+/* 响应式设计调整 */
+@media (max-width: 500px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .timer {
+    font-size: 3rem;
+  }
+  
+  .setting {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .setting input[type="number"] {
+    width: 100%;
+  }
+}
+```
+
+这些CSS样式创建了一个专业、现代化的用户界面，适合专注时钟应用的功能需求。
+
+## 步骤3：实现JavaScript功能
+
+现在创建`script.js`文件，实现应用的核心逻辑：
+
+```javascript
+// DOM元素
+const minutesElement = document.getElementById('minutes');
+const secondsElement = document.getElementById('seconds');
+const modeIndicatorElement = document.getElementById('mode-indicator');
+const timerElement = document.getElementById('timer');
+const startButton = document.getElementById('start-btn');
+const pauseButton = document.getElementById('pause-btn');
+const resetButton = document.getElementById('reset-btn');
+const sessionsCountElement = document.getElementById('sessions-count');
+const sessionsGoalElement = document.getElementById('sessions-goal');
+const settingsToggleButton = document.getElementById('settings-toggle');
+const settingsContainer = document.getElementById('settings-container');
+const saveSettingsButton = document.getElementById('save-settings');
+const bellSound = document.getElementById('bell-sound');
+const tickSound = document.getElementById('tick-sound');
+
+// 设置输入元素
+const workDurationInput = document.getElementById('work-duration');
+const shortBreakDurationInput = document.getElementById('short-break-duration');
+const longBreakDurationInput = document.getElementById('long-break-duration');
+const sessionsBeforeLongBreakInput = document.getElementById('sessions-before-long-break');
+const soundEnabledInput = document.getElementById('sound-enabled');
+const autoStartBreaksInput = document.getElementById('auto-start-breaks');
+const autoStartWorkInput = document.getElementById('auto-start-work');
+const notificationsEnabledInput = document.getElementById('notifications-enabled');
+
+// 应用状态
+let timerState = {
+  minutes: 25,
+  seconds: 0,
+  mode: 'work', // 'work', 'shortBreak', 'longBreak'
+  isRunning: false,
+  timerId: null,
+  sessionsCompleted: 0
+};
+
+// 用户设置（默认值）
+let userSettings = {
+  workDuration: 25,
+  shortBreakDuration: 5,
+  longBreakDuration: 15,
+  sessionsBeforeLongBreak: 4,
+  soundEnabled: true,
+  autoStartBreaks: true,
+  autoStartWork: false,
+  notificationsEnabled: true
+};
+
+// 从本地存储加载设置
+function loadSettings() {
+  const savedSettings = localStorage.getItem('focusTimerSettings');
+  if (savedSettings) {
+    userSettings = JSON.parse(savedSettings);
+    
+    // 更新设置输入框的值
+    workDurationInput.value = userSettings.workDuration;
+    shortBreakDurationInput.value = userSettings.shortBreakDuration;
+    longBreakDurationInput.value = userSettings.longBreakDuration;
+    sessionsBeforeLongBreakInput.value = userSettings.sessionsBeforeLongBreak;
+    soundEnabledInput.checked = userSettings.soundEnabled;
+    autoStartBreaksInput.checked = userSettings.autoStartBreaks;
+    autoStartWorkInput.checked = userSettings.autoStartWork;
+    notificationsEnabledInput.checked = userSettings.notificationsEnabled;
+  }
+  
+  // 加载完成的会话数
+  const savedSessionsCount = localStorage.getItem('focusTimerSessionsCompleted');
+  if (savedSessionsCount !== null) {
+    timerState.sessionsCompleted = parseInt(savedSessionsCount);
+    sessionsCountElement.textContent = timerState.sessionsCompleted;
+  }
+  
+  // 加载目标会话数
+  const savedSessionsGoal = localStorage.getItem('focusTimerSessionsGoal');
+  if (savedSessionsGoal !== null) {
+    sessionsGoalElement.textContent = savedSessionsGoal;
+  }
+}
+
+// 保存设置到本地存储
+function saveSettings() {
+  userSettings = {
+    workDuration: parseInt(workDurationInput.value),
+    shortBreakDuration: parseInt(shortBreakDurationInput.value),
+    longBreakDuration: parseInt(longBreakDurationInput.value),
+    sessionsBeforeLongBreak: parseInt(sessionsBeforeLongBreakInput.value),
+    soundEnabled: soundEnabledInput.checked,
+    autoStartBreaks: autoStartBreaksInput.checked,
+    autoStartWork: autoStartWorkInput.checked,
+    notificationsEnabled: notificationsEnabledInput.checked
+  };
+  
+  localStorage.setItem('focusTimerSettings', JSON.stringify(userSettings));
+  resetTimer();
+  
+  // 隐藏设置面板
+  settingsContainer.style.display = 'none';
+  
+  // 提供反馈
+  alert('设置已保存！');
+}
+
+// 计时器逻辑
+function startTimer() {
+  if (timerState.isRunning) return;
+  
+  timerState.isRunning = true;
+  startButton.disabled = true;
+  pauseButton.disabled = false;
+  timerElement.classList.add('timer-running');
+  
+  timerState.timerId = setInterval(() => {
+    updateTimer();
+  }, 1000);
+}
+
+function pauseTimer() {
+  if (!timerState.isRunning) return;
+  
+  timerState.isRunning = false;
+  startButton.disabled = false;
+  pauseButton.disabled = true;
+  timerElement.classList.remove('timer-running');
+  
+  clearInterval(timerState.timerId);
+}
+
+function resetTimer() {
+  pauseTimer();
+  
+  // 根据当前模式设置时间
+  if (timerState.mode === 'work') {
+    timerState.minutes = userSettings.workDuration;
+  } else if (timerState.mode === 'shortBreak') {
+    timerState.minutes = userSettings.shortBreakDuration;
+  } else {
+    timerState.minutes = userSettings.longBreakDuration;
+  }
+  
+  timerState.seconds = 0;
+  updateTimerDisplay();
+}
+
+function updateTimer() {
+  // 播放滴答声
+  if (userSettings.soundEnabled) {
+    tickSound.play().catch(err => console.error('无法播放滴答声:', err));
+  }
+  
+  // 更新计时器
+  if (timerState.seconds === 0) {
+    if (timerState.minutes === 0) {
+      // 计时结束
+      timerComplete();
+      return;
+    }
+    timerState.minutes--;
+    timerState.seconds = 59;
+  } else {
+    timerState.seconds--;
+  }
+  
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  minutesElement.textContent = String(timerState.minutes).padStart(2, '0');
+  secondsElement.textContent = String(timerState.seconds).padStart(2, '0');
+}
+
+function timerComplete() {
+  pauseTimer();
+  
+  // 播放提示音
+  if (userSettings.soundEnabled) {
+    bellSound.play().catch(err => console.error('无法播放提示音:', err));
+  }
+  
+  // 发送通知
+  if (userSettings.notificationsEnabled) {
+    showNotification();
+  }
+  
+  // 更新会话计数（仅在工作模式结束时）
+  if (timerState.mode === 'work') {
+    timerState.sessionsCompleted++;
+    sessionsCountElement.textContent = timerState.sessionsCompleted;
+    localStorage.setItem('focusTimerSessionsCompleted', timerState.sessionsCompleted);
+    
+    // 决定下一个休息是短休息还是长休息
+    if (timerState.sessionsCompleted % userSettings.sessionsBeforeLongBreak === 0) {
+      switchMode('longBreak');
+    } else {
+      switchMode('shortBreak');
+    }
+    
+    // 如果设置了自动开始休息
+    if (userSettings.autoStartBreaks) {
+      startTimer();
+    }
+  } else {
+    // 从休息模式切换回工作模式
+    switchMode('work');
+    
+    // 如果设置了自动开始工作
+    if (userSettings.autoStartWork) {
+      startTimer();
+    }
+  }
+}
+
+function switchMode(mode) {
+  timerState.mode = mode;
+  
+  // 更新UI
+  document.body.classList.remove('work-mode', 'break-mode');
+  
+  if (mode === 'work') {
+    modeIndicatorElement.textContent = '工作时间';
+    document.body.classList.add('work-mode');
+    timerState.minutes = userSettings.workDuration;
+  } else if (mode === 'shortBreak') {
+    modeIndicatorElement.textContent = '短休息';
+    document.body.classList.add('break-mode');
+    timerState.minutes = userSettings.shortBreakDuration;
+  } else {
+    modeIndicatorElement.textContent = '长休息';
+    document.body.classList.add('break-mode');
+    timerState.minutes = userSettings.longBreakDuration;
+  }
+  
+  timerState.seconds = 0;
+  updateTimerDisplay();
+}
+
+// 通知功能
+function showNotification() {
+  // 检查浏览器是否支持通知
+  if (!("Notification" in window)) {
+    console.log("此浏览器不支持通知");
+    return;
+  }
+  
+  // 检查通知权限
+  if (Notification.permission === "granted") {
+    createNotification();
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        createNotification();
+      }
+    });
+  }
+}
+
+function createNotification() {
+  const title = timerState.mode === 'work' ? '工作时间结束!' : '休息时间结束!';
+  const options = {
+    body: timerState.mode === 'work' ? '休息一下吧!' : '回到工作状态!',
+    icon: 'assets/favicon.ico'
+  };
+  
+  const notification = new Notification(title, options);
+  
+  // 点击通知时聚焦应用窗口
+  notification.onclick = function() {
+    window.focus();
+    notification.close();
+  };
+  
+  // 5秒后自动关闭通知
+  setTimeout(() => notification.close(), 5000);
+}
+
+// 初始化应用
+function initApp() {
+  // 加载设置
+  loadSettings();
+  
+  // 初始化计时器显示
+  resetTimer();
+  
+  // 添加事件监听器
+  startButton.addEventListener('click', startTimer);
+  pauseButton.addEventListener('click', pauseTimer);
+  resetButton.addEventListener('click', resetTimer);
+  
+  // 设置面板切换
+  settingsToggleButton.addEventListener('click', () => {
+    settingsContainer.style.display = settingsContainer.style.display === 'none' || !settingsContainer.style.display ? 'block' : 'none';
+  });
+  
+  // 保存设置
+  saveSettingsButton.addEventListener('click', saveSettings);
+  
+  // 会话目标点击编辑
+  sessionsGoalElement.addEventListener('click', function() {
+    const newGoal = prompt('设置新的目标会话数:', this.textContent);
+    if (newGoal !== null && !isNaN(newGoal) && parseInt(newGoal) > 0) {
+      this.textContent = parseInt(newGoal);
+      localStorage.setItem('focusTimerSessionsGoal', newGoal);
+    }
+  });
+  
+  // 请求通知权限
+  if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+    Notification.requestPermission();
+  }
+  
+  // 设置初始模式
+  document.body.classList.add('work-mode');
+}
+
+// 页面加载时初始化应用
+document.addEventListener('DOMContentLoaded', initApp);
+```
+
+这段JavaScript代码实现了专注时钟的所有核心功能：
+- 计时器逻辑和显示
+- 在工作和休息模式之间切换
+- 保存和加载用户设置
+- 音频提醒
+- 桌面通知
+- 会话计数统计
+
+## 步骤4：准备音频文件
+
+在项目中创建`assets`目录，并添加以下文件：
+
+1. `bell.mp3` - 计时结束时播放的铃声
+2. `tick.mp3` - (可选)计时进行中的滴答声
+3. `favicon.ico` - 网站图标
+
+你可以从以下资源获取免费的音效文件：
+- [Freesound](https://freesound.org/)
+- [Pixabay音效库](https://pixabay.com/sound-effects/)
+- [Zapsplat](https://www.zapsplat.com/)
+
+## 步骤5：测试应用
+
+现在你可以通过以下方式在浏览器中打开你的专注时钟应用：
+
+1. 在文件浏览器中，双击`index.html`文件
+2. 或者使用VS Code的Live Server插件启动应用
+
+测试以下功能：
+
+- 开始、暂停和重置计时器
+- 完成一个工作周期，查看是否自动切换到休息模式
+- 修改设置并确认它们生效
+- 测试声音提醒和桌面通知功能
+- 检查会话计数是否正确更新
+- 测试移动设备上的响应式设计
+
+## 步骤6：增强应用功能
+
+### 添加深色模式
+
+要添加深色模式支持，首先在HTML中添加切换按钮：
+
+```html
+<div class="theme-toggle">
+  <input type="checkbox" id="dark-mode-toggle">
+  <label for="dark-mode-toggle">深色模式</label>
+</div>
+```
+
+然后在CSS中添加深色模式样式：
+
+```css
+/* 在:root下添加深色模式变量 */
+:root.dark-theme {
+  --primary-color: #3498db;
+  --primary-dark: #2980b9;
+  --secondary-color: #e74c3c;
+  --text-color: #ecf0f1;
+  --background-color: #2c3e50;
+  --container-bg: #34495e;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --border-color: #4a6380;
+  --success-color: #2ecc71;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+```
+
+最后在JavaScript中添加切换逻辑：
+
+```javascript
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+// 检查是否已有保存的模式偏好
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark-theme');
+  darkModeToggle.checked = true;
+}
+
+// 切换深色/浅色模式
+darkModeToggle.addEventListener('change', function() {
+  if (this.checked) {
+    document.documentElement.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark-theme');
+    localStorage.setItem('theme', 'light');
+  }
+});
+```
+
+### 添加任务记录功能
+
+你可以添加一个简单的任务记录功能，让用户能够记录每个工作周期做了什么：
+
+1. 在HTML中添加任务输入区域
+2. 使用localStorage保存任务历史
+3. 为每个已完成的工作周期添加时间戳和任务描述
+
+## 步骤7：部署应用
+
+你可以通过以下方式部署你的专注时钟应用：
+
+### 选项1：GitHub Pages（免费）
+
+1. 创建一个GitHub账号（如果还没有）
+2. 创建一个新的仓库
+3. 上传你的项目文件
+4. 在仓库设置中启用GitHub Pages
+
+### 选项2：Netlify（免费）
+
+1. 创建一个Netlify账号
+2. 选择"从文件夹上传新站点"
+3. 拖放你的项目文件夹
+4. 等待部署完成
+
+### 选项3：Vercel（免费）
+
+1. 创建一个Vercel账号
+2. 创建新项目并选择"从文件夹导入"
+3. 上传你的项目文件
+4. 等待部署完成
+
+## 项目拓展思路
+
+以下是一些可以添加到项目中的拓展功能：
+
+1. **任务列表**：添加待办事项列表与计时器集成
+2. **统计报表**：显示每日/每周的专注时间统计和图表
+3. **自定义音效**：允许用户上传自己的提示音
+4. **多主题**：提供多种颜色主题供选择
+5. **同步功能**：使用Firebase或其他服务实现数据同步与备份
+6. **社交分享**：分享你的专注成就到社交媒体
+7. **成就系统**：添加徽章和成就以增加动力
+
+## 总结
+
+恭喜！你已经成功构建了一个功能完整的专注时钟应用。通过这个项目，你学习了：
+
+- 如何使用JavaScript创建和管理计时器
+- 如何实现Web通知和音频提醒
+- 如何使用localStorage持久保存用户数据
+- 如何创建响应式设计适应不同设备
+- 如何构建一个专注于用户体验的生产力工具
+
+这个项目是一个非常实用的工具，你可以在日常工作和学习中使用它来提高效率。随着你编程技能的提升，你可以继续添加更多功能，使它变得更加强大和个性化。
+
+## 常见问题解答
+
+**Q: 通知功能在某些浏览器中不工作怎么办？**  
+A: 不同浏览器对通知API的支持可能有所不同。确保你已经请求了通知权限，并检查浏览器的兼容性。
+
+**Q: 如何让计时器在后台运行时也能正常工作？**  
+A: 标准的setTimeout/setInterval在标签页不活跃时可能会减慢或暂停。可以考虑使用Web Workers或者计算时间差来保证计时器的准确性。
+
+**Q: 为什么音频有时不播放？**  
+A: 一些浏览器限制自动播放音频。确保在用户交互后（如点击按钮）再播放音频，或者提供静音选项。
+
+**Q: 如何支持更多语言？**  
+A: 考虑添加一个语言选择器，并为每种支持的语言创建翻译文件。使用JavaScript根据用户选择切换界面文本。
+
+**下一步学习**：尝试构建一个[聊天机器人UI界面](/docs/projects/beginners/chatbot-ui)，学习如何创建交互式对话界面！ 

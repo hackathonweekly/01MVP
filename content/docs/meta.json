@@ -1,14 +1,3 @@
 {
-  "pages": [
-    "introduction",
-    "planning",
-    "building",
-    "validation",
-    "launching",
-    "case-studies",
-    "practical-tutorials",
-    "ai-programming-tutorials",
-    "resources",
-    "contribute"
-  ]
-} 
+  "pages": ["guide", "projects", "..."]
+}

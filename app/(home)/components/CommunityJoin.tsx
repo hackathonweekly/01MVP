@@ -86,7 +86,7 @@ export function CommunityJoin() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Button asChild size="lg" className="bg-black hover:bg-gray-800 text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 shadow-lg">
-              <Link href="/docs" className="font-semibold px-8 py-6 text-lg">
+              <Link href="/docs/guide" className="font-semibold px-8 py-6 text-lg">
                 开启创造之旅 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>

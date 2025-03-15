@@ -53,7 +53,7 @@ export function HeroSection() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-gradient-to-r from-indigo-600 to-blue-700 hover:from-indigo-700 hover:to-blue-800 text-white dark:from-indigo-500 dark:to-blue-600 dark:hover:from-indigo-600 dark:hover:to-blue-700 shadow-lg">
-              <Link href="/docs" className="font-semibold px-8 py-6 text-lg">
+              <Link href="/docs/guide" className="font-semibold px-8 py-6 text-lg">
                 开始创造之旅 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
