@@ -1,0 +1,356 @@
+---
+title: MCP服务器生态系统
+description: 当前可用的MCP服务器、安装配置和使用方法指南
+---
+
+本文档详细介绍当前市面上可用的MCP服务器，并提供各类服务器的安装配置和使用方法。
+
+## 1. MCP服务器市场概览
+
+MCP服务器生态系统正在迅速发展，目前已有超过1000个MCP服务器可用。这些服务器主要分布在以下几个平台：
+
+1. **[PulseMCP](https://www.pulsemcp.com/servers)**：提供超过1150个MCP服务器，是目前最大的MCP服务器集合。
+2. **[Cline MCP Marketplace](https://cline.bot/mcp-marketplace)**：Cline提供的MCP服务器市场，支持一键安装。
+3. **[mcp.so](https://mcp.so/)**：专注于高质量MCP服务器的集合网站。
+4. **[Cursor Directory](https://cursor.directory/)**：与Cursor IDE相关的MCP服务器集合。
+5. **[Smithery.ai](https://smithery.ai/)**：提供MCP服务器构建和托管服务。
+6. **[GitHub modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)**：官方维护的MCP服务器仓库。
+
+## 2. 官方MCP服务器
+
+Anthropic官方提供了一系列核心MCP服务器，这些服务器已经过充分测试，并提供稳定的功能。
+
+### 2.1 核心基础服务器
+
+| 服务器名称 | 功能描述 | 使用场景 | 月使用量 |
+|----------|---------|---------|---------|
+| **Filesystem** | 读取、写入和操作本地文件 | 文件管理和内容分析 | 134k+ |
+| **Fetch** | 检索和转换网页内容为markdown | 网页抓取和信息获取 | 113k+ |
+| **SQLite** | 查询和分析SQLite数据库 | 本地数据库操作 | 67k+ |
+| **Puppeteer** | 编程控制网站导航和屏幕截图 | 网页自动化和测试 | 65.5k+ |
+| **Git** | 与本地Git仓库交互 | 代码版本控制 | 52.5k+ |
+| **Brave Search** | 通过Brave API检索网页和新闻 | 互联网检索 | 52.5k+ |
+| **GitHub** | 管理GitHub仓库、问题和搜索代码 | 开发协作 | 49.4k+ |
+| **PostgreSQL** | 访问和分析PostgreSQL数据库 | 数据库查询和管理 | 15.9k+ |
+| **Slack** | 发送消息和管理Slack频道 | 团队沟通 | 11k+ |
+| **Sentry** | 检索和分析应用程序错误报告 | 错误排查 | 10.7k+ |
+
+### 2.2 高级官方服务器
+
+| 服务器名称 | 功能描述 | 特殊功能 |
+|----------|---------|---------|
+| **Knowledge Graph Memory** | 构建和查询持久性语义网络 | 数据关系建模和语义查询 |
+| **Sequential Thinking** | 实现结构化的顺序思考过程 | 复杂问题分解和推理路径探索 |
+| **Time** | 提供时间和时区转换工具 | 本地化时间计算 |
+| **Demo (Everything)** | 展示协议特性和工具兼容性 | 测试和学习MCP功能 |
+
+## 3. 热门社区MCP服务器
+
+社区开发者也贡献了许多高质量的MCP服务器，满足各种专业需求。
+
+### 3.1 数据库服务器
+
+| 服务器名称 | 功能描述 | 安装命令/方式 |
+|----------|---------|-------------|
+| **MongoDB MCP** | 与MongoDB数据库交互 | `npx -y @quantgeekdev/mongo-mcp` |
+| **Pinecone Vector DB** | 利用Pinecone进行语义搜索 | `npx -y @sirmews/mcp-pinecone` |
+| **DuckDB** | DuckDB数据库集成 | `python -m mcp-server-duckdb` |
+| **Neo4j** | 图数据库操作 | `npx -y neo4j-mcp` |
+| **Snowflake** | 云数据仓库访问 | `python -m mcp-snowflake-server` |
+| **Supabase MCP Server** | Supabase平台集成 | `npx -y @alexanderzuev/supabase-mcp-server` |
+
+### 3.2 知识管理和文档服务器
+
+| 服务器名称 | 开发者 | 功能描述 | 月使用量 |
+|----------|-------|---------|---------|
+| **Obsidian** | Calclavia | 搜索和分析Obsidian笔记 | 33.1k+ |
+| **ArXiv** | John Blazick | 搜索和分析学术论文 | 12.9k+ |
+| **Notion** | suekou | Notion API集成 | 8k+ |
+| **Atlassian Cloud** | sooperset | 访问Confluence和Jira | 13.8k+ |
+| **Apple Notes MCP** | sirmews | 访问Apple Notes | 5k+ |
+| **Google Drive** | Anthropic | 访问Google云端硬盘文件 | 7k+ |
+
+### 3.3 AI/LLM增强服务器
+
+| 服务器名称 | 功能描述 | 安装方式 |
+|----------|---------|---------|
+| **OpenAI MCP** | 调用OpenAI模型 | `python -m mzxrai/mcp-openai` |
+| **Perplexity** | 专家编程辅助 | 通过Daniel Riccio的服务器访问 |
+| **WolframAlpha** | 科学计算和知识查询 | `npx -y @secretiveshell/wolframalpha-mcp` |
+| **LangChain Integration** | 在LangChain中使用MCP工具 | `npx -y @rectalogic/langchain-mcp` |
+| **Replicate** | 使用Replicate机器学习模型 | `npx -y @gerred/mcp-replicate` |
+
+### 3.4 实用工具服务器
+
+| 服务器名称 | 功能描述 | 安装方式 |
+|----------|---------|---------|
+| **Sleep** | 在操作间引入延迟 | `npx -y sleep-mcp` |
+| **MCP Installer** | 安装其他MCP服务器 | `npx -y @anaisbetts/mcp-installer` |
+| **Playwright** | Web浏览器自动化 | `npx -y @execute-automation/playwright-mcp` |
+| **Shell Command** | 执行白名单Shell命令 | `npx -y @tumf/shell-command-mcp` |
+| **Text Editor** | 高效文本操作 | `npx -y @tumf/text-editor-mcp` |
+| **File Format Converter** | 文档格式转换 | `python -m file-format-converter-mcp` |
+
+## 4. 专业领域MCP服务器
+
+### 4.1 开发和编程
+
+| 服务器名称 | 功能描述 | 安装/使用方式 |
+|----------|---------|-------------|
+| **AiDD (Dev Workflows)** | 集成文件系统、代码分析和Git | `npx -y @skydeck-ai/aidd-mcp` |
+| **LLM Code Context** | 智能代码上下文共享 | `npx -y @cyberchitta/llm-code-context` |
+| **GoDoc MCP** | Go语言文档访问 | `npx -y @mrjoshuak/godoc-mcp` |
+| **Python REPL** | 持久Python执行环境 | `python -m python-repl-mcp` |
+| **Ollama** | 本地大语言模型推理 | `npx -y @matt-green/ollama-mcp` |
+
+### 4.2 API和云服务
+
+| 服务器名称 | 功能描述 | 安装/配置要点 |
+|----------|---------|-------------|
+| **Cloudflare** | 管理Cloudflare服务 | 需要Cloudflare API令牌 |
+| **Stripe Agent Toolkit** | 支付处理和客户管理 | 需要Stripe API密钥 |
+| **Firebase MCP** | Firebase服务集成 | 需要Firebase配置 |
+| **YouTube MCP** | 获取YouTube字幕 | 不需要API密钥即可使用 |
+| **Video Editor** | AI驱动的视频编辑 | 集成Video Jungle API |
+| **Tinybird** | 大数据集分析 | 需要Tinybird API令牌 |
+
+### 4.3 专业工具
+
+| 服务器名称 | 开发者 | 功能描述 | 使用要点 |
+|----------|-------|---------|---------|
+| **KOSPI/KOSDAQ Stock Data** | Sangrok Mun | 韩国股市数据访问 | 提供实时市场数据 |
+| **Docling** | Deep Shah | 文档格式转换 | 基于IBM Docling软件 |
+| **Miro** | evalstate | 访问Miro白板 | 需要OAuth密钥 |
+| **Ancestry MCP** | reeeeemo | 读取.ged文件和基因数据 | 家谱和基因分析 |
+| **Coinmarket MCP** | anjor | 加密货币市场数据 | 需要CoinMarketCap API密钥 |
+
+## 5. 安装和使用MCP服务器的方法
+
+### 5.1 使用MCP安装器
+
+MCP安装器是安装其他MCP服务器的最简单方法，特别适合初学者。
+
+#### 5.1.1 安装MCP安装器
+
+首先，在Claude桌面应用或其他MCP客户端中配置MCP安装器：
+
+```json
+{
+  "mcpServers": {
+    "mcp-installer": {
+      "command": "npx",
+      "args": ["-y", "@anaisbetts/mcp-installer"]
+    }
+  }
+}
+```
+
+#### 5.1.2 使用MCP安装器安装其他服务器
+
+一旦安装了MCP安装器，可以通过以下方式安装其他服务器：
+
+1. **直接请求Claude**：
+   ```
+   请帮我安装Brave搜索MCP服务器
+   ```
+
+2. **指定包名**：
+   ```
+   请安装名为@modelcontextprotocol/server-filesystem的MCP服务器
+   ```
+
+3. **从本地路径安装**：
+   ```
+   请从/Users/username/projects/my-mcp-server安装MCP服务器
+   ```
+
+4. **设置环境变量**：
+   ```
+   请安装GitHub MCP服务器，并设置GITHUB_PERSONAL_ACCESS_TOKEN环境变量为'your_token'
+   ```
+
+### 5.2 从NPM安装
+
+许多MCP服务器可以直接从NPM注册表安装：
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "your_github_token"
+      }
+    }
+  }
+}
+```
+
+### 5.3 从Python包安装
+
+Python实现的MCP服务器可以通过pip或uv安装：
+
+```json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "python",
+      "args": ["-m", "mcp_server_weather"]
+    }
+  }
+}
+```
+
+### 5.4 从GitHub仓库安装
+
+可以直接从GitHub克隆并运行MCP服务器：
+
+1. **克隆仓库**：
+   ```bash
+   git clone https://github.com/username/mcp-server-example
+   cd mcp-server-example
+   npm install
+   ```
+
+2. **配置Claude**：
+   ```json
+   {
+     "mcpServers": {
+       "example-server": {
+         "command": "npm",
+         "args": ["start"],
+         "cwd": "/path/to/mcp-server-example"
+       }
+     }
+   }
+   ```
+
+## 6. 使用主要MCP服务器的示例
+
+### 6.1 文件系统服务器
+
+**配置**：
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "resources": {
+        "paths": ["/Users/username/Documents", "/Users/username/Projects"]
+      }
+    }
+  }
+}
+```
+
+**使用示例**：
+```
+请列出我Documents目录中的所有PDF文件并按日期排序
+请读取Projects/report.md文件并总结其内容
+请在Documents目录下创建一个名为summary.txt的文件，内容为你刚才的总结
+```
+
+### 6.2 Git服务器
+
+**配置**：
+```json
+{
+  "mcpServers": {
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"]
+    }
+  }
+}
+```
+
+**使用示例**：
+```
+请帮我查看当前代码仓库的状态
+请展示最近的10个提交记录
+请创建一个新分支名为'feature/new-api'并切换到该分支
+```
+
+### 6.3 数据库服务器
+
+**SQLite配置**：
+```json
+{
+  "mcpServers": {
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite"]
+    }
+  }
+}
+```
+
+**使用示例**：
+```
+请连接到数据库文件/Users/username/Projects/app.db
+请列出该数据库中的所有表
+请查询users表中的前10条记录
+```
+
+## 7. 开发自定义MCP服务器
+
+如果现有的MCP服务器不能满足您的需求，您可以开发自己的自定义MCP服务器。
+
+### 7.1 基础框架选择
+
+1. **TypeScript/JavaScript**：
+   - 使用`@modelcontextprotocol/mcp-server-js`库
+   - 适合Web和Node.js开发者
+
+2. **Python**：
+   - 使用`mcp-server-python`库
+   - 适合数据科学和机器学习应用
+
+3. **Kotlin/Java**：
+   - 使用`mcp-server-jvm`库
+   - 适合企业级应用和Android开发
+
+### 7.2 服务器开发步骤
+
+1. **初始化项目**：
+   ```bash
+   # TypeScript示例
+   npx create-mcp-server my-custom-server
+   cd my-custom-server
+   npm install
+   ```
+
+2. **定义服务器功能**：
+   - 实现Resources、Tools、Prompts等功能
+   - 定义API和访问控制
+
+3. **测试与调试**：
+   - 使用MCP测试工具验证功能
+   - 本地部署进行真实环境测试
+
+4. **发布服务器**：
+   - 发布到NPM或PyPI
+   - 提交到MCP服务器目录
+
+### 7.3 最佳实践
+
+- **安全优先**：限制功能访问范围
+- **明确配置**：提供清晰的配置选项
+- **良好文档**：详细说明安装和使用方法
+- **错误处理**：提供有用的错误信息
+- **版本控制**：遵循语义化版本规范
+
+## 8. 总结和资源
+
+MCP服务器生态系统正在快速扩展，为AI模型提供了前所未有的能力。通过合理选择和配置MCP服务器，您可以显著增强Claude等AI助手的功能，实现更复杂的自动化和集成。
+
+### 有用的学习资源
+
+- [MCP开发者文档](https://spec.modelcontextprotocol.io/)
+- [Claude文档中心](https://docs.anthropic.com/claude/docs)
+- [MCP讨论社区](https://discord.gg/modelcontextprotocol)
+- [MCP GitHub组织](https://github.com/modelcontextprotocol)
+
+随着更多开发者加入MCP生态系统，我们可以期待看到更多创新的服务器和应用场景出现。无论您是用户还是开发者，现在都是加入MCP社区的绝佳时机。 

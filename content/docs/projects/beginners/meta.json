@@ -2,14 +2,10 @@
   "name": "入门级教程",
   "defaultOpen": true,
   "pages": [
-    "todo-app",
-    "markdown-notes",
-    "calculator",
-    "summary-extension",
-    "focus-timer",
-    "chatbot-ui",
-    "image-generator",
-    "weather-app",
-    "currency-converter"
+    "15min-nextjs-fullstack-website-with-deepseek-api",
+    "1h-website",
+    "AI-coding-GDC",
+    "ai-meditation-website-generation",
+    "knowledge-payment-website-example"
   ]
-} 
+}
