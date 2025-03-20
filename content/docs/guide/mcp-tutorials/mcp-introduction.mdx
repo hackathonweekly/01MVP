@@ -16,6 +16,10 @@ Model Context Protocol (MCP，模型上下文协议) 是由Anthropic公司开发
 
 MCP创建的主要目的是解决当前AI模型因数据孤岛限制而无法充分发挥潜力的难题，为AI与外部系统建立安全双向链接提供了统一标准。
 
+> 以前大家用 lightning / usb / micro usb 各种各样的接口，规范各不相同，AI 用起来非常麻烦
+> 它解决的最大痛点就是 Agent 开发中调用外部工具门槛过高的问题
+>> 本质上就是统一了规范的 function calling
+
 ## 2. MCP的核心价值
 
 ### 2.1 统一标准
@@ -54,6 +58,9 @@ MCP支持实时的双向通信，AI模型不仅能查询数据，还能主动触
 MCP采用客户端-服务器架构，包含以下主要组件：
 
 *[MCP架构示意图：一个客户端-服务器架构图，展示了MCP主机、MCP客户端、MCP服务器以及资源之间的关系和数据流]*
+
+![MCP架构示意图](public/images/mcp-core.png)
+
 
 ### 4.1 MCP主机 (MCP Host)
 

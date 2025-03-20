@@ -2,6 +2,7 @@
     "pages": [
         "mcp-introduction",
         "mcp-usage-guide",
-        "mcp-server-ecosystem"
+        "mcp-server-ecosystem",
+        "mcp-combined-guide"
     ]
 }
