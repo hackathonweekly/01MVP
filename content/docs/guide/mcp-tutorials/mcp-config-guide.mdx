@@ -1,0 +1,415 @@
+---
+title: MCP服务器配置指南
+description: 如何为Cursor、Claude和其他平台配置常用的MCP服务器
+---
+
+# MCP服务器配置指南
+
+本教程将详细介绍如何配置最常用的MCP服务器，包括文件系统、GitHub、Web搜索等多种服务器的配置方法和注意事项。
+
+## MCP配置文件位置
+
+不同平台的MCP配置文件位置不同：
+
+- **Cursor**: `~/.cursor/mcp.json` (macOS/Linux) 或 `C:\Users\用户名\.cursor\mcp.json` (Windows)
+- **Claude桌面应用**: `~/.claude/mcp.json` (macOS) 或 `%APPDATA%\claude\mcp.json` (Windows)
+- **VSCode + Cline**: 通过VSCode设置界面配置
+
+## 配置服务器基本语法
+
+MCP配置文件使用JSON格式，基本结构如下：
+
+```json
+{
+  "mcpServers": {
+    "服务器名称": {
+      "command": "命令",
+      "args": ["参数1", "参数2", ...],
+      "env": {
+        "环境变量1": "值1"
+      },
+      "resources": {
+        "资源配置": "值"
+      }
+    }
+  }
+}
+```
+
+## Windows系统的特殊配置
+
+Windows系统下，所有服务器的配置都需要使用cmd作为命令，并使用`/c`参数来执行npm命令：
+
+```json
+{
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "服务器包名"
+  ]
+}
+```
+
+## 常用MCP服务器配置示例
+
+### 1. 文件系统服务器
+
+文件系统服务器允许AI助手读取和修改本地文件。
+
+**Windows配置**:
+
+```json
+"filesystem": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-filesystem"
+  ],
+  "resources": {
+    "paths": ["${workspaceFolder}"]
+  }
+}
+```
+
+**安装命令**:
+```bash
+npm install -g @modelcontextprotocol/server-filesystem
+```
+
+### 2. GitHub服务器
+
+GitHub服务器允许AI助手直接与GitHub仓库交互，包括读取文件、创建PR等。
+
+**Windows配置**:
+
+```json
+"github": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-github"
+  ],
+  "env": {
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "你的GitHub个人访问令牌"
+  }
+}
+```
+
+**获取GitHub令牌**:
+1. 访问GitHub设置 -> Developer settings -> Personal access tokens
+2. 创建一个包含`repo`权限的令牌
+
+### 3. Web搜索服务器(Brave)
+
+Brave搜索服务器允许AI助手搜索网络获取最新信息。
+
+**Windows配置**:
+
+```json
+"brave-search": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-brave-search"
+  ],
+  "env": {
+    "BRAVE_API_KEY": "你的Brave API密钥"
+  }
+}
+```
+
+**获取Brave API密钥**:
+1. 访问[Brave API](https://brave.com/search/api/)
+2. 注册并选择适合的套餐
+3. 生成API密钥
+
+### 4. Git服务器
+
+Git服务器允许AI助手执行本地Git操作，如查看历史、创建分支等。
+
+**Windows配置**:
+
+```json
+"git": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-git"
+  ]
+}
+```
+
+### 5. HTTP请求服务器(Fetch)
+
+Fetch服务器允许AI助手发送HTTP请求与API交互。
+
+**Windows配置**:
+
+```json
+"fetch": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-fetch"
+  ]
+}
+```
+
+### 6. 终端服务器
+
+终端服务器允许AI助手执行系统命令（需谨慎使用）。
+
+**Windows配置**:
+
+```json
+"terminal": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-terminal"
+  ]
+}
+```
+
+### 7. SQLite服务器
+
+SQLite服务器允许AI助手查询和分析本地数据库。
+
+**Windows配置**:
+
+```json
+"sqlite": {
+  "command": "cmd",
+  "args": [
+    "/c",
+    "npx",
+    "-y",
+    "@modelcontextprotocol/server-sqlite"
+  ],
+  "resources": {
+    "paths": ["${workspaceFolder}/data"]
+  }
+}
+```
+
+## 配置流程示例
+
+以下是在Windows系统的Cursor IDE中配置MCP服务器的完整流程：
+
+### 步骤1：打开MCP配置文件
+
+1. 在Windows资源管理器中导航到 `C:\Users\你的用户名\.cursor\`
+2. 如果不存在`mcp.json`文件，创建一个新文件
+3. 使用文本编辑器(如VS Code或记事本)打开文件
+
+### 步骤2：配置基本结构
+
+如果是新文件，添加基本JSON结构：
+
+```json
+{
+  "mcpServers": {
+  }
+}
+```
+
+### 步骤3：添加文件系统服务器
+
+在`mcpServers`对象中添加文件系统服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem"
+      ],
+      "resources": {
+        "paths": ["${workspaceFolder}"]
+      }
+    }
+  }
+}
+```
+
+### 步骤4：添加其他服务器
+
+根据需要添加其他服务器，例如GitHub服务器：
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem"
+      ],
+      "resources": {
+        "paths": ["${workspaceFolder}"]
+      }
+    },
+    "github": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "你的GitHub令牌"
+      }
+    }
+  }
+}
+```
+
+### 步骤5：安装服务器包
+
+打开命令提示符或PowerShell，安装所需的服务器包：
+
+```bash
+npm install -g @modelcontextprotocol/server-filesystem
+npm install -g @modelcontextprotocol/server-github
+# 根据需要安装其他服务器
+```
+
+### 步骤6：重启Cursor
+
+保存配置文件并完全退出Cursor，然后重新启动以加载新配置。
+
+### 步骤7：验证配置
+
+在Cursor中与Claude聊天，尝试访问文件系统：
+
+```
+请列出当前项目的文件结构
+```
+
+如果Claude能够显示文件列表，则说明配置成功。
+
+## 完整配置示例
+
+以下是一个包含所有推荐服务器的完整配置文件示例(针对Windows系统)：
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem"
+      ],
+      "resources": {
+        "paths": ["${workspaceFolder}"]
+      }
+    },
+    "git": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-git"
+      ]
+    },
+    "github": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "你的GitHub令牌"
+      }
+    },
+    "brave-search": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "你的Brave API密钥"
+      }
+    },
+    "fetch": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ]
+    },
+    "terminal": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-terminal"
+      ]
+    },
+    "sqlite": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sqlite"
+      ],
+      "resources": {
+        "paths": ["${workspaceFolder}/data"]
+      }
+    }
+  }
+}
+```
+
+## 注意事项
+
+1. **安全性**：终端服务器具有高安全风险，请谨慎使用
+2. **API密钥**：不要将API密钥直接硬编码在配置文件中，考虑使用环境变量
+3. **路径限制**：始终限制文件系统服务器只能访问必要的目录
+4. **性能考虑**：不要同时加载过多服务器，可能会影响性能
+
+## 问题排查
+
+如果服务器未正常工作：
+
+1. 检查配置文件的JSON语法是否正确
+2. 确认已安装相应的NPM包
+3. 检查环境变量和路径是否正确
+4. 完全重启Cursor
+5. 检查服务器日志(如果有)
+
+通过以上步骤，您应该能够成功配置各种MCP服务器，大幅增强Claude在Cursor中的能力。 

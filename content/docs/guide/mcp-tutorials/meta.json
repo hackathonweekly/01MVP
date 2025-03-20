@@ -3,6 +3,7 @@
         "mcp-introduction",
         "mcp-usage-guide",
         "mcp-server-ecosystem",
-        "mcp-combined-guide"
+        "mcp-combined-guide",
+        "mcp-connect-third-server"
     ]
 }
