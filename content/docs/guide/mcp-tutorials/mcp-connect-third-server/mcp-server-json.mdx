@@ -1,0 +1,654 @@
+---
+title: MCP服务JSON
+description: 第三方MCP服务器的JSON配置示例
+---
+
+# MCP服务器JSON配置
+
+本文档提供了各种第三方MCP服务器的JSON配置示例，包括国内平台和国际平台服务器。您可以将这些配置添加到Cursor的`mcp.json`文件中，以启用相应的服务器功能。
+
+## 目录
+
+- [国内平台服务器配置](#国内平台服务器配置)
+- [微信公众平台](#wechat-official)
+- [微博](#weibo)
+- [支付宝小程序](#alipay-miniapp)
+- [百度智能云](#baidu-cloud)
+- [飞书](#feishu)
+- [淘宝/天猫](#taobao)
+- [钉钉](#dingtalk)
+- [国际平台服务器配置](#国际平台服务器配置)
+- [YouTube](#youtube)
+- [X (Twitter)](#twitter)
+- [Webflow](#webflow)
+- [EverArt](#everart)
+- [Notion](#notion)
+- [Discord](#discord)
+- [Google Calendar](#google-calendar)
+- [组合配置示例](#组合配置示例)
+- [安全注意事项](#安全注意事项)
+
+<a id="国内平台服务器配置"></a>
+## 国内平台服务器配置
+
+<a id="wechat-official"></a>
+### 微信公众平台
+
+微信公众平台MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "wechat-official": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-wechat-official"
+      ],
+      "env": {
+        "WECHAT_APP_ID": "${YOUR_WECHAT_APP_ID}",
+        "WECHAT_APP_SECRET": "${YOUR_WECHAT_APP_SECRET}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `WECHAT_APP_ID`: 微信公众平台的AppID
+- `WECHAT_APP_SECRET`: 微信公众平台的AppSecret
+- 需要在微信公众平台配置服务器URL和Token以接收事件推送
+
+[返回微信公众平台服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#微信公众平台)
+
+<a id="weibo"></a>
+### 微博
+
+微博MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "weibo": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-weibo"
+      ],
+      "env": {
+        "WEIBO_APP_KEY": "${YOUR_WEIBO_APP_KEY}",
+        "WEIBO_APP_SECRET": "${YOUR_WEIBO_APP_SECRET}",
+        "WEIBO_ACCESS_TOKEN": "${YOUR_WEIBO_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `WEIBO_APP_KEY`: 微博开放平台的AppKey
+- `WEIBO_APP_SECRET`: 微博开放平台的AppSecret
+- `WEIBO_ACCESS_TOKEN`: 用户授权的访问令牌
+- 需要完成用户授权流程获取访问令牌
+
+[返回微博服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#微博)
+
+<a id="alipay-miniapp"></a>
+### 支付宝小程序
+
+支付宝小程序MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "alipay-miniapp": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-alipay-miniapp"
+      ],
+      "env": {
+        "ALIPAY_APP_ID": "${YOUR_ALIPAY_APP_ID}",
+        "ALIPAY_PRIVATE_KEY": "${YOUR_ALIPAY_PRIVATE_KEY}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `ALIPAY_APP_ID`: 支付宝开放平台的AppID
+- `ALIPAY_PRIVATE_KEY`: 支付宝开放平台的应用私钥
+- 需要在支付宝开放平台配置授权回调地址
+
+[返回支付宝小程序服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#支付宝小程序)
+
+<a id="baidu-cloud"></a>
+### 百度智能云
+
+百度智能云MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "baidu-cloud": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-baidu-cloud"
+      ],
+      "env": {
+        "BAIDU_API_KEY": "${YOUR_BAIDU_API_KEY}",
+        "BAIDU_SECRET_KEY": "${YOUR_BAIDU_SECRET_KEY}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `BAIDU_API_KEY`: 百度AI开放平台的API Key
+- `BAIDU_SECRET_KEY`: 百度AI开放平台的Secret Key
+- 需要在百度AI开放平台开通相应的API服务
+
+[返回百度智能云服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#百度智能云)
+
+<a id="feishu"></a>
+### 飞书
+
+飞书MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "feishu": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-feishu"
+      ],
+      "env": {
+        "FEISHU_APP_ID": "${YOUR_FEISHU_APP_ID}",
+        "FEISHU_APP_SECRET": "${YOUR_FEISHU_APP_SECRET}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `FEISHU_APP_ID`: 飞书开放平台的App ID
+- `FEISHU_APP_SECRET`: 飞书开放平台的App Secret
+- 需要在飞书开放平台配置事件订阅和权限
+
+[返回飞书服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#飞书)
+
+<a id="taobao"></a>
+### 淘宝/天猫
+
+淘宝/天猫MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "taobao": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-taobao"
+      ],
+      "env": {
+        "TAOBAO_APP_KEY": "${YOUR_TAOBAO_APP_KEY}",
+        "TAOBAO_APP_SECRET": "${YOUR_TAOBAO_APP_SECRET}",
+        "TAOBAO_SESSION_KEY": "${YOUR_TAOBAO_SESSION_KEY}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `TAOBAO_APP_KEY`: 淘宝开放平台的AppKey
+- `TAOBAO_APP_SECRET`: 淘宝开放平台的AppSecret
+- `TAOBAO_SESSION_KEY`: 店铺授权的会话密钥
+- 需要完成商家授权流程获取会话密钥
+
+[返回淘宝/天猫服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#淘宝天猫)
+
+<a id="dingtalk"></a>
+### 钉钉
+
+钉钉MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "dingtalk": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@wopal/mcp-dingtalk"
+      ],
+      "env": {
+        "DINGTALK_APP_KEY": "${YOUR_DINGTALK_APP_KEY}",
+        "DINGTALK_APP_SECRET": "${YOUR_DINGTALK_APP_SECRET}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `DINGTALK_APP_KEY`: 钉钉开放平台的AppKey
+- `DINGTALK_APP_SECRET`: 钉钉开放平台的AppSecret
+- 需要在钉钉开放平台配置回调URL和加密参数
+
+[返回钉钉服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#钉钉)
+
+<a id="国际平台服务器配置"></a>
+## 国际平台服务器配置
+
+<a id="youtube"></a>
+### YouTube
+
+YouTube MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "youtube": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-youtube"
+      ],
+      "env": {
+        "YOUTUBE_API_KEY": "${YOUR_YOUTUBE_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+在Windows系统中使用`cmd`启动，Linux/Mac系统可使用：
+
+```json
+{
+  "mcpServers": {
+    "youtube": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-youtube"
+      ],
+      "env": {
+        "YOUTUBE_API_KEY": "${YOUR_YOUTUBE_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `YOUTUBE_API_KEY`: 从Google Cloud Console获取的YouTube API密钥
+- 需要确保已启用YouTube Data API v3
+
+[返回YouTube服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#youtube)
+
+<a id="twitter"></a>
+### X (Twitter)
+
+X (Twitter) MCP服务器有两种实现：
+
+EnesCinr版本:
+
+```json
+{
+  "mcpServers": {
+    "twitter": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@enescinr/mcp-twitter"
+      ],
+      "env": {
+        "TWITTER_BEARER_TOKEN": "${YOUR_TWITTER_BEARER_TOKEN}",
+        "TWITTER_API_KEY": "${YOUR_TWITTER_API_KEY}",
+        "TWITTER_API_SECRET": "${YOUR_TWITTER_API_SECRET}"
+      }
+    }
+  }
+}
+```
+
+Vidhupv版本:
+
+```json
+{
+  "mcpServers": {
+    "x-twitter": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@vidhupv/mcp-server-twitter"
+      ],
+      "env": {
+        "TWITTER_API_KEY": "${YOUR_TWITTER_API_KEY}",
+        "TWITTER_API_SECRET": "${YOUR_TWITTER_API_SECRET}",
+        "TWITTER_ACCESS_TOKEN": "${YOUR_TWITTER_ACCESS_TOKEN}",
+        "TWITTER_ACCESS_SECRET": "${YOUR_TWITTER_ACCESS_SECRET}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- 两个版本功能略有不同，可以根据需要选择
+- 所有凭证都需要从Twitter Developer Portal获取
+- 需要创建Twitter开发者账户并注册应用
+
+[返回X (Twitter)服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#x-twitter)
+
+<a id="webflow"></a>
+### Webflow
+
+Webflow MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "webflow": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-webflow"
+      ],
+      "env": {
+        "WEBFLOW_API_TOKEN": "${YOUR_WEBFLOW_API_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `WEBFLOW_API_TOKEN`: 从Webflow开发者设置获取的API令牌
+- 需要确保API令牌有相应网站的访问权限
+
+[返回Webflow服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#webflow)
+
+<a id="everart"></a>
+### EverArt
+
+EverArt MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "everart": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-everart"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "${YOUR_OPENAI_API_KEY}",
+        "STABILITY_API_KEY": "${YOUR_STABILITY_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `OPENAI_API_KEY`: OpenAI API密钥，用于DALL-E模型
+- `STABILITY_API_KEY`: Stability AI API密钥，用于Stable Diffusion模型
+- 可以只配置其中一个API密钥，服务器将使用可用的模型
+
+[返回EverArt服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#everart)
+
+<a id="notion"></a>
+### Notion
+
+Notion MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "notion": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-notion"
+      ],
+      "env": {
+        "NOTION_TOKEN": "${YOUR_NOTION_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `NOTION_TOKEN`: 从Notion开发者页面获取的API密钥
+- 需要将集成添加到要操作的Notion工作区
+
+[返回Notion服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#notion)
+
+<a id="discord"></a>
+### Discord
+
+Discord MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "discord": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-discord"
+      ],
+      "env": {
+        "DISCORD_BOT_TOKEN": "${YOUR_DISCORD_BOT_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- `DISCORD_BOT_TOKEN`: Discord开发者门户创建的机器人令牌
+- 需要为机器人设置适当的权限，并将其添加到您的服务器
+
+[返回Discord服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#discord)
+
+<a id="google-calendar"></a>
+### Google Calendar
+
+Google Calendar MCP服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "google-calendar": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-google-calendar"
+      ],
+      "env": {
+        "GOOGLE_CLIENT_ID": "${YOUR_GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${YOUR_GOOGLE_CLIENT_SECRET}",
+        "GOOGLE_REFRESH_TOKEN": "${YOUR_GOOGLE_REFRESH_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+配置说明：
+- 需要从Google Cloud Console获取客户端ID和密钥
+- 需要完成OAuth授权流程获取刷新令牌
+- 需要启用Google Calendar API
+
+[返回Google Calendar服务器介绍](/docs/guide/mcp-tutorials/mcp-connect-third-server#google-calendar)
+
+<a id="组合配置示例"></a>
+## 组合配置示例
+
+以下是组合多个MCP服务器的配置示例：
+
+<a id="国际开发者套件"></a>
+### 国际开发者套件
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${YOUR_GITHUB_TOKEN}"
+      }
+    },
+    "notion": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-notion"],
+      "env": {
+        "NOTION_TOKEN": "${YOUR_NOTION_TOKEN}"
+      }
+    },
+    "discord": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-discord"],
+      "env": {
+        "DISCORD_BOT_TOKEN": "${YOUR_DISCORD_BOT_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+<a id="国内开发者套件"></a>
+### 国内开发者套件
+
+```json
+{
+  "mcpServers": {
+    "feishu": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@wopal/mcp-feishu"],
+      "env": {
+        "FEISHU_APP_ID": "${YOUR_FEISHU_APP_ID}",
+        "FEISHU_APP_SECRET": "${YOUR_FEISHU_APP_SECRET}"
+      }
+    },
+    "dingtalk": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@wopal/mcp-dingtalk"],
+      "env": {
+        "DINGTALK_APP_KEY": "${YOUR_DINGTALK_APP_KEY}",
+        "DINGTALK_APP_SECRET": "${YOUR_DINGTALK_APP_SECRET}"
+      }
+    },
+    "baidu-cloud": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@wopal/mcp-baidu-cloud"],
+      "env": {
+        "BAIDU_API_KEY": "${YOUR_BAIDU_API_KEY}",
+        "BAIDU_SECRET_KEY": "${YOUR_BAIDU_SECRET_KEY}"
+      }
+    }
+  }
+}
+```
+
+<a id="内容创作者套件"></a>
+### 内容创作者套件
+
+```json
+{
+  "mcpServers": {
+    "youtube": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-youtube"],
+      "env": {
+        "YOUTUBE_API_KEY": "${YOUR_YOUTUBE_API_KEY}"
+      }
+    },
+    "twitter": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@enescinr/mcp-twitter"],
+      "env": {
+        "TWITTER_BEARER_TOKEN": "${YOUR_TWITTER_BEARER_TOKEN}",
+        "TWITTER_API_KEY": "${YOUR_TWITTER_API_KEY}",
+        "TWITTER_API_SECRET": "${YOUR_TWITTER_API_SECRET}"
+      }
+    },
+    "wechat-official": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@wopal/mcp-wechat-official"],
+      "env": {
+        "WECHAT_APP_ID": "${YOUR_WECHAT_APP_ID}",
+        "WECHAT_APP_SECRET": "${YOUR_WECHAT_APP_SECRET}"
+      }
+    },
+    "weibo": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@wopal/mcp-weibo"],
+      "env": {
+        "WEIBO_APP_KEY": "${YOUR_WEIBO_APP_KEY}",
+        "WEIBO_APP_SECRET": "${YOUR_WEIBO_APP_SECRET}",
+        "WEIBO_ACCESS_TOKEN": "${YOUR_WEIBO_ACCESS_TOKEN}"
+      }
+    },
+    "everart": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-everart"],
+      "env": {
+        "OPENAI_API_KEY": "${YOUR_OPENAI_API_KEY}",
+        "STABILITY_API_KEY": "${YOUR_STABILITY_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+<a id="安全注意事项"></a>
+## 安全注意事项
+
+请注意，以上配置中的API密钥和令牌都应该替换为您自己的凭证。建议使用环境变量或安全的凭证管理工具来存储这些敏感信息，而不是直接写入配置文件。
+
+在`mcp.json`文件中，您可以使用`${ENV_VAR_NAME}`语法引用环境变量，这样可以避免将敏感凭证直接写入配置文件。
