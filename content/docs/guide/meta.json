@@ -1,13 +1,14 @@
 {
-  "title": "MVP指南",
+  "title": "MVP参考手册",
   "root": true,
   "pages": [
     "introduction",
-    "mvp-planning",
-    "ai-programming-tutorials",
-    "case-studies",
-    "mcp-tutorials",
+    "planning",
+    "building",
+    "validation",
+    "launching",
     "resources",
-    "contribute"
+    "contribute",
+    "..."
   ]
 }

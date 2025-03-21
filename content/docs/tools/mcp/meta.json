@@ -1,0 +1,11 @@
+{
+    "title": "MCP指南",
+    "pages": [
+        "mcp-introduction",
+        "mcp-usage-guide",
+        "mcp-server-ecosystem",
+        "mcp-combined-guide",
+        "mcp-connect-third-server",
+        "..."
+    ]
+}

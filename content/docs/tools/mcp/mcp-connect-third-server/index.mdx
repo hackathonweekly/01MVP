@@ -1,0 +1,362 @@
+---
+title: 连接第三方服务
+description: 通过MCP连接各种第三方服务器
+---
+
+本教程将指导您如何连接各种第三方MCP服务器，实现与不同平台的集成。
+
+## 目录
+
+- [国内平台服务器](#国内平台服务器)
+  - [微信公众平台](#微信公众平台)
+  - [微博](#微博)
+  - [支付宝小程序](#支付宝小程序)
+  - [百度智能云](#百度智能云)
+  - [飞书](#飞书)
+  - [淘宝/天猫](#淘宝天猫)
+  - [钉钉](#钉钉)
+- [国际平台服务器](#国际平台服务器)
+  - [YouTube](#youtube)
+  - [X (Twitter)](#x-twitter)
+  - [Webflow](#webflow)
+  - [EverArt](#everart)
+  - [Notion](#notion)
+  - [Discord](#discord)
+  - [Google Calendar](#google-calendar)
+- [配置文件详解](#配置文件详解)
+- [常见问题](#常见问题)
+
+## 国内平台服务器
+
+<a id="微信公众平台"></a>
+### 微信公众平台
+
+微信公众平台MCP服务器允许AI助手管理微信公众号，发布文章，回复粉丝消息等。
+
+**主要功能：**
+- 图文消息创建和发布
+- 粉丝消息管理
+- 素材库管理
+- 数据统计分析
+
+**配置要求：**
+- 需要微信公众平台的AppID和AppSecret
+- 需要配置服务器URL和Token
+
+**使用例子：**
+```
+请为我的微信公众号创建一篇关于"AI助手如何提高工作效率"的文章，并添加3张相关图片
+```
+
+[查看微信公众平台MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#wechat-official)
+
+### 微博
+
+微博MCP服务器允许AI助手直接发布微博内容，获取热门话题，与粉丝互动。
+
+**主要功能：**
+- 发布和调度微博
+- 话题搜索和趋势查询
+- 评论和私信管理
+- 用户互动
+
+**配置要求：**
+- 需要微博开放平台的AppKey和AppSecret
+- 需要用户授权的访问令牌
+
+**使用例子：**
+```
+请查询今日微博热搜前10名，并为我的账号发布一条关于排名第一话题的微博
+```
+
+[查看微博MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#weibo)
+
+### 支付宝小程序
+
+支付宝小程序MCP服务器用于支付宝小程序开发和管理。
+
+**主要功能：**
+- 小程序内容更新
+- 用户数据管理
+- 支付功能集成
+- 服务消息发送
+
+**配置要求：**
+- 需要支付宝开放平台的AppID和私钥
+- 需要配置授权回调地址
+
+**使用例子：**
+```
+请更新我的支付宝小程序首页轮播图内容，并添加一个新的产品类别
+```
+
+[查看支付宝小程序MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#alipay-miniapp)
+
+### 百度智能云
+
+百度智能云MCP服务器集成百度智能云的各种API，包括OCR、语音识别、自然语言处理等功能。
+
+**主要功能：**
+- OCR图像识别
+- 语音合成与识别
+- 自然语言处理
+- 知识图谱查询
+
+**配置要求：**
+- 需要百度AI开放平台的API Key和Secret Key
+- 需要开通相应的API服务
+
+**使用例子：**
+```
+请使用百度OCR识别我上传的图片中的文字，并翻译成英文
+```
+
+[查看百度智能云MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#baidu-cloud)
+
+### 飞书
+
+飞书MCP服务器用于飞书文档、会议、消息等功能的管理和操作。
+
+**主要功能：**
+- 文档创建和编辑
+- 会议排期和管理
+- 群组消息发送
+- 任务管理
+
+**配置要求：**
+- 需要飞书开放平台的App ID和App Secret
+- 需要配置事件订阅和权限
+
+**使用例子：**
+```
+请在我的飞书团队中创建一个新的文档，标题为"MCP服务器开发计划"，并邀请研发团队成员协作
+```
+
+[查看飞书MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#feishu)
+
+### 淘宝/天猫
+
+淘宝/天猫MCP服务器用于管理淘宝店铺、产品和订单。
+
+**主要功能：**
+- 产品管理
+- 订单处理
+- 库存监控
+- 店铺数据分析
+
+**配置要求：**
+- 需要淘宝开放平台的AppKey和AppSecret
+- 需要店铺授权的会话密钥
+
+**使用例子：**
+```
+请查询我的淘宝店铺昨日销售数据，并生成一份商品销售排行榜
+```
+
+[查看淘宝/天猫MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#taobao)
+
+### 钉钉
+
+钉钉MCP服务器用于钉钉工作通知、群聊和工作流管理。
+
+**主要功能：**
+- 工作通知发送
+- 群聊消息管理
+- 待办任务创建
+- 审批流程管理
+
+**配置要求：**
+- 需要钉钉开放平台的AppKey和AppSecret
+- 需要配置回调URL和加密参数
+
+**使用例子：**
+```
+请在我的钉钉团队群发送一条工作通知，提醒所有人明天下午3点参加MCP项目进度会议
+```
+
+[查看钉钉MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#dingtalk)
+
+## 国际平台服务器
+
+以下是一些流行的国际平台MCP服务器及其使用方法。
+
+### YouTube
+
+YouTube MCP服务器允许AI助手直接与YouTube API交互，执行视频管理、创建短视频和分析等操作。
+
+**主要功能：**
+- 视频上传和管理
+- 频道数据分析
+- 评论管理
+- YouTube Shorts创建
+
+**配置要求：**
+- 需要从[Google Cloud Console](https://console.cloud.google.com/)获取YouTube API密钥
+- 需要启用YouTube Data API v3
+
+**使用例子：**
+```
+请上传我刚才制作的视频到我的YouTube频道，标题是"MCP教程"，描述是"学习如何使用Model Context Protocol"
+```
+
+[查看YouTube MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#youtube)
+
+### X (Twitter)
+
+Twitter MCP服务器有两种实现，都允许AI助手直接与Twitter/X API交互，发布推文、搜索内容和管理账户。
+
+**主要功能：**
+- 发布和调度推文
+- 搜索推文和话题
+- 获取趋势信息
+- 用户互动管理
+
+**配置要求：**
+- 需要从[Twitter Developer Portal](https://developer.twitter.com/)获取API密钥和访问令牌
+- 需要创建一个Twitter开发者账户并创建应用
+
+**使用例子：**
+```
+请搜索关于"AI助手"的最新推文，并总结关键观点
+```
+
+[查看X (Twitter) MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#twitter)
+
+### Webflow
+
+Webflow MCP服务器允许AI助手直接操作Webflow网站，管理内容和设计。
+
+**主要功能：**
+- 网站内容管理
+- 创建和修改页面
+- 集合项管理
+- 网站结构调整
+
+**配置要求：**
+- 需要从[Webflow开发者设置](https://webflow.com/dashboard/account/integrations)获取API令牌
+- 需要相应网站的访问权限
+
+**使用例子：**
+```
+请更新我的Webflow网站首页的标题为"AI驱动的未来"，并添加一段关于MCP的介绍文字
+```
+
+[查看Webflow MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#webflow)
+
+### EverArt
+
+EverArt MCP服务器是一个AI图像生成服务器，支持多种图像生成模型。
+
+**主要功能：**
+- 基于文本提示生成图像
+- 支持多种AI模型
+- 图像风格调整
+- 图像尺寸和质量控制
+
+**配置要求：**
+- 需要OpenAI和/或Stability AI的API密钥
+- 支持DALL-E和Stable Diffusion等模型
+
+**使用例子：**
+```
+请生成一张"在未来城市中使用AI助手的人"的图像，风格写实，分辨率1024x1024
+```
+
+[查看EverArt MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#everart)
+
+### Notion
+
+Notion MCP服务器允许AI助手直接与Notion工作区交互，管理页面、数据库和内容。
+
+**主要功能：**
+- 创建和编辑页面
+- 管理数据库
+- 内容搜索和查询
+- 页面结构调整
+
+**配置要求：**
+- 需要从[Notion开发者页面](https://www.notion.so/my-integrations)获取API密钥
+- 需要将集成添加到指定工作区
+
+**使用例子：**
+```
+请在我的Notion工作区中创建一个新页面，标题为"MCP服务器列表"，并添加我们今天讨论的所有服务器
+```
+
+[查看Notion MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#notion)
+
+### Discord
+
+Discord MCP服务器允许AI助手直接与Discord服务器交互，发送消息和管理内容。
+
+**主要功能：**
+- 发送和接收消息
+- 频道管理
+- 用户互动
+- 服务器数据查询
+
+**配置要求：**
+- 需要创建Discord机器人并获取令牌
+- 需要为机器人设置适当的权限
+
+**使用例子：**
+```
+请在我的Discord服务器的公告频道发送一条消息，通知所有人新的MCP服务器已经上线
+```
+
+[查看Discord MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#discord)
+
+### Google Calendar
+
+Google Calendar MCP服务器允许AI助手直接管理和查询日历事件。
+
+**主要功能：**
+- 创建和修改日历事件
+- 查询日程安排
+- 管理会议邀请
+- 日历同步
+
+**配置要求：**
+- 需要从Google Cloud Console获取API密钥和刷新令牌
+- 需要启用Google Calendar API
+
+**使用例子：**
+```
+请查看我下周的日程安排，并在周五下午3点添加一个"MCP开发会议"的事件，时长1小时
+```
+
+[查看Google Calendar MCP服务器JSON配置](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json#google-calendar)
+
+## 配置文件详解
+
+MCP服务器的配置文件通常采用JSON格式，您可以在[MCP服务JSON](/docs/tools/mcp/mcp-connect-third-server/mcp-server-json)页面找到详细的配置示例。
+
+## 常见问题
+
+### API密钥安全
+
+为确保API密钥安全，建议：
+- 使用环境变量存储API密钥，而不是直接写入配置文件
+- 定期轮换API密钥
+- 为API密钥设置适当的权限范围
+- 使用专用的开发者账号而非个人账号
+
+### 服务器更新
+
+第三方MCP服务器通常会定期更新以适应API变化。确保：
+- 定期检查服务器是否有更新
+- 关注相关开发者社区获取更新通知
+- 测试更新后的服务器以确保兼容性
+
+### 网络环境考虑
+
+- 国际平台可能需要合适的网络环境才能正常访问
+- 国内平台通常对API调用频率有严格限制，需要进行合理控制
+- 考虑配置代理或VPN以确保稳定连接
+
+### 多平台集成
+
+如果需要同时使用多个第三方MCP服务器，建议：
+- 根据使用频率选择性加载服务器，避免同时启动过多服务器
+- 考虑将相关服务器分组，根据任务需求加载不同组合
+- 监控系统资源使用情况，确保性能稳定

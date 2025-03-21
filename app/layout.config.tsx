@@ -24,13 +24,18 @@ export const baseOptions: BaseLayoutProps = {
   },
   links: [
     {
-      text: 'MVP指南',
+      text: 'MVP参考手册',
       url: '/docs/guide',
       active: 'nested-url',
     },
     {
       text: '动手实践教程',
-      url: '/docs/projects',
+      url: '/docs/cases',
+      active: 'nested-url',
+    },
+    {
+      text: 'AI工具',
+      url: '/docs/tools',
       active: 'nested-url',
     },
   ],

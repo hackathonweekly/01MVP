@@ -14,7 +14,7 @@ export function ContentStructure() {
       icon: <FileText className="h-5 w-5" />
     },
     {
-      title: "MVP计划",
+      title: "MVP规划",
       path: "/docs/mvp-planning",
       description: "MVP规划与策略",
       icon: <Lightbulb className="h-5 w-5" />

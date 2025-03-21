@@ -1,9 +1,0 @@
-{
-  "name": "动手实践教程",
-  "root": true,
-  "pages": [
-    "beginners",
-    "intermediate",
-    "advanced"
-  ]
-} 

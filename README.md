@@ -1,7 +1,5 @@
 # 01MVP - 从0到1，创造你的MVP
 
-![01MVP Logo](/public/icon.svg)
-
 [01MVP.com](https://01mvp.com) 是周周黑客松社区旗下的产品知识库，致力于帮助创造者从0到1实现**最小可行产品**（MVP），并快速找到他们的**前100个**用户。
 
 > 🚧 本网站基于 [Fumadocs](https://fumadocs.vercel.app) 文档框架构建，目前仍在开发中，部分内容由 AI 生成。
