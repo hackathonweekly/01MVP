@@ -3,15 +3,11 @@
   "root": true,
   "pages": [
     "introduction",
-    "planning",
-    "building",
-    "validation",
-    "launching",
-    "tutorials",
-    "case-studies",
-    "practical-tutorials",
+    "mvp-planning",
     "ai-programming-tutorials",
+    "case-studies",
+    "mcp-tutorials",
     "resources",
     "contribute"
   ]
-} 
+}

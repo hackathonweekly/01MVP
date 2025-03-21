@@ -8,33 +8,39 @@ import { Card } from '@/components/ui/card';
 export function ContentStructure() {
   const contentSections = [
     {
-      title: "开始指南",
+      title: "入门指南",
       path: "/docs/introduction",
       description: "项目概述与基础设置",
       icon: <FileText className="h-5 w-5" />
     },
     {
-      title: "规划阶段",
-      path: "/docs/planning",
-      description: "MVP概念与市场验证",
+      title: "MVP计划",
+      path: "/docs/mvp-planning",
+      description: "MVP规划与策略",
       icon: <Lightbulb className="h-5 w-5" />
     },
     {
-      title: "构建阶段",
-      path: "/docs/building",
-      description: "开发资源与工具",
-      icon: <Wrench className="h-5 w-5" />
+      title: "MCP教程",
+      path: "/docs/mcp-tutorials",
+      description: "最小可行产品创建教程",
+      icon: <CheckSquare className="h-5 w-5" />
     },
     {
-      title: "验证阶段",
-      path: "/docs/validation",
-      description: "用户反馈与MVP扩展",
+      title: "市场验证",
+      path: "/docs/planning/idea-validation",
+      description: "创意验证与市场分析",
       icon: <UserCheck className="h-5 w-5" />
     },
     {
-      title: "发布阶段",
-      path: "/docs/launching",
-      description: "部署与用户获取",
+      title: "实用工具",
+      path: "/docs/resources",
+      description: "开发工具与资源",
+      icon: <Wrench className="h-5 w-5" />
+    },
+    {
+      title: "AI编程教程",
+      path: "/docs/ai-programming-tutorials",
+      description: "AI辅助开发指南",
       icon: <Rocket className="h-5 w-5" />
     },
     {
@@ -85,25 +91,25 @@ export function ContentStructure() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Main large blurred circle */}
         <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-teal-50 via-emerald-100 to-transparent dark:from-teal-950 dark:via-emerald-900 dark:to-transparent rounded-full opacity-40 transform translate-x-1/2 blur-xl" />
-        
+
         {/* Key horizontal and vertical lines */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-300 dark:via-indigo-700 to-transparent opacity-50" />
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-300 dark:via-indigo-700 to-transparent opacity-50" />
-        
+
         {/* Primary diagonal line */}
         <div className="absolute top-1/2 left-1/2 w-[700px] h-[3px] bg-gradient-to-r from-transparent via-emerald-300 dark:via-emerald-700 to-transparent opacity-60 transform -rotate-45" />
-        
+
         {/* A few strategic geometric shapes */}
         <div className="absolute left-10 top-1/3 w-16 h-16 border-4 border-indigo-200 dark:border-indigo-700 rounded-sm opacity-50 transform rotate-45" />
         <div className="absolute right-20 bottom-1/4 w-20 h-20 bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900 dark:to-amber-800 opacity-40 transform rotate-12 shadow-lg" />
-        
+
         {/* Limited colorful circles */}
         <div className="absolute top-1/4 right-1/3 w-8 h-8 bg-gradient-to-br from-blue-200 to-blue-300 dark:from-blue-700 dark:to-blue-600 rounded-full opacity-60 shadow-lg" />
         <div className="absolute bottom-1/4 left-1/3 w-8 h-8 bg-gradient-to-br from-amber-200 to-amber-300 dark:from-amber-700 dark:to-amber-600 rounded-full opacity-60 shadow-lg" />
       </div>
-      
+
       <Container className="relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -119,7 +125,7 @@ export function ContentStructure() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -143,7 +149,7 @@ export function ContentStructure() {
           ))}
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -156,7 +162,7 @@ export function ContentStructure() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
