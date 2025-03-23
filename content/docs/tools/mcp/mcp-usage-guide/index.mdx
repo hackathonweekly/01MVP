@@ -349,6 +349,8 @@ Cursor的强大之处在于它将编码与MCP无缝集成，以下是一些开�
 
 ### 6.2 使用Python创建MCP服务器
 
+> 下面将创建实用示例作为演示：一个笔记管理MCP服务器，它可以添加、删除和查看Markdown格式的笔记
+
 #### 创建项目
 
 1. 创建新项目目录：
@@ -357,77 +359,33 @@ Cursor的强大之处在于它将编码与MCP无缝集成，以下是一些开�
    cd my_mcp_server
    ```
 
-2. 使用MCP提供的工程创建器创建模板项目：
+2. 安装MCP服务器创建工具：
    ```bash
-   uv pip install create-mcp-server
-   create-mcp-server my_service
-   cd my_service
+   pip install uv create-mcp-server
    ```
+
+3. 使用MCP提供的工程创建器创建模板项目：
+
+  通过agent创建
+
+  ```
+  create-mcp-server 创建自定义的 mcpserver
+  然后会生成一个文件夹，里头的 README 给出了 mcp 的配置，可以复制到 mcp.json 中
+  ```
+
+  根据README提供的配置复制到mcp.json
+
+  ```bash
+  create-mcp-server my_service
+  cd my_service
+  ```
 
 #### 修改服务器代码
 
-编辑`src/my_service/server.py`文件，实现所需功能：
+通过agent创建，提出需求（以下为例子）
 
-```python
-from modelcontextprotocol.server import Server, StdioServerTransport
-from modelcontextprotocol.server.tools import tool, ToolRegistry
-import asyncio
-
-# 创建服务器实例
-server = Server(
-    {
-        "name": "my-custom-server",
-        "version": "1.0.0"
-    },
-    {
-        "capabilities": {
-            "resources": {},
-            "tools": {}
-        }
-    }
-)
-
-# 注册工具
-tools = ToolRegistry()
-
-@tools.tool({
-    "name": "greet",
-    "description": "Greets a person by name",
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "type": "string",
-                "description": "The name of the person to greet"
-            }
-        },
-        "required": ["name"]
-    },
-    "returns": {
-        "type": "string",
-        "description": "A greeting message"
-    }
-})
-async def greet(params):
-    name = params["name"]
-    return f"Hello, {name}! Nice to meet you."
-
-# 注册工具到服务器
-server.register_tools(tools)
-
-# 主函数
-async def main():
-    # 创建传输
-    transport = StdioServerTransport()
-    
-    # 连接服务器到传输
-    await server.connect(transport)
-    
-    # 保持服务器运行
-    await server.wait_for_disconnect()
-
-if __name__ == "__main__":
-    asyncio.run(main())
+```
+帮我把 @server.py 改成一个可以添加、删除、查看所有笔记列表的 mcpserver， 笔记会存放在 这个服务器的文件夹下，保存为 markdown
 ```
 
 #### 运行服务器
@@ -436,7 +394,76 @@ if __name__ == "__main__":
 python -m my_service
 ```
 
-### 6.3 使用TypeScript创建MCP服务器
+根据README提供mcp配置启动服务，可开始agent使用：
+
+![笔记管理](public/images/guide/mcp-note.png)
+
+1. **创建新笔记**：
+   ```
+   请创建一个标题为"项目计划"的笔记，内容应包括项目目标、时间线和责任人
+   ```
+
+2. **列出所有笔记**：
+   ```
+   请列出我所有的笔记
+   ```
+
+3. **查看特定笔记**：
+   ```
+   请显示ID为"1234_项目计划"的笔记内容
+   ```
+
+4. **更新笔记**：
+   ```
+   请更新ID为"1234_项目计划"的笔记，添加一个新的部分"风险管理"
+   ```
+
+5. **删除笔记**：
+   ```
+   请删除ID为"1234_项目计划"的笔记
+   ```
+
+这个笔记管理MCP服务器使您的AI助手能够直接管理你的Markdown笔记，这对于项目管理、日常笔记和学习资料整理非常有用。
+
+### 6.3 高德地图MCP使用示例
+
+根据README提供mcp配置启动服务，可开始agent使用：
+
+![高德地图](public/images/guide/mcp-gaode.png)
+
+1. **搜索兴趣点**：
+   ```
+   请搜索北京的故宫博物院
+   ```
+
+2. **地理编码**：
+   ```
+   请将地址"北京市海淀区中关村"转换为经纬度坐标
+   ```
+
+3. **逆地理编码**：
+   ```
+   请查询经纬度"116.481499,39.990475"对应的地址信息
+   ```
+
+4. **路线规划**：
+   ```
+   请规划从北京故宫到颐和园的驾车路线
+   ```
+
+5. **天气查询**：
+   ```
+   请查询北京市今天和未来几天的天气情况
+   ```
+
+6. **智能旅游路线**：
+   ```
+   请帮我规划北京三日游，包含故宫、长城、颐和园、天坛和鸟巢
+   ```
+
+高德地图MCP服务使您的AI助手能够进行地理位置查询、路线规划和天气查询等功能，这对于旅行规划、出行导航和位置服务非常有用。
+
+### 6.4 使用TypeScript创建MCP服务器
 
 #### 创建项目
 
@@ -457,89 +484,26 @@ python -m my_service
    npx tsc --init
    ```
 
+4. 创建README.md：
+
+  ```
+  @gaode 是一个MCP服务项目，创建README.md，且给出了 mcp 的配置，可以复制到 mcp.json 中
+  ```
+
+  根据README提供的配置复制到mcp.json，记得修改密钥
+
 #### 编写服务器代码
 
 创建`src/index.ts`文件：
 
-```typescript
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
-
-// 定义参数和返回值的Schema
-const GreetParamsSchema = z.object({
-  name: z.string().describe("The name of the person to greet")
-});
-
-const GreetReturnsSchema = z.string().describe("A greeting message");
-
-// 创建服务器
-const server = new Server(
-  {
-    name: "my-typescript-server",
-    version: "1.0.0"
-  },
-  {
-    capabilities: {
-      tools: {
-        greet: {
-          description: "Greets a person by name",
-          parameters: GreetParamsSchema,
-          returns: GreetReturnsSchema
-        }
-      }
-    }
-  }
-);
-
-// 实现工具处理函数
-server.setToolHandler("greet", async (params) => {
-  const { name } = GreetParamsSchema.parse(params);
-  return `Hello, ${name}! Nice to meet you from TypeScript.`;
-});
-
-// 启动服务器
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  
-  // 等待断开连接
-  await new Promise(() => {}); // 保持运行
-}
-
-main().catch(console.error);
+```
+创建@index.ts ，即提供调用高德的api的mcp服务，而可以通过调用这个mcp服务实现规划旅游路线更加可视化与合理
 ```
 
-#### 构建和运行
+#### 运行服务器
 
-1. 添加脚本到`package.json`：
-   ```json
-   {
-     "scripts": {
-       "start": "ts-node src/index.ts"
-     }
-   }
-   ```
-
-2. 运行服务器：
-   ```bash
-   npm start
-   ```
-
-### 6.4 配置自定义服务器
-
-在Claude配置文件中添加您的自定义服务器：
-
-```json
-{
-  "mcpServers": {
-    "my-custom-server": {
-      "command": "python",
-      "args": ["-m", "my_service"],
-      "cwd": "/path/to/my_mcp_server/my_service"
-    }
-  }
-}
+```bash
+npm start
 ```
 
 ## 7. 常见问题与故障排除
@@ -613,72 +577,4 @@ export function TroubleshootingTool() {
 ### 8.1 Cursor中的MCP安全性最佳实践
 
 1. **最小权限原则**：使用`${workspaceFolder}`变量限制文件系统服务器只访问当前项目
-2. **使用环境变量**：通过Cursor支持的环境变量语法`${ENV_VAR}`引用敏感信息
-3. **定期审查配置**：随着项目变化更新MCP服务器配置，移除不必要的权限
-4. **工具隔离**：为不同类型的项目创建不同的MCP配置集，避免过度授权
-
-### 8.2 开发环境中的性能最佳实践
-
-1. **按需加载**：在Cursor中只启用当前项目所需的MCP服务器
-2. **缓存策略**：对于频繁访问的API资源，实现本地缓存机制
-3. **避免大型文件传输**：在处理大型代码库时，引导Claude只读取必要的文件部分
-4. **批量操作**：将多个小操作合并为一个请求，减少MCP服务器的启动开销
-
-### 8.3 Cursor开发流程最佳实践
-
-1. **明确任务描述**：向Claude提供详细的开发任务说明，包括文件路径和具体需求
-   ```
-   请在src/components/目录下查找所有包含表单处理逻辑的组件，并重构它们以使用React Hook Form库
-   ```
-
-2. **增量开发**：将大型任务分解为小步骤，逐步完成
-   ```
-   第一步：分析当前表单实现
-   第二步：编写一个使用React Hook Form的基础组件
-   第三步：逐个重构现有组件
-   ```
-
-3. **代码审查请求**：让Claude检查自己生成的代码
-   ```
-   请检查我刚才实现的UserForm组件是否存在安全问题或性能隐患
-   ```
-
-4. **文档生成**：使用MCP服务器生成项目文档
-   ```
-   请分析src/api目录下的所有文件，为API端点生成一份完整的文档，包括参数说明和返回值格式
-   ```
-
-## 9. 总结
-
-MCP极大地增强了Cursor IDE中Claude助手的能力，通过本指南，您已经学习了如何在Cursor中设置和使用MCP服务器，处理常见问题，以及遵循最佳实践来优化开发流程。特别是在软件开发场景下，MCP服务器使Claude能够:
-
-- **直接访问和修改项目文件**，实现真正的代码助手功能
-- **搜索最新的技术资料**，提供基于最新信息的解决方案
-- **与版本控制系统交互**，协助代码提交和审查
-- **执行环境和依赖分析**，确保项目的一致性
-
-作为开发者，您可以将Cursor与MCP结合，创建一个强大的AI辅助开发环境，显著提高编码效率和质量。随着MCP生态系统的不断发展，将有更多专业开发工具被集成进来，进一步增强AI助手在软件开发中的价值。
-
-export function RelatedLinks() {
-  return (
-    <div className="related-links">
-      <h4>延伸阅读</h4>
-      <ul>
-        <li><a href="/docs/tools/mcp/mcp-introduction">MCP介绍</a></li>
-        <li><a href="/docs/tools/mcp/mcp-server-ecosystem">MCP服务器生态系统</a></li>
-        <li><a href="/docs/tools/mcp/mcp-usage-guide/mcp-platform-usage">MCP平台使用指南</a></li>
-        <li><a href="https://cursor.sh/docs/ai-features">Cursor AI功能文档</a></li>
-      </ul>
-    </div>
-  );
-}
-
-<RelatedLinks />
-
-## 参考资源
-
-- [MCP官方文档](https://modelcontextprotocol.io/)
-- [Cursor官方文档](https://cursor.sh/docs)
-- [MCP服务器GitHub仓库](https://github.com/modelcontextprotocol/servers)
-- [Cursor Discord社区](https://discord.gg/cursor)
-- [Claude文档](https://docs.anthropic.com/claude/docs) 
+2. **使用环境变量**：通过Cursor支持的环境变量语法`${ENV_VAR}`
