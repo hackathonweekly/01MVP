@@ -91,9 +91,24 @@ Anthropic官方提供了一系列核心MCP服务器，这些服务器已经过�
 | **Text Editor** | 高效文本操作 | `npx -y @tumf/text-editor-mcp` |
 | **File Format Converter** | 文档格式转换 | `python -m file-format-converter-mcp` |
 
-## 4. 专业领域MCP服务器
+## 4. 国内平台MCP服务器
 
-### 4.1 开发和编程
+| 服务器名称 | 仓库地址 | 功能描述 |
+|----------|---------|---------|
+| **微信 MCP 服务** | [@wopal/mcp-wechat](https://github.com/wopal-dev/mcp-wechat) | 微信公众号管理、消息接收与发送 |
+| **支付宝小程序 MCP 服务** | [@wopal/mcp-alipay-miniapp](https://github.com/wopal-dev/mcp-alipay-miniapp) | 小程序页面管理、用户信息获取 |
+| **微博 MCP 服务** | [@wopal/mcp-weibo](https://github.com/wopal-dev/mcp-weibo) | 微博发布、热搜获取、评论管理 |
+| **百度智能云 MCP 服务** | [@wopal/mcp-baidu-cloud](https://github.com/wopal-dev/mcp-baidu-cloud) | OCR识别、自然语言处理、语音合成 |
+| **钉钉 MCP 服务** | [@wopal/mcp-dingtalk](https://github.com/wopal-dev/mcp-dingtalk) | 群组消息发送、工作通知、工作流程 |
+| **飞书 MCP 服务** | [@wopal/mcp-feishu](https://github.com/wopal-dev/mcp-feishu) | 文档管理、会议预定、消息发送 |
+| **淘宝/天猫 MCP 服务** | [@wopal/mcp-taobao](https://github.com/wopal-dev/mcp-taobao) | 店铺管理、商品上传、订单查询 |
+| **网易云音乐 MCP 服务** | [@wopal/mcp-netease-music](https://github.com/wopal-dev/mcp-netease-music) | 歌曲搜索、歌词查询、专辑详情 |
+| **高德地图 MCP 服务** | [@wopal/mcp-gaode-maps](https://github.com/wopal-dev/mcp-gaode-maps) | 地点搜索、路线规划、天气查询、景点详情 |
+| **Bilibili MCP 服务** | [@wopal/mcp-bilibili](https://github.com/wopal-dev/mcp-bilibili) | 视频搜索、弹幕获取、用户信息查询 |
+
+## 5. 专业领域MCP服务器
+
+### 5.1 开发和编程
 
 | 服务器名称 | 功能描述 | 安装/使用方式 |
 |----------|---------|-------------|
@@ -103,7 +118,7 @@ Anthropic官方提供了一系列核心MCP服务器，这些服务器已经过�
 | **Python REPL** | 持久Python执行环境 | `python -m python-repl-mcp` |
 | **Ollama** | 本地大语言模型推理 | `npx -y @matt-green/ollama-mcp` |
 
-### 4.2 API和云服务
+### 5.2 API和云服务
 
 | 服务器名称 | 功能描述 | 安装/配置要点 |
 |----------|---------|-------------|
@@ -114,7 +129,7 @@ Anthropic官方提供了一系列核心MCP服务器，这些服务器已经过�
 | **Video Editor** | AI驱动的视频编辑 | 集成Video Jungle API |
 | **Tinybird** | 大数据集分析 | 需要Tinybird API令牌 |
 
-### 4.3 专业工具
+### 5.3 专业工具
 
 | 服务器名称 | 开发者 | 功能描述 | 使用要点 |
 |----------|-------|---------|---------|
@@ -124,13 +139,13 @@ Anthropic官方提供了一系列核心MCP服务器，这些服务器已经过�
 | **Ancestry MCP** | reeeeemo | 读取.ged文件和基因数据 | 家谱和基因分析 |
 | **Coinmarket MCP** | anjor | 加密货币市场数据 | 需要CoinMarketCap API密钥 |
 
-## 5. 安装和使用MCP服务器的方法
+## 6. 安装和使用MCP服务器的方法
 
-### 5.1 使用MCP安装器
+### 6.1 使用MCP安装器
 
 MCP安装器是安装其他MCP服务器的最简单方法，特别适合初学者。
 
-#### 5.1.1 安装MCP安装器
+#### 6.1.1 安装MCP安装器
 
 首先，在Claude桌面应用或其他MCP客户端中配置MCP安装器：
 
@@ -145,7 +160,7 @@ MCP安装器是安装其他MCP服务器的最简单方法，特别适合初学�
 }
 ```
 
-#### 5.1.2 使用MCP安装器安装其他服务器
+#### 6.1.2 使用MCP安装器安装其他服务器
 
 一旦安装了MCP安装器，可以通过以下方式安装其他服务器：
 
@@ -169,7 +184,7 @@ MCP安装器是安装其他MCP服务器的最简单方法，特别适合初学�
    请安装GitHub MCP服务器，并设置GITHUB_PERSONAL_ACCESS_TOKEN环境变量为'your_token'
    ```
 
-### 5.2 从NPM安装
+### 6.2 从NPM安装
 
 许多MCP服务器可以直接从NPM注册表安装：
 
@@ -187,7 +202,7 @@ MCP安装器是安装其他MCP服务器的最简单方法，特别适合初学�
 }
 ```
 
-### 5.3 从Python包安装
+### 6.3 从Python包安装
 
 Python实现的MCP服务器可以通过pip或uv安装：
 
@@ -202,7 +217,7 @@ Python实现的MCP服务器可以通过pip或uv安装：
 }
 ```
 
-### 5.4 从GitHub仓库安装
+### 6.4 从GitHub仓库安装
 
 可以直接从GitHub克隆并运行MCP服务器：
 
@@ -226,9 +241,9 @@ Python实现的MCP服务器可以通过pip或uv安装：
    }
    ```
 
-## 6. 使用主要MCP服务器的示例
+## 7. 使用主要MCP服务器的示例
 
-### 6.1 文件系统服务器
+### 7.1 文件系统服务器
 
 **配置**：
 ```json
@@ -252,7 +267,7 @@ Python实现的MCP服务器可以通过pip或uv安装：
 请在Documents目录下创建一个名为summary.txt的文件，内容为你刚才的总结
 ```
 
-### 6.2 Git服务器
+### 7.2 Git服务器
 
 **配置**：
 ```json
@@ -273,7 +288,7 @@ Python实现的MCP服务器可以通过pip或uv安装：
 请创建一个新分支名为'feature/new-api'并切换到该分支
 ```
 
-### 6.3 数据库服务器
+### 7.3 数据库服务器
 
 **SQLite配置**：
 ```json
@@ -294,11 +309,11 @@ Python实现的MCP服务器可以通过pip或uv安装：
 请查询users表中的前10条记录
 ```
 
-## 7. 开发自定义MCP服务器
+## 8. 开发自定义MCP服务器
 
 如果现有的MCP服务器不能满足您的需求，您可以开发自己的自定义MCP服务器。
 
-### 7.1 基础框架选择
+### 8.1 基础框架选择
 
 1. **TypeScript/JavaScript**：
    - 使用`@modelcontextprotocol/mcp-server-js`库
@@ -312,7 +327,7 @@ Python实现的MCP服务器可以通过pip或uv安装：
    - 使用`mcp-server-jvm`库
    - 适合企业级应用和Android开发
 
-### 7.2 服务器开发步骤
+### 8.2 服务器开发步骤
 
 1. **初始化项目**：
    ```bash
@@ -334,7 +349,7 @@ Python实现的MCP服务器可以通过pip或uv安装：
    - 发布到NPM或PyPI
    - 提交到MCP服务器目录
 
-### 7.3 最佳实践
+### 8.3 最佳实践
 
 - **安全优先**：限制功能访问范围
 - **明确配置**：提供清晰的配置选项
@@ -342,7 +357,7 @@ Python实现的MCP服务器可以通过pip或uv安装：
 - **错误处理**：提供有用的错误信息
 - **版本控制**：遵循语义化版本规范
 
-## 8. 总结和资源
+## 9. 总结和资源
 
 MCP服务器生态系统正在快速扩展，为AI模型提供了前所未有的能力。通过合理选择和配置MCP服务器，您可以显著增强Claude等AI助手的功能，实现更复杂的自动化和集成。
 
