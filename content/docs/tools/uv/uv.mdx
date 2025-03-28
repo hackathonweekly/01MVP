@@ -1,0 +1,750 @@
+---
+title: uv：Python 新一代快速而雄心勃勃的包管理器深度指南
+---
+# uv：Python 新一代快速而雄心勃勃的包管理器深度指南
+
+一份关于为什么以及如何开始使用 uv 的综合指南 —— 这个正在席卷 Python 世界的包管理器（以及更多功能）。
+
+_发布于 2024 年 12 月 2 日，更新于 2025 年 1 月 23 日_
+
+![Uv Drake](https://www.saaspegasus.com/static/images/web/uv/drake-uv-banner.3ba5686aafaf.jpg "Drake on uv.")
+
+上图展示了使用标准工具与使用 uv 从头开始设置新的 Python 环境所需的步骤对比。
+
+如果你是一个 Python 开发者，你可能听说过大家都在谈论的这个叫做 [uv](https://docs.astral.sh/uv/) 的新工具。
+
+如果你和我一样 —— 通常对最新的工具潮流持谨慎态度 —— 你可能会倾向于将其视为另一个转瞬即逝的炒作，就像说"pipenv"那样快来快去。
+
+这篇文章要告诉你为什么这种想法是错误的，为什么 uv 感觉像是 Python 包和项目管理的未来，以及如何在你的项目中开始使用它。
+
+如果你一直在听说 uv 并想了解更多或尝试使用它，这篇文章就是为你准备的！
+
+- [目标读者](#目标读者)
+- [什么是 uv？](#什么是-uv)
+- [为什么使用 uv？](#为什么使用-uv)
+    - [uv 速度惊人](#uv-速度惊人)
+    - [uv 功能齐全](#uv-功能齐全)
+    - [uv 前景光明](#uv-前景光明)
+- [安装 uv](#安装-uv)
+- [将 uv 整合到现有工作流中](#将-uv-整合到现有工作流中)
+    - [使用 uv 安装 Python](#使用-uv-安装-python)
+    - [使用 uv 管理虚拟环境](#使用-uv-管理虚拟环境)
+    - [使用 uv 的 pip 接口管理包](#使用-uv-的-pip-接口管理包)
+    - [uv 管理项目依赖](#uv-管理项目依赖)
+    - [速查表：uv 与现有工具对比](#速查表uv-与现有工具对比)
+- [采用 uv 作为新工作流](#采用-uv-作为新工作流)
+    - [前提：uv 使用的文件](#前提uv-使用的文件)
+        - [pyproject.toml 文件](#pyprojecttoml-文件)
+        - [uv.lock 文件](#uvlock-文件)
+    - [设置项目使用 uv](#设置项目使用-uv)
+    - [使用环境](#使用环境)
+        - [运行 Python](#运行-python)
+        - [处理依赖](#处理依赖)
+    - [速查表：uv 工作流中的常见操作](#速查表uv-工作流中的常见操作)
+- [高级用法](#高级用法)
+    - [处理开发和生产环境的需求](#处理开发和生产环境的需求)
+        - [在不同依赖组中添加、删除和更改包](#在不同依赖组中添加删除和更改包)
+        - [安装不同依赖组中的包](#安装不同依赖组中的包)
+    - [一次性环境和工具](#一次性环境和工具)
+    - [uv 与 Docker](#uv-与-docker)
+    - [构建和发布项目](#构建和发布项目)
+- [结论和资源](#结论和资源)
+
+## 目标读者
+
+这篇文章适合任何对了解 uv 以及如何在 Python 项目中使用它感兴趣的人。
+
+我来自 Django 背景，所以会重点关注与 Django 项目相关的 uv 工作流程：
+
+1. 设置 Python 环境
+2. 安装和管理包
+3. 构建和运行应用
+
+uv 在打包方面也做了很多工作 —— 即帮助你构建和发布自己的 Python 包。这篇文章大多略过了这些用例，因为它们与大多数使用 Python 的项目无关。
+
+这篇文章适合初学者 —— 我不假设你有太多 Python 或其他工具的知识。但如果你不是使用 Python 的开发者，你可能不会从中获益太多。事实上，如果你是这样的人 —— 你为什么要读这个？出去走走，接触大自然，庆幸你从未需要考虑 Python 打包的问题！
+
+好的 —— 确定要继续阅读吗？
+
+让我们开始吧！
+
+## 什么是 uv？
+
+让我们从基础开始。uv 究竟是什么？
+
+使 uv 难以解释的原因之一是它不仅仅是一个工具。[uv 主页](https://docs.astral.sh/uv/)上的这句描述有助于我们了解：
+
+> 🚀 一个工具可以替代 pip、pip-tools、pipx、poetry、pyenv、twine、virtualenv 等。
+
+那可真是很多工具啊！
+
+然后网站继续列出了 uv 可以做的另外约 10 件事，但现在我们暂时忽略这些。
+
+最简单的理解 uv 的方式是：**无论你现在如何管理 Python 环境和依赖，uv 都能为你做得更好更快。**
+
+说真的！除非你在做一些非常不寻常的事情，否则无论你使用什么以及如何使用它，uv 都可能处理得来。它还可能处理得更好，而且几乎肯定更快。在大多数情况下，_快得多_。
+
+## 为什么使用 uv？
+
+你可能在想 —— 我已经有了一个使用 virtualenv/pip/pip-tools/poetry 等的工作流程。为什么要费心去尝试这个新东西？
+
+这里我提供三个理由：
+
+1. uv 速度惊人
+2. uv 功能齐全
+3. uv 前景光明
+
+如果你已经确信要尝试 uv，请随时跳过这部分。
+
+### uv 速度惊人
+
+这将是整篇文章的重复主题 —— 但我要在这里强调一下。**uv 速度惊人。**
+
+毫不夸张地说，我现在使用 uv 的大多数操作比之前快了大约 20 倍。20倍！
+
+这意味着那些感觉缓慢的操作（例如 20 秒）现在感觉很快（1 秒）。那些感觉相当快的操作（例如 2 秒）现在感觉瞬间完成（0.1 秒）。在采用 uv 之前我并不抱怨速度问题 —— 但现在使用 uv，一切都感觉像魔法一样。
+
+![Uv Speed](https://www.saaspegasus.com/static/images/web/uv/uv-speed.5aed4d997649.svg)
+
+使用热缓存安装 Trio 依赖所需的时间。虽然图表并不能完全捕捉到速度的体验感受。
+
+### uv 功能齐全
+
+我认为 uv 的座右铭应该是这样的：_为速度而来，为多功能而留下。_
+
+虽然速度绝对是切换到 uv 的最令人信服的理由，但它作为一个能做你需要对 Python 做的_所有事情_的单一工具这一事实真的很棒。正如 uv 在上面的简介中指出的，你基本上可以停止使用所有其他工具，全心投入使用 uv。这简化并集中了生态系统中的许多事情。
+
+![Uv tool](https://www.saaspegasus.com/static/images/web/uv/one-ring.a7a26c58e2ea.png)
+
+uv 有点像力量之戒 —— 它是驾驭所有工具的唯一工具。
+
+### uv 前景光明
+
+uv 最具争议的方面之一是它由一家风险投资支持的公司（[Astral](https://astral.sh/) —— 也是代码检查工具 [ruff](https://astral.sh/ruff) 的开发者）创建和拥有。
+
+这在短期内意味着：
+
+1. uv 背后有大量资源支持
+2. uv 希望所有人都采用它
+
+这些都是好事！到目前为止，这些优势表现为一群非常聪明的人努力工作，使 uv、文档和整个生态系统变得很棒。团队不断发布更新，回应 Github 问题，并且总体上投入大量精力和资源到 uv 中。
+
+结果显而易见 —— uv 从一个功能不太多的工具，到今天能够接管你的整个项目。
+
+当然，值得注意的是，幕后的风投公司最终会来收回他们的投资。所以无法保证 uv 的未来_永远_光明。但就目前而言，仅仅是改进的速度就让 uv 的发展轨迹看起来非常好。
+
+**我们应该多担心 uv 锁定问题？**
+
+锁定可能是对 uv 最大的合理担忧。虽然这个工具很棒，背后的团队看起来也很优秀 —— 但历史上充满了这样的例子：赚钱的需求将一个好的开放生态系统变成了一个以盈利为目的的系统。我们是否应该担心未来 Astral 将我们锁定在他们的世界中然后榨取金钱？
+
+我认为_不_担心这一点至少有点天真。但同时，uv 采用宽松许可证（MIT）这一事实意味着，如果团队真的决定变坏，社区有一个逃生出口来接管。
+
+我个人的感觉是，担心这些事情发生是合理的，但不应该阻止你今天使用 uv。希望 Astral 能找到一种赚钱的方式，让 uv 永远保持开放和出色。
+
+好的，我们已经讨论了_为什么_。现在让我们进入_内容_。
+
+## 安装 uv
+
+在我们开始使用 uv 之前，我们需要快速介绍如何开始使用它。
+
+uv 是一个单一的命令行可执行文件。有[多种安装方式](https://docs.astral.sh/uv/getting-started/installation/)，但最简单的是使用提供的安装脚本：
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+运行此命令后，你将拥有一个新的命令行工具，可以通过在任何地方输入"uv"来运行：
+
+```bash
+$ uv
+An extremely fast Python package manager.
+
+Usage: uv [OPTIONS] <COMMAND>
+```
+
+那么这个工具可以做什么呢？
+
+下面是它为你处理的一些常见任务。
+
+## 将 uv 整合到现有工作流中
+
+使用 uv 有两种不同的方式。第一种是将其作为你已经在做的事情的替代品。这是采用 uv 最简单的方式，也是在不改变太多工作流程的情况下获得 uv 速度优势的好方法。
+
+稍后我们将看到如何使用 uv 以_新_的方式工作，但现在让我们先介绍一些你可能已经在做的常见事情。
+
+### 使用 uv 安装 Python
+
+你不必使用 uv 来安装 Python —— 它会很乐意找到并使用你已经安装的 Python。但如果你_想_使用它来安装 Python，可以运行：
+
+```bash
+uv python install 3.12
+```
+
+我发现这比通过更标准的渠道手动安装 Python 更容易、更可靠。无需摆弄 apt 存储库或下载安装程序。只需 "uv python install" 就能开始了！
+
+顺便说一下 —— Ī研究这篇文章时，我了解到管理 Python 安装也是 `pyenv` 的主要工作，所以我们已经从 uv 描述中删除了一个工具！
+
+让我们更新它以保持跟踪：
+
+> 🚀 一个工具可以替代 pip、pip-tools、pipx、poetry、~~pyenv~~、twine、virtualenv 等。
+
+_更多阅读：[uv 的 Python 文档](https://docs.astral.sh/uv/guides/install-python/)。_
+
+### 使用 uv 管理虚拟环境
+
+当我第一次开始使用 Python 时 —— 现在已经快 20 年了 —— 我甚至不知道什么是虚拟环境；我只是把所有库都放到系统 Python 中。这在我只做一个项目时没有问题，直到我开始处理多个项目并遇到各种版本冲突的问题。于是我发现了虚拟环境的好处 —— 为单个项目使用的沙盒 Python 安装。
+
+Python 环境工具自那时起已经走过了很长的路。首先我们有了 `virtualenv` —— 一个允许你为每个项目创建单独环境的第三方工具。然后，在 Python 3.3 中，我们有了 `venv` —— 基本上是 `virtualenv`，但内置于 Python 中。
+
+现在，对我来说，没有某种虚拟环境就运行 Python 感觉像是亵渎。
+
+![No Venv](https://www.saaspegasus.com/static/images/web/uv/no-venv.4e57a4b43eea.jpg "This is fine.")
+
+如果现在使用没有虚拟环境的系统 Python，我会有这种感觉。
+
+好的，这与 uv 有什么关系？
+
+uv 提供了对这些现有工具的直接替代。所以现在，不再通过运行类似以下命令来创建虚拟环境：
+
+```bash
+python3.12 -m venv /path/to/environment
+```
+
+而可以使用 uv：
+
+```bash
+uv venv /path/to/environment --python 3.12
+```
+
+这样做的一个好处是你不必再担心 Python 安装了！如果 uv 找不到正确的 Python 版本，它会直接为你下载并安装。这也意味着你实际上不需要使用我刚才提到的 `uv python` 命令，但如果需要的话它就在那里。
+
+再回到我们的 uv 描述，我们现在也用更简单的替代品消除了 `virtualenv`：
+
+> 🚀 一个工具可以替代 pip、pip-tools、pipx、poetry、~~pyenv~~、twine、~~virtualenv~~ 等。
+
+_更多阅读：[uv 的环境文档](https://docs.astral.sh/uv/pip/environments/)。_
+
+**附注：我应该把虚拟环境放在哪里？**
+
+**_简而言之：在项目本地的 ".venv" 文件夹中。_**
+
+长期以来，关于虚拟环境到底应该放在哪里没有明确的最佳实践，有两种竞争的选择：一种是在机器上的某个集中位置，如 `~/.virtualenvs` 或 `~/environments`；另一种是使用项目本地的文件夹，如 `venv` 或 `.venv` 或 `env`。
+
+这些天，在大多数情况下，项目本地选项胜出（感谢 node_modules！），这是现在你最常见的 Python 环境位置。除了其他好处外，这使得 IDE 更容易找到你的环境。
+
+在这篇文章的后面，我们将讨论如何可以"全面采用" uv 的环境管理，完全放弃 venv 和 pip 调用。如果你这样做，uv 会将你的环境放在名为 `.venv` 的项目本地文件夹中 —— 所以这是这里推荐的位置。
+
+### 使用 uv 的 pip 接口管理包
+
+uv 用于环境管理是一个不错的便利功能，但现在事情开始变得更好了。
+
+除了使用 uv 管理环境，你还可以用它来管理包。再一次，uv 提供了一个非常熟悉的开箱即用的接口。
+
+基本上，不再运行：
+
+```bash
+pip install django
+```
+
+而是运行：
+
+```bash
+uv pip install django
+```
+
+那么为什么这更好呢？
+
+用一个词来说，_速度_。
+
+使用 uv 管理 Python 包比使用常规 pip 快（认真地！）10-20 倍。当我运行它时，它快到我经常担心它没有工作（实际上它工作了）。
+
+如果你从这篇文章中只记住一件事，**就是开始使用 "uv pip" 代替 "pip"，你的生活就会变得好很多**。
+
+回到我们的描述 —— 我们现在还用更好的东西替换了 `pip`：
+
+> 🚀 一个工具可以替代 ~~pip~~、pip-tools、pipx、poetry、~~pyenv~~、twine、~~virtualenv~~ 等。
+
+_更多阅读：[uv 的包文档](https://docs.astral.sh/uv/pip/packages/)。_
+
+### uv 管理项目依赖
+
+好的，我们已经看到如何使用 uv 设置 Python 环境和安装包。现在让我们开始进入更有趣的部分。
+
+大多数项目接下来需要的是一种管理_依赖_的方式 —— 即项目依赖的一组 Python 包。这是你表达"这个 Python 项目依赖于 `django` 和 `requests` 包"的地方。
+
+Python 依赖历史上被包含在 `requirements.txt`、`setup.py` 和 `pyproject.toml` 等文件中，并由各种工具管理，如 [pip-tools](https://github.com/jazzband/pip-tools)、[Poetry](https://python-poetry.org/)、[PDM](https://pdm-project.org/en/latest/)、[Pipenv](https://pipenv.pypa.io/en/latest/) 和 [Conda](https://anaconda.org/anaconda/conda)。
+
+除了有时帮助管理环境外，这些工具大多数做的是帮助将一组_基础_需求 —— 你的项目直接使用的包 —— 转换为一组_完整_需求 —— 那些_其他_包需要运行的包。它们还帮助保持包锁定到特定版本并解决包之间的依赖关系。
+
+**我们为什么需要这些工具？**
+
+让我们用一个简单的例子来解释为什么这是必要的。假设你想在一个新项目中使用 Django，所以你运行 `pip install django`。
+
+这将输出类似以下内容：
+
+```
+$ pip install django
+Collecting django
+  Using cached Django-5.1.3-py3-none-any.whl.metadata (4.2 kB)
+Collecting asgiref<4,>=3.8.1 (from django)
+  Using cached asgiref-3.8.1-py3-none-any.whl.metadata (9.3 kB)
+Collecting sqlparse>=0.3.1 (from django)
+  Using cached sqlparse-0.5.2-py3-none-any.whl.metadata (3.9 kB)
+Using cached Django-5.1.3-py3-none-any.whl (8.3 MB)
+Using cached asgiref-3.8.1-py3-none-any.whl (23 kB)
+Using cached sqlparse-0.5.2-py3-none-any.whl (44 kB)
+Installing collected packages: sqlparse, asgiref, django
+Successfully installed asgiref-3.8.1 django-5.1.3 sqlparse-0.5.2
+```
+
+这实际上安装了_三个_包：django、asgiref 和 sqlparse。这是因为 django 需要其他两个包才能工作。我们还得到了这些包的特定_版本_（django-5.1.3、asgiref-3.8.1 和 sqlparse-0.5.2）。
+
+这些工具本质上帮助你说"我只关心 Django"，同时确保你在后台获得所需的其他一切的正确、一致的版本。
+
+这是一个简单的情况，但当你有依赖于其他包的包，而这些包又依赖于具有不同版本约束的其他包，等等时，事情会变得更加复杂。
+
+我来自 [pip-tools](https://github.com/jazzband/pip-tools) 学派 —— 它有一种非常简单的方式处理这个问题。你将_基础_需求保存在一个 `requirements.in` 文件中，看起来像这样：
+
+```txt
+django>=5.0
+```
+
+requirements.in 文件仅包含核心依赖项（和可选版本）。
+
+然后你运行这样的命令来生成 `requirements.txt` 文件：
+
+```bash
+pip-compile requirements.in -o requirements.txt
+```
+
+完成后，你将拥有一个 `requirements.txt` 文件，看起来像这样：
+
+```txt
+# This file is autogenerated by pip-compile with Python 3.11
+# by the following command:
+#
+#    pip-compile requirements.in
+#
+asgiref==3.8.1
+    # via django
+django==5.1.3
+    # via -r tmpreqs.in
+sqlparse==0.5.2
+    # via django
+```
+
+requirements.txt 文件包含完整的依赖项（和固定版本）。
+
+现在我们的 `requirements.txt` 文件获取了完整的依赖集，可以与 `(uv) pip install` 一起使用来安装所有精确的依赖，并固定版本。但是，我们可以通过在 `requirements.in` 文件中添加/删除/升级内容并重新运行命令来管理我们的_基础_依赖。
+
+这很有效，我认为我永远不会找到比这更好的东西 —— 但是再次，uv 作弊了！就像 venv 和 pip 一样，uv 使自己成为了 pip-tools 的替代品。
+
+所以，如果你喜欢 pip-tools 并且不想改变你的工作流程，你所要做的就是安装 uv，然后不用写上面的命令，而是写：
+
+```bash
+uv pip compile requirements.in -o requirements.txt
+```
+
+再一次，杀手级功能是_速度_。
+
+`uv pip compile` 运行速度比 `pip-compile` 快（确实是！）约 20 倍。我刚刚在托管这个网站的 Django 项目上并排运行了它们，pip-compile 花了 18 秒。**_Uv 花费不到一秒钟。_**
+
+我们现在已经用一个更好、更快的替代品消除了 pip-tools：
+
+> 🚀 一个工具可以替代 ~~pip~~、~~pip-tools~~、pipx、poetry、~~pyenv~~、twine、~~virtualenv~~ 等。
+
+再说一次，我们可以就此打住，但 uv 还有更多功能，所以让我们继续！
+
+_更多阅读：[uv 的"锁定环境"文档](https://docs.astral.sh/uv/pip/compile/)_。
+
+**附注：uv 为什么这么快？**
+
+关于 uv 你会一致注意到的一点是它速度极快。他们是怎么做到的？
+
+我绝不是这个话题的专家，但高级答案是两个主要因素：
+
+1. 它是用 [Rust](https://www.rust-lang.org/) 编写的，这种语言非常快。
+2. 团队投入了大量工作，采用许多技巧来优化过程的每一步。
+
+如果你有兴趣了解更多关于 uv 的内部结构以及他们如何使其如此之快，我强烈推荐 [Charlie Marsh 的这个会议演讲](https://www.youtube.com/watch?v=gSKTfG1GXYQ)，他是 Astral（uv 背后的公司）的创始人。
+
+### 速查表：uv 与现有工具对比
+
+好的，我们现在已经介绍了如何使用 uv 作为你已经在使用的大多数 Python 工具的直接替代品。以下是一个快速总结：
+
+|用途|以前的工具|命令（示例）|使用 uv|
+|---|---|---|---|
+|**安装 Python**|homebrew, apt, deadsnakes, pyenv 等|`sudo apt install python3`|`uv python install`|
+|**创建虚拟环境**|venv, virtualenv|`python -m venv .venv`|`uv venv`|
+|**安装包**|pip|`pip install django`|`uv pip install django`|
+|**构建依赖**|pip-tools, poetry|`pip-compile requirements.in -o requirements.txt`|`uv pip compile requirements.in -o requirements.txt`|
+
+## 采用 uv 作为新工作流
+
+到目前为止，我们一直在讨论如何使用 uv 作为你可能已经在使用的特定工具的直接替代品。事实上，你可以利用 uv 的强大功能和速度而不改变太多其他工作流程，这很大程度上是设计使然！uv 背后的团队知道采用新工具需要时间，最简单的方法是提供易于采用的解决方案。
+
+话虽如此，uv 有自己的愿景，成为一统天下的工具。如果你勇敢地采用它，你可以更新~所有的工作流程 —— 大多数情况下是更好的！
+
+我是什么意思？
+
+我上面描述的一切都是我称之为_旧方式做事_。但 uv 还有一套新的 API，可以为你简化很多这些工作。
+
+本节将讨论这是如何工作的。
+
+### 前提：uv 使用的文件
+
+在你全面采用 uv 之前，你必须将当前的打包文件更新为它期望的格式。
+
+由于我来自 pip-tools 世界，我将用该生态系统的术语描述这些文件，但概念将与 poetry 和各种其他工具中的概念类似。
+
+uv 使用两个主要文件来理解项目的环境：
+
+1. `pyproject.toml` 文件
+2. `uv.lock` 文件
+
+我们将逐一介绍这些。
+
+#### pyproject.toml 文件
+
+`pyproject.toml` 文件是[用于 Python 打包的标准文件](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)，也用于代码检查、类型检查等其他工具。uv 使用此文件及其标准格式来获取有关项目及其依赖项的信息。即使你从未使用过 uv，你的项目可能已经在使用这个文件。
+
+从_纯粹的包管理角度_来看，你可以将 pyproject.toml 文件视为 `pip-tools` 中的 `requirements.in` 文件（它还包含其他工作流程的其他内容，但我们现在不担心这些）。换句话说，它定义了_主要_项目依赖项，但不一定包含确切的版本，或者依赖项的依赖项，等等。
+
+它还包含有关项目本身的一些信息，它支持的 Python 版本等。这里是一个典型的例子：
+
+```toml
+[project]
+name = "uv-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.0",
+]
+```
+
+一个典型的 pyproject.toml 文件。这个项目有一个单一的依赖项（django）。
+
+#### uv.lock 文件
+
+如果 `pyproject.toml` 是你的新 `requirements.in` 文件，那么 `uv.lock` 就是你的新 `requirements.txt` 文件 —— 它将跟踪你项目的所有依赖项、依赖项的依赖项，等等。
+
+就像 `requirements.txt` 一样，如果你使用 uv，你永远不会手动编辑 `uv.lock` 文件，而是使用 uv 命令行应用程序保持其更新。由于这个原因 —— 以及它看起来相对丑陋 —— 我们不会在这里展示它，但你可以[在这里查看上述 `pyproject.toml` 文件使用的锁文件](https://gist.github.com/czue/a61c80c1f199aa25f3816de9bc8271ca)。
+
+有了这些内容，让我们展示如何使用 uv 自己的工作流程来复制我们上面概述的内容！
+
+_进一步阅读：[uv 的项目结构文档](https://docs.astral.sh/uv/concepts/projects/layout/)_。
+
+**为什么 uv.lock 文件看起来如此复杂？**
+
+对于习惯使用 requirements.txt 的人来说，uv.lock 文件的一个令人震惊的方面是它包含了多少_内容_。这些文件比简单的 requirements.txt 文件复杂得多！
+
+uv.lock 更复杂的简短答案是它做了更多的工作。uv 的锁文件是_跨平台_的，这意味着除了将包锁定到特定版本外，它们还将特定版本固定到特定的_环境_。
+
+例如，如果你仔细查看[生成的锁文件](https://gist.github.com/czue/a61c80c1f199aa25f3816de9bc8271ca)，你会看到它还包含一个名为 `tz-data` 的库，这在我们的 requirements.txt 文件中根本没有出现。这是因为 django 只有在 Windows 32 位架构上运行时才需要 `tz-data`！但如果你在该环境中使用 uv，你也会安装 `tz-data`！
+
+基本上，uv.lock 文件保存了足够的信息，可以在任何支持的 Python 版本、操作系统等上复制一致的安装。
+
+这并不是使 uv.lock 格式更复杂的唯一原因 —— 它还存储了关于在哪里以及如何获取包的更多信息 —— 但这是最_有用_的原因。
+
+### 设置项目使用 uv
+
+### 使用环境
+
+#### 运行 Python
+
+现在我们有了环境。在旧世界中，下一个合乎逻辑的事情是_激活_它，我们可以这样做：
+
+```bash
+source .venv/bin/activate
+```
+
+运行这个命令后，未来的 python 命令将在环境中运行，我们可以做我们习惯的一切！我经常使用这个工作流程，如果你不想更新你的肌肉记忆，它很棒。
+
+但我们不再处于旧世界了。
+
+uv 速度之快的一个惊人结果是，`uv sync` —— 特别是在热缓存下 —— 基本上是即时的。这意味着我们可以在每次运行 python 命令时同步我们的环境！
+
+uv 为此提供了一个内置命令，称为 `uv run`。所以，在 Django 世界中，不再运行：
+
+```bash
+uv sync
+source .venv/bin/activate
+python manage.py runserver
+```
+
+你可以只运行：
+
+```bash
+uv run manage.py runserver
+```
+
+这将：
+
+1. 同步你的环境（基本上是即时的）
+2. 在更新的环境中运行 `python manage.py runserver`
+
+实际上，这意味着你可以用 "uv run" 替换每次输入 "python" 的地方，完全不用担心同步或管理你的环境！uv 会检查一切是否最新，修复任何问题，然后运行你的命令。当然，所有这些都发生得如此之快，你甚至不会注意到。
+
+_更多阅读：[uv 关于运行命令的文档](https://docs.astral.sh/uv/guides/projects/#running-commands)_。
+
+**🚀 为你的下一个 Python SaaS 获得领先优势。**
+
+如果你是 Python 开发者，你可能想考虑为你的下一个项目使用 [SaaS Pegasus](https://www.saaspegasus.com/)。它是一个基于 Django 的启动项目，内置了账户管理、计费、团队、现代前端和近乎即时的部署。当然，它完全支持开箱即用的 uv。
+
+#### 处理依赖
+
+好的，我们知道如何设置环境并在其中运行命令。但我们如何管理依赖呢？
+
+有多种方法处理这个问题，但最简单的是使用 `uv add` 和 `uv remove`。
+
+```bash
+# 安装一个包
+uv add requests
+# 删除一个包
+uv remove requests
+```
+
+这些命令基本上是一站式服务，将：
+
+1. 更新 pyproject.toml 文件中的依赖。
+2. 更新 uv.lock 文件。
+3. 同步你的环境。
+
+或者，你可以直接编辑 pyproject.toml 文件，然后运行 `uv lock`（仅更新锁文件）或 `uv sync`（更新锁文件和环境）。
+
+恭喜，你现在可以完全在 uv 中管理你的环境了！
+
+_更多阅读：[uv 的依赖文档](https://docs.astral.sh/uv/concepts/projects/dependencies/)_。
+
+### 速查表：uv 工作流中的常见操作
+
+我们已经正式全面采用 uv！这里是一个快速速查表，说明在这个新世界中如何执行常见操作：
+
+|用途|uv 的版本|解释|
+|---|---|---|
+|**项目依赖文件**|`pyproject.toml`|基础/核心依赖在此文件中定义。|
+|**项目锁文件**|`uv.lock`|衍生的依赖在这个通用锁文件中管理。|
+|**安装 Python**|`uv sync` 或 `uv run`|uv 将在同步或在你的环境中运行代码时根据需要查找或安装 Python。|
+|**创建虚拟环境**|`uv sync` 或 `uv run`|uv 将在你第一次使用它时根据需要创建虚拟环境。|
+|**安装包**|`uv sync` 或 `uv run`|每次使用时，uv 都会将所有需要的包安装到你的环境中。|
+|**构建依赖**|`uv sync` 或 `uv run`|每次运行时，uv 都会从依赖中重建锁文件。|
+|**添加包**|`uv add`|将包添加到 pyproject.toml、uv.lock，并同步你的环境。|
+|**删除包**|`uv remove`|将包从 pyproject.toml、uv.lock 中删除，并同步你的环境。|
+|**升级包**|`uv sync --upgrade-package <package>`|将在 uv.lock 文件中升级包并同步你的环境。|
+|**升级所有包**|`uv lock --upgrade`|将根据 `pyproject.toml` 中的版本约束升级 uv.lock 文件中的所有包。|
+
+## 高级用法
+
+好了，这些都是基础知识，是将项目切换到 uv 所需的大部分内容。本文的其余部分涵盖了我在为 [Django 启动项目 SaaS Pegasus](https://www.saaspegasus.com/) 添加 uv 支持时遇到的其他问题。
+
+这绝不是关于 uv 的全面主题集，只是我到目前为止遇到的一些问题。
+
+我将保持本节更简短、更简洁，只关注传达关键信息。
+
+### 处理开发和生产环境的需求
+
+将需求分为常规、开发和生产需求是很常见的。在 pip-tools 世界中，这通常意味着为每组不同的 requirements.in 文件。
+
+在 uv 和 pyproject.toml 中，支持_依赖组_，这是为这种用例设计的。
+
+#### 在不同依赖组中添加、删除和更改包
+
+你可以通过向 `uv add` 传递 `--group` 标志，将包添加到依赖组：
+
+```bash
+uv add --group production gunicorn
+```
+
+这将在 pyproject.toml 文件中这样添加包：
+
+```toml
+[project]
+name = "uv-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.0",
+]
+
+[dependency-groups]
+production = [
+    "gunicorn>=23.0.0",
+]
+```
+
+`uv add` 还支持 `--dev` 标志，自动将依赖添加到 dev 组：
+
+```bash
+uv add --dev django-debug-toolbar
+# 此命令与以下命令相同
+# uv add --group dev django-debug-toolbar
+```
+
+那将更新文件如下：
+
+```toml
+[project]
+name = "uv-demo"
+# 这里是其他项目内容
+[dependency-groups]
+production = [
+    "gunicorn>=23.0.0",
+]
+dev = [
+    "django-debug-toolbar>=4.4.6",
+]
+```
+
+#### 安装不同依赖组中的包
+
+默认情况下，当你运行 `uv sync` 和 `uv run` 等命令时，uv 会安装主组和 dev 组中的所有包。
+
+如果你想包含或排除包，可以使用 `--group`、`--no-group` 和 `--only-group` 标志。
+
+例如，要只安装基础 + 生产依赖，你可以运行：
+
+```bash
+uv sync --no-group dev --group prod
+```
+
+每次运行 `uv sync` 和 `uv run` 时都必须指定组包含/排除是很烦人的，这可能就是为什么 uv 默认包含所有 dev 依赖！
+
+*更多阅读：[uv 的开发依赖文档](https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies)
+
+### 一次性环境和工具
+
+关于 uv 如此之快的一个很酷的事情是，你可以非常快速地：
+
+1. 设置虚拟环境
+2. 在其中安装包
+3. 在该环境中运行命令
+
+这使得在 Python CLI 上运行东西而不必安装任何内容变得非常容易。uv 可以为你构建一个快速的小型一次性环境，并在使用完毕后将其移除。uv 为这些情况提供了"工具"工作流。
+
+例如，你可以让一头 ASCII 艺术奶牛说话，如下所示：
+
+```bash
+$ uv tool run pycowsay hello from uv
+
+  -------------
+< hello from uv >
+  -------------
+   \   ^__^
+    \  (oo)\_______
+       (__)\       )\/\
+           ||----w |
+           ||     ||
+```
+
+或者像这样创建一个新的 Django 项目：
+
+```bash
+uv tool run --from django django-admin startproject myproject
+```
+
+还有一个 `uvx` 命令，等同于 `uv tool run`。
+
+```bash
+uvx pycowsay hello from uv
+```
+
+顺便说一下，这替代了 pipx，所以我们最终消除了我们描述中的另一个项目：
+
+> 🚀 一个工具可以替代 ~~pip~~、~~pip-tools~~、~~pipx~~、poetry、~~pyenv~~、twine、~~virtualenv~~ 等。
+
+_更多阅读：[uv 的工具文档](https://docs.astral.sh/uv/guides/tools/)_。
+
+### uv 与 Docker
+
+当我将生产应用程序迁移到 uv 时，我在生产 Dockerfile 上遇到了一些问题。
+
+首先，我尝试将所有 Python 命令更新为使用 `uv run gunicorn` 而不是 `gunicorn`，但我遇到了这种方法的问题（抱歉，我不记得具体是什么问题，我应该更好地记录下来）。
+
+无论如何，我最终意识到，我不必经历那种麻烦！是的，我仍然需要更新我的 Dockerfile 以使用 uv 构建环境，我是这样做的：
+
+```dockerfile
+# 阶段 1: 构建 python 依赖
+FROM python:3.11-slim-bookworm as build-python
+
+# 这大致遵循以下指南：https://hynek.me/articles/docker-uv/
+# 创建一个带有依赖项的独立环境。
+# - 让 uv 不要抱怨无法使用硬链接，
+# - 告诉 uv 对包进行字节编译以加快应用程序启动速度，
+# - 防止 uv 意外下载独立的 Python 构建，
+# - 选择一个 Python（在 uv 0.5.0 及更高版本上使用 `/usr/bin/python3.12`），
+# - 最后声明 `/app` 作为 `uv sync` 的目标。
+ENV UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_PROJECT_ENVIRONMENT=/code/.venv
+
+COPY --from=ghcr.io/astral-sh/uv:0.5.2 /uv /uvx /bin/
+
+# 由于没有必要携带锁文件，我们将它们移动到
+# 一个不会复制到运行时映像的目录中。
+# 尾部斜杠使 COPY 自动创建 `/_lock/`。
+COPY pyproject.toml uv.lock /_lock/
+
+# 同步依赖项。
+# 这一层会被缓存，直到 uv.lock 或 pyproject.toml 发生变化。
+RUN --mount=type=cache,target=/root/.cache \
+    cd /_lock && \
+    uv sync \
+      --frozen \
+      --no-group dev \
+      --group prod
+```
+
+这基本上安装了 uv，设置了一些生产优化，然后对生产需求运行 `uv sync`。需要注意的一个关键点是它使用 `UV_PROJECT_ENVIRONMENT=/code/.venv` 告诉 uv 在哪里创建环境，因为我们需要它在下一步中。我选择将我的环境放在"正常"的 .venv 文件夹中，但你可以将它放在任何地方。
+
+在构建环境后，在 Dockerfile 的后期阶段，我们只需复制整个环境并确保它成为默认使用的环境，方法是将其放在路径上：
+
+```dockerfile
+WORKDIR /code
+COPY --from=build-python --chown=django:django /code /code
+# 确保默认使用虚拟环境的 python/gunicorn/celery
+ENV PATH="/code/.venv/bin:$PATH"
+```
+
+现在 `python`、`gunicorn`、`celery` 和其他工具会因为它们在路径中排在首位而拾取正确的环境。这比摆弄 uv run _简单得多_。
+
+非常感谢 Hynek Schlawack，特别是[这篇文章](https://hynek.me/articles/docker-uv/)帮助我解决了这个问题！
+
+### 构建和发布项目
+
+最后，我只想提一下，uv 还可以构建并将你的包发布到 PyPi。我不会详细介绍这部分，但有了它，我们最终替代了 twine，它可以帮助你做这件事。发布也是我们尚未涵盖的 poetry 的最后一个主要功能，所以我们也可以消除它。
+
+> 🚀 一个工具可以替代 ~~pip~~、~~pip-tools~~、~~pipx~~、~~poetry~~、~~pyenv~~、~~twine~~、~~virtualenv~~ 等。
+
+_更多阅读：[uv 的发布文档](https://docs.astral.sh/uv/guides/publish/)_
+
+## 结论和资源
+
+好吧，这比我预期的要长得多，但希望它有用！
+
+正如你可能已经猜到的，我对 uv 非常看好，并且已经在我的所有项目中采用它。我希望这能激励你尝试并做同样的事情！
+
+我想对以下资源表示感谢，除了优秀的文档外，它们还帮助我更好地理解如何充分利用 uv：
+
+1. 我已经在上面提到过，但 [Charlie Marsh 关于 uv 的演讲](https://www.youtube.com/watch?v=gSKTfG1GXYQ) 是对 uv 能做什么以及它如何工作的有用概述。
+2. Simon Willison 的博客有[多篇关于使用 uv 的实用文章](https://simonwillison.net/tags/uv/)
+3. Hynek Schlawack 有[关于 uv 的很棒的视频概述](https://www.youtube.com/watch?v=8UuW8o4bHbw)，以及一篇关于[使用 uv 与 Docker](https://hynek.me/articles/docker-uv/) 的好文章。
+4. [Anže Pečar 关于 uv 和 Django 的博客](https://blog.pecar.me/uv-with-django)。
+
+感谢阅读！
+
+_当你在这里的时候，你可能想看看我的 [Python SaaS 样板](https://www.saaspegasus.com/)，SaaS Pegasus。Pegasus 已被用于启动数千个 Django 项目，可以帮助你在下一个网络项目上节省数周的开发时间。_
+
+# 订阅更新
+
+## 注册以在我发布有关使用 Django 构建 SaaS 应用程序的新文章时获得通知。
+
+我不会发送垃圾邮件，你可以随时取消订阅。
+
+SaaS Pegasus — 版权所有 2025
+
+🦄 使用 [SaaS Pegasus](https://www.saaspegasus.com/) 构建 

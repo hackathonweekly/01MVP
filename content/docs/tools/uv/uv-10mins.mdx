@@ -1,0 +1,349 @@
+---
+title: "uv 10分钟快速入门：Python 新一代包管理器"
+---
+
+# uv 10分钟快速入门
+
+## 什么是 uv？
+
+[uv](https://docs.astral.sh/uv/) 是一个极速的 Python 包管理器和环境管理工具，可以替代 pip、pip-tools、pipx、poetry、pyenv、virtualenv 等工具。它使用 Rust 编写，速度比传统工具快 10-20 倍。
+
+> 来自一个用户的评价： UV 是 Python 生态中的原神，Python 生态中的 node_modules. 未来某一天会成为 Python 的耶路撒冷
+
+完整的 uv 命令列表: https://docs.astral.sh/uv/reference/cli/#uv
+
+## 为什么选择 uv？
+
+- **极速表现**：所有操作比传统工具快 10-20 倍
+- **功能丰富**：一个工具替代整个工具链
+- **简化工作流**：统一的界面处理所有 Python 环境和包管理任务
+- **跨平台支持**：可在所有主要操作系统上一致工作
+
+## 安装 uv
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+## uv 主要功能概览
+
+uv 提供了五个核心功能模块：
+
+1. **Python 版本管理**：安装和管理 Python 解释器
+2. **脚本运行**：执行独立 Python 脚本
+3. **项目管理**：创建和管理 Python 项目
+4. **工具运行**：使用临时环境运行 Python 工具
+5. **pip 接口**：兼容现有 pip 工作流
+
+## 基本用法：替代现有工具
+
+| 功能 | 传统方式 | uv 方式 |
+|------|----------|---------|
+| **安装 Python** | `sudo apt install python3.12` | `uv python install 3.12` |
+| **创建虚拟环境** | `python -m venv .venv` | `uv venv` 默认创建 `.venv` 目录|
+| **安装包** | `pip install django` |`uv add django` 或 `uv pip install django` |
+| **锁定依赖** | `pip-compile requirements.in` | `uv pip compile requirements.in` |
+| **运行代码** | `python script.py` | `uv run script.py` 方便在对应的环境中执行 |
+
+## 虚拟环境管理
+
+### 创建虚拟环境
+
+与 `pip` 不同，uv 默认要求使用虚拟环境，这是一种隔离包依赖的最佳实践。
+
+```bash
+# 创建默认虚拟环境（在当前目录的 .venv 中）
+uv venv
+
+# 指定路径创建虚拟环境
+uv venv my-env-name
+
+# 创建指定 Python 版本的虚拟环境
+uv venv --python 3.12
+```
+
+如果指定的 Python 版本在系统中不可用，uv 会自动下载并安装它。
+
+### 使用虚拟环境
+
+使用默认名称（.venv）创建虚拟环境后，uv 会在后续操作中自动找到并使用它：
+
+```bash
+# 创建环境
+uv venv
+
+# 在新创建的环境中安装包
+uv pip install django
+uv add django # 推荐
+
+# 在环境中运行代码
+# 不需要手动激活虚拟环境，通过这个命令，uv 会自动找到对应的 .venv 并激活
+uv run xxx.py 
+```
+
+### 激活虚拟环境
+
+如果你习惯使用 `source .venv/bin/activate` 激活虚拟环境，可以这样做：
+
+```bash
+# Linux/macOS
+source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
+
+# 其他shell（如 fish、csh 等）也有专门的激活脚本
+# fish
+source .venv/bin/activate.fish
+
+# csh/tcsh
+source .venv/bin/activate.csh
+
+# Nushell
+use .venv\Scripts\activate.nu
+```
+
+### 退出虚拟环境
+
+要退出活动的虚拟环境：
+
+```bash
+deactivate
+```
+
+### 虚拟环境发现机制
+
+当运行修改环境的命令（如 `uv pip install`）时，uv 会按以下顺序查找虚拟环境：
+
+1. 通过 `VIRTUAL_ENV` 环境变量激活的虚拟环境
+2. 通过 `CONDA_PREFIX` 环境变量激活的 Conda 环境
+3. 当前目录或最近父目录中的 `.venv` 虚拟环境
+
+如果找不到虚拟环境，uv 会提示创建一个。
+
+## 创建和管理项目
+
+### 初始化新项目
+
+```bash
+# 创建新项目
+uv init my-project
+
+# 或在现有目录中初始化
+mkdir my-project && cd my-project
+uv init
+```
+
+### 项目文件结构
+
+#### 1. pyproject.toml 文件示例
+
+```toml
+[project]
+name = "my-project" 
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0",
+]
+```
+
+### 日常使用 - 理解 uv add 与 uv pip install 区别
+
+`uv add` 和 `uv pip install` 的主要区别：
+
+- **uv add**：
+  - 修改 pyproject.toml 文件，添加依赖
+  - 更新 uv.lock 文件
+  - 同步虚拟环境
+  - 适用于项目开发，自动管理项目依赖
+
+- **uv pip install**：
+  - 仅安装包到当前环境，不修改项目文件
+  - 类似传统 pip 命令
+  - 适用于临时安装或非项目开发
+
+```bash
+# 添加依赖到项目
+uv add requests
+
+# 添加开发依赖
+uv add --dev black
+
+# 删除依赖
+uv remove requests
+```
+
+### 理解 uv.lock 文件和 uv sync 命令
+
+`uv.lock` 是由 uv 自动管理的锁定文件：
+
+- **自动生成**：在首次运行 `uv add` 或 `uv sync` 时生成
+- **无需手动编辑**：uv 会根据 pyproject.toml 的更改自动更新
+- **跨平台兼容**：存储了不同平台所需的依赖信息
+
+`uv sync` 主要在以下情况使用：
+
+- 首次设置项目后同步环境
+- pyproject.toml 手动修改后更新依赖
+- 切换到新的环境或工作站时
+- 拉取最新代码后确保依赖一致
+
+大多数情况下，`uv add` 和 `uv remove` 已经包含了 sync 操作，不需要再额外运行 `uv sync`。
+
+```bash
+# 仅在必要时使用：首次设置或手动修改 pyproject.toml 后
+uv sync
+
+# 同步环境，但仅包含生产依赖
+uv sync --no-group dev --group prod
+```
+
+### 运行项目代码
+
+使用 `uv run` 替代传统的 `python script.py` 运行代码，这样做的好处：
+
+1. **自动同步环境**：无需担心依赖是否安装
+2. **自动使用正确的 Python 版本**
+3. **正确载入项目配置**：包括环境变量等
+4. **简化工作流**：一个命令完成环境管理和脚本执行
+
+```bash
+# 不要再使用：
+# python app.py
+# python -m flask run
+# python manage.py runserver
+
+# 而是使用 uv run：
+uv run app.py
+uv run -m flask run
+uv run manage.py runserver
+
+# 带参数的命令
+uv run manage.py runserver 0:8000
+
+# 执行模块
+uv run -m pytest tests/
+
+# 传递环境变量
+DEBUG=1 uv run app.py
+```
+
+## 使用一次性工具 (Tools)
+
+uv 可以在临时隔离环境中运行工具，无需全局安装。
+
+### 临时运行工具
+uvx 等价于 uv tool run， 临时运行工具而且不需要安装它。类似于 npm 的 npx 命令。
+
+```bash
+# 运行工具（简写方式）
+uvx ruff check .
+
+# 等同于
+uv tool run ruff check .
+
+# 指定版本
+uvx [email protected] check .
+
+# 从不同包运行命令
+uvx --from httpie http example.com
+```
+
+### 安装持久工具
+
+```bash
+# 安装工具（持久化到用户环境，然后就可以全局使用）
+uv tool install ruff
+
+# 然后就可以
+ruff --version
+
+# 安装特定版本
+uv tool install 'ruff>=0.3.0'
+
+# 安装带附加功能的工具
+uv tool install mkdocs --with mkdocs-material
+
+# 列出已安装的工具
+uv tool list
+
+# 升级工具
+uv tool upgrade ruff
+```
+
+## 管理不同依赖组
+
+```bash
+# 创建生产环境（不含开发依赖）
+uv sync --no-group dev --group prod
+
+# 添加到特定组
+uv add --group production gunicorn
+```
+
+## Docker 中使用 uv
+
+```dockerfile
+FROM python:3.12-slim
+
+# 安装 uv
+COPY --from=ghcr.io/astral-sh/uv:0.5.2 /uv /usr/local/bin/
+
+# 设置环境变量
+ENV UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_PROJECT_ENVIRONMENT=/app/.venv
+
+# 复制项目文件
+COPY pyproject.toml uv.lock ./
+
+# 同步依赖
+RUN uv sync --frozen --no-group dev --group prod
+```
+
+## 速查表：常用操作
+
+| 操作 | 命令 |
+|------|------|
+| **创建新项目** | `uv init my-project` |
+| **安装 Python** | `uv python install 3.12` |
+| **创建虚拟环境** | `uv venv` |
+| **创建/同步环境** | `uv sync` |
+| **运行 Python 脚本** | `uv run script.py` |
+| **运行 Python 模块** | `uv run -m module` |
+| **添加包到项目** | `uv add django` |
+| **安装包到环境** | `uv pip install django` |
+| **添加开发包** | `uv add --dev pytest` |
+| **删除包** | `uv remove package` |
+| **更新特定包** | `uv sync --upgrade-package package` |
+| **更新所有包** | `uv lock --upgrade` |
+| **查看依赖树** | `uv tree` 或 `uv pip tree` |
+| **临时运行工具** | `uvx tool_name` |
+| **安装持久工具** | `uv tool install tool_name` |
+| **查看帮助** | `uv --help` |
+
+## 优势对比
+
+| 任务 | pip/virtualenv | uv |
+|------|---------------|-----|
+| 安装 Django 包 | ~5-10 秒 | ~0.3 秒 |
+| 虚拟环境管理 | 多个工具 | 单一工具 |
+| 锁定依赖 | 需要额外工具 | 内置功能 |
+| 跨平台一致性 | 较低 | 很高 |
+| 项目管理 | 多工具组合 | 集成工作流 |
+| 工具运行 | 需要 pipx | 内置 uvx |
+| 运行脚本 | 需手动同步环境 | 自动同步环境 |
+
+## 资源
+
+- [uv 官方文档](https://docs.astral.sh/uv/)
+- [GitHub 仓库](https://github.com/astral-sh/uv) 
+- [功能文档](https://docs.astral.sh/uv/getting-started/features/)
+- [工具指南](https://docs.astral.sh/uv/guides/tools/) 
